@@ -1,72 +1,82 @@
   @extends('admin.layout.master')
 
   @section('page-contents')
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="head-name d-flex justify-content-between ">
+              <div>
+                  <h6>School data list</h6>
+                  <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
+              </div>
+              <div class="d-flex">
+
+                  <div class="p-1">
+                      <a href="{{ route('admin.export') }}" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
+                              class="fas fa-download fa-sm text-white-50"></i> Export</a>
+                  </div>
+                  <div class="p-1">
+                      <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                          id="import_modal"><i class="fas fa-upload fa-sm text-white-50"></i> Upload</a>
+
+                      {{-- <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          <input type="file" name="file" class="form-control">
+                          <br>
+                          <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-upload fa-sm text-white-50">Import User Data</button>
+                      </form> --}}
+                  </div>
+              </div>
+          </div>
+
+      </div>
       <!-- /.container-fluid -->
       <div class="container-fluid">
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
               <div class="card-header d-flex justify-content-between py-3">
-                  <h6 class="my-auto font-weight-bold text-primary">Add Your School Data</h6>
-                  <!-- <a href="add-payment.html" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                    <span class="text">Update</span>
-                </a> -->
+                  <h6 class="my-auto font-weight-bold text-primary">School Data</h6>
+                  <a href="{{ route('admin.school-data.create') }}" class="btn btn-primary btn-icon-split">
+                      <span class="icon text-white-50">
+                          <i class="fas fa-plus"></i>
+                      </span>
+                      <span class="text">Add</span>
+                  </a>
               </div>
               <div class="card-body">
-                  <form>
-                      <div class="form-row">
-                          <div class="form-group col-md-3">
-                              <label for="inputEmail4">Dice No</label>
-                              <input type="text" class="form-control" id="inputEmail4" placeholder="KN00123">
-                          </div>
-                          <div class="form-group col-md-4">
-                              <label for="inputPassword4">School Name</label>
-                              <input type="text" class="form-control" id="inputPassword4" placeholder="Bethany">
-                          </div>
-                          <div class="form-group col-md-3">
-                              <label for="inputAddress">District</label>
-                              <input type="text" class="form-control" id="inputAddress" placeholder="Bangalore">
-                          </div>
-                      </div>
-                      <div class="form-row">
-                          <div class="form-group col-md-4">
-                              <label for="inputAddress2">Address</label>
-                              <input type="text" class="form-control" id="inputAddress2"
-                                  placeholder="Apartment, studio, or floor">
-                          </div>
-                          <div class="form-group col-md-3">
-                              <label for="inputPassword4">Contact No</label>
-                              <input type="text" class="form-control" id="inputPassword4" placeholder="890989079">
-                          </div>
-                          <div class="form-group col-md-3">
-                              <label for="inputAddress">Secondary Contact No</label>
-                              <input type="text" class="form-control" id="inputAddress" placeholder="9090900000">
-                          </div>
-                      </div>
-                      <div class="form-row">
-                          <div class="form-group col-md-4">
-                              <label for="inputEmail4">Mail Id</label>
-                              <input type="text" class="form-control" id="inputEmail4" placeholder="bethany@gmail.com">
-                          </div>
-                          <div class="form-group col-md-4">
-                              <label for="inputPassword4">Secondary Mail Id</label>
-                              <input type="text" class="form-control" id="inputPassword4"
-                                  placeholder="contactbethany@gmail.com">
-                          </div>
-                      </div>
-                      <button class="btn btn-primary mt-3">
-                          <!-- <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span> -->
-                          <span class="text">Update</span>
-                      </button>
-                  </form>
+                  <div class="table-responsive">
+                      <table id="dataTable" class="table nowrap align-middle" style="width:100%">
+                          <thead>
+                              <tr>
+                                  <th>Sl No.</th>
+                                  <th>Dise Code</th>
+                                  <th>School Name</th>
+                                  <th>Districts</th>
+                                  <th>Show</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach ($school_datas as $index => $school_data)
+                                  <tr>
+                                      <td>{{ $school_datas->firstItem() + $index }}</td>
+                                      <td>{{ $school_data->dise_code }}</td>
+                                      <td>{{ $school_data->school_name }}</td>
+                                      <td>{{ $school_data->district }}</td>
+                                      <td>
+                                          <button type="button" class="btn btn-sm bg-paid" data-toggle="modal"
+                                              data-target="#logoutModal">Details</button>
+                                      </td>
+                                  </tr>
+                              @endforeach
+                          </tbody>
+                      </table>
+                  </div>
               </div>
           </div>
-
       </div>
       <!-- /.container-fluid -->
   @endsection
+  

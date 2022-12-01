@@ -2,24 +2,25 @@
 @section('page-contents')
     <!-- /.container-fluid -->
     <div class="container-fluid">
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header d-flex justify-content-between py-3">
                 <h6 class="my-auto font-weight-bold text-primary">Update User</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.users.update', $user->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$user->name}}">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                                value="{{ $user->name }}">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="{{$user->email}}">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+                                value="{{ $user->email }}">
                         </div>
                         {{-- <div class="form-group col-md-12">
                             <label for="password">Password</label>
@@ -33,7 +34,6 @@
                 </form>
             </div>
         </div>
-
     </div>
     <!-- /.container-fluid -->
 @endsection

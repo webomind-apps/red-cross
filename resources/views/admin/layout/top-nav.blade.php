@@ -1,5 +1,3 @@
- 
-
  <nav class="navbar navbar-expand navbar-light bg-white topbar  static-top ">
 
      <!-- Sidebar Toggle (Topbar) -->
@@ -135,11 +133,41 @@
 
      </ul>
 
+      <!-- Logout Modal-->
+ <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">×</span>
+             </button>
+         </div>
+         {{-- <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div> --}}
+         <div class="modal-footer">
+             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+             {{-- <a class="btn btn-primary" href="{{route('logout')}}">Logout</a> --}}
+             <form method="POST" action="{{ route('logout') }}" style="padding: 10px 10px">
+                 @csrf
+                 <x-dropdown-link :href="route('logout')"
+                     onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                     {{ __('Log Out') }}
+                 </x-dropdown-link>
+             </form>
+         </div>
+     </div>
+ </div>
+</div>
+
  </nav>
 
+
+
  <div class="dash-board d-sm-flex align-items-center justify-content-between mb-4">
-    <h3 class="">Dashboard</h3>
-    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+     <h3 class="">Dashboard</h3>
+     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-    <p><a href="#">Dashboard </a> > <a href="#" class="active">Dashboard</a></p>
-</div>
+     <p><a href="#">Dashboard </a> > <a href="#" class="active">Dashboard</a></p>
+ </div>

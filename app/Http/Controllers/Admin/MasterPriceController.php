@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\FinancialYear;
+use App\Models\MasterPrice;
 use Illuminate\Http\Request;
 
 class MasterPriceController extends Controller
@@ -14,7 +16,9 @@ class MasterPriceController extends Controller
      */
     public function index()
     {
-        return view('admin.master-price.index');
+        $masterprice = MasterPrice::first();
+        // $financial_year = FinancialYear::first();
+        return view('admin.master-price.index', compact('masterprice'));
     }
 
     /**
@@ -35,7 +39,14 @@ class MasterPriceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $masterprice =  new MasterPrice();
+        $masterprice->school_registration_annual_fee = $request->school_registration_annual_fee;
+        $masterprice->school_student_memebership_fee = $request->school_student_memebership_fee;
+        $masterprice->college_registration_annual_fee = $request->college_registration_annual_fee;
+        $masterprice->college_student_membership_fee = $request->college_student_membership_fee;
+        $masterprice->save();
+
+        return redirect()->route('admin.master-price.index');
     }
 
     /**
@@ -57,7 +68,8 @@ class MasterPriceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $masterprice = MasterPrice::find($id);
+        return view('admin.master-price.edit', compact('masterprice'));
     }
 
     /**
@@ -69,7 +81,15 @@ class MasterPriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $masterprice = MasterPrice::find($id);
+        $masterprice->school_registration_annual_fee = $request->school_registration_annual_fee;
+        $masterprice->school_student_memebership_fee = $request->school_student_memebership_fee;
+        $masterprice->college_registration_annual_fee = $request->college_registration_annual_fee;
+        $masterprice->college_student_membership_fee = $request->college_student_membership_fee;
+        $masterprice->save();
+
+        return redirect()->route('admin.master-price.index');
+
     }
 
     /**
@@ -80,6 +100,10 @@ class MasterPriceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $masterprice = MasterPrice::find($id);
+
+        $masterprice->delete();
+
+        return redirect()->route('admin.master-price.index');
     }
 }

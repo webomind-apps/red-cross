@@ -43,7 +43,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('admin.dashboard')}}">
+        <a class="nav-link" href="{{ route('dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -93,17 +93,22 @@
             <span>Tables</span></a>
     </li> -->
     <li class="nav-item">
-        <a class="nav-link" href="school-data.html">
+        <a class="nav-link" href="{{route('admin.school-data.index')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>School Data</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="payment-detail.html">
+        <a class="nav-link" href="{{ route('admin.payment-details.index')}}">
             <i class="far fa-info-circle"></i>
-            <span>Payment Details</span></a>
+            <span>Registration Payment</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="email-template.html">
+        <a class="nav-link" href="{{ route('admin.jrc-exam-payment-details.index')}}">
+            <i class="far fa-info-circle"></i>
+            <span>Jrc Examination Payment</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.email-templates.index')}}">
             <i class="fas fa-envelope-open"></i>
             <span>Email Templates</span></a>
     </li>
@@ -119,7 +124,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.financial-year.index') }}">
-            <i class="fas fa-usd-circle"></i>
+            <i class="fas fa-calendar"></i>
             <span>Financial year</span></a>
     </li>
 
