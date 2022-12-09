@@ -25,19 +25,19 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="name">School Registartion Annual fee</label>
+                            <label for="School Registartion Annual fee">School Registartion Annual fee</label>
                             <input type="text" class="form-control" id="school_registration_annual_fee" name="school_registration_annual_fee"
                                 placeholder="School Registartion Annual fee"
                                 value="{{ $masterprice ? $masterprice->school_registration_annual_fee : '' }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="to date">School Student membership fee</label>
+                            <label for="School Student membership fee">School Student membership fee</label>
                             <input type="text" class="form-control" id="school_student_memebership_fee" name="school_student_memebership_fee"
                                 placeholder="Student membership fee"
                                 value="{{ $masterprice ? $masterprice->school_student_memebership_fee : '' }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="from date">College Registration Annual fee</label>
+                            <label for="College Registration Annual fee">College Registration Annual fee</label>
                             <input type="text" class="form-control" id="college_registration_annual_fee" name="college_registration_annual_fee"
                                 placeholder="College Registration Annual fee"
                                 value="{{ $masterprice ? $masterprice->college_registration_annual_fee : '' }}">
@@ -49,16 +49,22 @@
                                 value="{{ $masterprice ? $masterprice->college_student_membership_fee : '' }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="from date">JRC Examination fee</label>
-                            <input type="text" class="form-control" id="college_registration_annual_fee" name="college_registration_annual_fee"
-                                placeholder="College Registration Annual fee"
-                                value="{{ $masterprice ? $masterprice->college_registration_annual_fee : '' }}">
+                            <label for="JRC Examination fee">JRC Examination fee</label>
+                            <input type="text" class="form-control" id="jrc_examination_fee" name="jrc_examination_fee"
+                                placeholder="JRC Examination fee"
+                                value="{{ $masterprice ? $masterprice->jrc_examination_fee : '' }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="to date">Book fee</label>
-                            <input type="text" class="form-control" id="college_student_membership_fee" name="college_student_membership_fee"
-                                placeholder="College membership fee"
-                                value="{{ $masterprice ? $masterprice->college_student_membership_fee : '' }}">
+                            <label for="Book fee">Book fee</label>
+                            <input type="text" class="form-control" id="book_fee" name="book_fee"
+                                placeholder="Book fee"
+                                value="{{ $masterprice ? $masterprice->book_fee : '' }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Convenience">Convenience %</label>
+                            <input type="text" class="form-control" id="convenience" name="convenience"
+                                placeholder="Convenience"
+                                value="{{ $masterprice ? $masterprice->convenience : '' }}">
                         </div>
                     </div>
                     <button class="btn btn-primary mt-3">

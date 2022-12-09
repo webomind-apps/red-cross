@@ -45,6 +45,7 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('admin.users.index')->with('success', 'User added successfully!');
+
     }
 
     /**
@@ -57,6 +58,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         return view('admin.users.view', compact('user'));
+
     }
 
     /**
@@ -86,6 +88,7 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully!');
+
     }
 
     /**
@@ -101,5 +104,6 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index');
+
     }
 }

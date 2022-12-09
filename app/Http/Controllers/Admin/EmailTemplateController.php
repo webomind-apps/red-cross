@@ -15,6 +15,7 @@ class EmailTemplateController extends Controller
     public function index()
     {
        return view('admin.email-templates.index');
+
     }
 
     /**

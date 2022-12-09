@@ -15,8 +15,8 @@ class FinancialYearController extends Controller
      */
     public function index()
     {
-        $financial_year = FinancialYear::first();
-        return view('admin.financial-year.index', compact('financial_year'));
+        $financial_years = FinancialYear::paginate(10);
+        return view('admin.financial-year.index', compact('financial_years'));
     }
 
     /**
@@ -26,6 +26,7 @@ class FinancialYearController extends Controller
      */
     public function create()
     {
+        return view('admin.financial-year.create');
     }
 
     /**
@@ -36,6 +37,13 @@ class FinancialYearController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required', 
+            'from_date' => 'required',
+            'to_date' =>'required',
+            'status' => 'required'
+        ]);
+        
         $financial_year = new FinancialYear();
         $financial_year->name = $request->name;
         $financial_year->from_date = $request->from_date;
@@ -66,7 +74,8 @@ class FinancialYearController extends Controller
      */
     public function edit($id)
     {
-        //
+        $financial_year = FinancialYear::find($id);
+        return view('admin.financial-year.edit', compact('financial_year'));
     }
 
     /**
@@ -97,6 +106,9 @@ class FinancialYearController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $financial_year = FinancialYear::find($id);
+        $financial_year->delete();
+
+        return redirect()->route('admin.financial-year.index')->with('success', 'Financial year deleted successfully!');
     }
 }

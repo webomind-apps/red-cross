@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\JrcExaminationFee;
 use Illuminate\Http\Request;
 
 class JrcExamPaymentController extends Controller
@@ -14,7 +15,8 @@ class JrcExamPaymentController extends Controller
      */
     public function index()
     {
-        return view('admin.jrc-exam-payment-details.index');
+        $jrc_examination_payments = JrcExaminationFee::paginate(10);
+        return view('admin.jrc-exam-payment-details.index', compact('jrc_examination_payments'));
     }
 
     /**
@@ -24,7 +26,7 @@ class JrcExamPaymentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.jrc-exam-payment-details.create');
     }
 
     /**
@@ -35,7 +37,9 @@ class JrcExamPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jrc_examination_fee = JrcExaminationFee::create($request->all());
+
+        return redirect()->route('admin.jrc-exam-payment-details.index');
     }
 
     /**
@@ -46,7 +50,9 @@ class JrcExamPaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        $jrc_examination_payment = JrcExaminationFee::find($id);
+
+        return view('admin.jrc-exam-payment-details.show', compact('jrc_examination_payment'));
     }
 
     /**
@@ -80,6 +86,10 @@ class JrcExamPaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jrc_examination_payment = JrcExaminationFee::find($id);
+
+        $jrc_examination_payment->delete();
+
+        return redirect()->route('admin.jrc-exam-payment-details.index');
     }
 }

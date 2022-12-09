@@ -7,7 +7,7 @@
         <!-- Page Heading -->
         <div class="head-name d-flex justify-content-between ">
             <div>
-                <h6>Jrc Exam Payment detail of all the schools</h6>
+                <h6>Payment detail of all the schools</h6>
                 <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
             </div>
             <div class="d-flex">
@@ -33,15 +33,17 @@
                 </div> --}}
                 <div class="p-1">
                     <select class="custom-select custom-select-sm form-control form-control-sm"
-                        aria-label="Default select example">
+                        aria-label="Default select example" id="year" name="year">
                         <option selected>Year</option>
-                        <option value="1">2022</option>
-                        <option value="2">2021</option>
-                        <option value="3">2020</option>
+                        @foreach ($years as $year)
+                            <option value="{{ $year->id }}" id="{{ $year->id }}">
+                                {{ $year->name }} </option>
+                        @endforeach
                     </select>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- /.container-fluid -->
     <div class="container-fluid">
@@ -50,7 +52,7 @@
         <div class="card shadow mb-4">
             <div class="card-header d-flex justify-content-between py-3">
                 <h6 class="my-auto font-weight-bold text-primary">Payment Details</h6>
-                <a href="{{ route('admin.jrc-exam-payment-details.create') }}" class="btn btn-primary btn-icon-split">
+                <a href="{{ route('admin.school-registration-payment.create') }}" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-plus"></i>
                     </span>
@@ -71,14 +73,16 @@
                                 <th>School Name</th>
                                 {{-- <th>Payment Year</th> --}}
                                 <th>Districts</th>
-                                <th>Amount Paid</th>
-                                {{-- <th>Amount Due</th> --}}
-                                <th>Status</th>
+                                {{-- <th>Amount Paid</th> --}}
+                                <th>Amount Due</th>
+                                {{-- <th>Status</th> --}}
                                 <th>View</th>
+
                             </tr>
                         </thead>
+
                         <tbody>
-                            @foreach ($jrc_examination_payments as $index => $jrc_examination_payment)
+                            @foreach ($school_registrations as $index => $school_registration)
                                 <tr>
                                     <th scope="row">
                                         <div class="form-check">
@@ -86,42 +90,46 @@
                                                 value="option1">
                                         </div>
                                     </th>
-                                    <td>{{ $jrc_examination_payment->dise_code }}</td>
-                                    <td>{{ $jrc_examination_payment->school_name }}</td>
-                                    {{-- <td>2020-2021</td> --}}
-                                    <td>{{ $jrc_examination_payment->district }}</td>
-                                    <td>{{ $jrc_examination_payment->total_to_be_paid }}</td>
-                                    {{-- <td>10500</td> --}}
-
-                                    <td><span class="badge bg-paid">Paid</span></td>
+                                    <td>{{ $school_registration->dise_code }}</td>
+                                    <td>{{ $school_registration->school_name }}</td>
+                                    {{-- <td>{{ $school_registration->name }}</td> --}}
+                                    <td>{{ $school_registration->district }}</td>
+                                    {{-- <td>{{ $school_registration->total_to_be_paid }}</td> --}}
+                                    <td>{{ $school_registration->balance }}</td>
+                                    {{-- @if ($school_registration->balance_amount == 0)
+                                        <td><span class="badge bg-paid">Paid</span></td>
+                                    @elseif($school_registration->balance_amount == $school_registration->total_fees)
+                                        <td><span class="badge bg-unpaid">Not paid</span></td>
+                                    @else
+                                        <td><span class="badge bg-partial">Partially paid</span></td>
+                                    @endif --}}
                                     <td>
                                         <a
-                                            href="{{ route('admin.jrc-exam-payment-details.show', $jrc_examination_payment->id) }}"><button
+                                            href="{{ route('admin.school-registration-payment.show', $school_registration->id) }}"><button
                                                 type="button" class="btn btn-sm bg-paid">Details</button></a>
-                                        <a class="deleteRecord" data-id="form-submit-{{ $jrc_examination_payment->id }}"
-                                            data-route="{{ route('admin.jrc-exam-payment-details.destroy', $jrc_examination_payment->id) }}">
+                                        <a class="deleteRecord" data-id="form-submit-{{ $school_registration->id }}"
+                                            data-route="{{ route('admin.school-registration-payment.destroy', $school_registration->id) }}">
                                             <i class="bg-unpaid p-2 far fa-trash-alt"></i>
                                         </a>
-                                        <form method="POST" id="form-submit-{{ $jrc_examination_payment->id }}"
-                                            action="{{ route('admin.jrc-exam-payment-details.destroy', $jrc_examination_payment->id) }}"
+                                        <form method="POST" id="form-submit-{{ $school_registration->id }}"
+                                            action="{{ route('admin.school-registration-payment.destroy', $school_registration->id) }}"
                                             hidden>
                                             @method('DELETE')
                                             @csrf
                                         </form>
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $jrc_examination_payments->links('pagination::bootstrap-4') }}
+                    {{-- {{ $school_registrations->links('pagination::bootstrap-4') }} --}}
                 </div>
             </div>
         </div>
+
     </div>
     <!-- /.container-fluid -->
 @endsection
-
 @push('scripts')
     <script>
         $('.deleteRecord').on('click', function() {

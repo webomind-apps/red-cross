@@ -66,7 +66,8 @@ class SchoolDataController extends Controller
      */
     public function show($id)
     {
-        //
+        $school_data = SchoolData::find($id);
+        return view('admin.school-data.show', compact('school_data'));
     }
 
     /**
@@ -100,19 +101,23 @@ class SchoolDataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $school_data = SchoolData::find($id);
+
+        $school_data->delete();
+
+        return redirect()->route('admin.school-data.index');
     }
 
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new SchoolDataExport, 'school-data.xlsx');
     }
 
     public function import()
     {
-        Excel::import(new SchoolDataImport, request()->file('file'));
-
+        // dd(request()->file('file'));
+        Excel::import(new SchoolDataImport, request()->file('file')->store('files'));
         return back();
     }
 }

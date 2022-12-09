@@ -17,16 +17,15 @@
                               class="fas fa-download fa-sm text-white-50"></i> Export</a>
                   </div>
                   <div class="p-1">
-                      <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                          id="import_modal"><i class="fas fa-upload fa-sm text-white-50"></i> Upload</a>
-
                       {{-- <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
                           @csrf
-                          <input type="file" name="file" class="form-control">
-                          <br>
-                          <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-upload fa-sm text-white-50">Import User Data</button>
+                          <input type="file" name="file" class="form-control"
+                              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                          <button data-toggle="modal" data-target="#logoutModal1"></i>Import</button>
                       </form> --}}
+                      <button data-toggle="modal" data-target="#ImportModal"
+                          class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
+                              class="fas fa-upload fa-sm text-white-50"></i>Import</button>
                   </div>
               </div>
           </div>
@@ -66,17 +65,67 @@
                                       <td>{{ $school_data->school_name }}</td>
                                       <td>{{ $school_data->district }}</td>
                                       <td>
-                                          <button type="button" class="btn btn-sm bg-paid" data-toggle="modal"
-                                              data-target="#logoutModal">Details</button>
+                                          <a href="{{ route('admin.school-data.show', $school_data->id) }}"><button
+                                                  type="button" class="btn btn-sm bg-paid">Details</button></a>
+                                          <a class="deleteRecord" data-id="form-submit-{{ $school_data->id }}"
+                                              data-route="{{ route('admin.school-data.destroy', $school_data->id) }}">
+                                              <i class="bg-unpaid p-2 far fa-trash-alt"></i>
+                                          </a>
+                                          <form method="POST" id="form-submit-{{ $school_data->id }}"
+                                              action="{{ route('admin.school-data.destroy', $school_data->id) }}" hidden>
+                                              @method('DELETE')
+                                              @csrf
+                                          </form>
                                       </td>
                                   </tr>
                               @endforeach
                           </tbody>
                       </table>
+                      {{ $school_datas->links('pagination::bootstrap-4') }}
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="modal fade" id="ImportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  {{-- <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <input type="file" name="file" class="form-control"
+                          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                      <button>Import</button>
+                  </form> --}}
+
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Cancel</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+
+                  <div class="modal-footer" style="align-content: center !important">
+                      <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          <input type="file" name="file" class="form-control"
+                              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                          <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
+                                  class="fas fa-upload fa-sm text-white-50"></i></button>
+                      </form>
                   </div>
               </div>
           </div>
       </div>
       <!-- /.container-fluid -->
   @endsection
-  
+  @push('scripts')
+      <script>
+          $('.deleteRecord').on('click', function() {
+              var id = $(this).data('id');
+              if (confirm('Are you sure you want to delete this?')) {
+                  $('#' + id + '').submit();
+              }
+          })
+      </script>
+  @endpush

@@ -318,245 +318,224 @@
             <div class="row">
                 <div class="col-lg-12rounded">
                     <div class="col-lg-11 mx-auto">
+                        <form action="{{ route('school-registration-payment.store') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
 
-                        <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="text" name="dise_code" id="dise_code"
+                                            autocomplete="off" class="input">
+                                        <label class="user-label">Dise code/School code</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="text" name="id" id="id"
+                                            autocomplete="off" class="input" hidden>
+                                    </div>
+                                </div>
 
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input required="" type="text" name="text" id="dise"
-                                        autocomplete="off" class="input">
-                                    <label class="user-label">Dise code/School code</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input required="" type="text" name="text" id="school_name"
-                                                autocomplete="off" class="input">
-                                            <label class="user-label">School Name</label>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="input-group">
+                                                <input required="" type="text" name="school_name"
+                                                    id="school_name" autocomplete="off" class="input" >
+                                                <label class="user-label">School Name</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input required="" type="text" name="text" id="district"
-                                                autocomplete="off" class="input">
-                                            <label class="user-label">District</label>
+                                        <div class="col-lg-3">
+                                            <div class="input-group">
+                                                <input required="" type="text" name="district" id="district"
+                                                    autocomplete="off" class="input">
+                                                <label class="user-label">District</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input required="" type="text" name="text" id="taluk"
-                                                autocomplete="off" class="input">
-                                            <label class="user-label">Taluk</label>
+                                        <div class="col-lg-3">
+                                            <div class="input-group">
+                                                <input required="" type="text" name="taluk" id="taluk"
+                                                    autocomplete="off" class="input">
+                                                <label class="user-label">Taluk</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input required="" type="text" name="text" id="pin_code"
-                                                autocomplete="off" class="input">
-                                            <label class="user-label">Pincode</label>
+                                        <div class="col-lg-3">
+                                            <div class="input-group">
+                                                <input required="" type="number" name="pin_code" id="pin_code"
+                                                    autocomplete="off" class="input">
+                                                <label class="user-label">Pincode</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input required="" type="text" name="text" id="phone"
-                                                autocomplete="off" class="input">
-                                            <label class="user-label">Phone Number</label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <input required="" type="number" name="phone_number"
+                                                    id="phone_number" autocomplete="off" class="input">
+                                                <label class="user-label">Phone Number</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input required="" type="text" name="text" id="email"
-                                                autocomplete="off" id="email" class="input">
-                                            <label class="user-label">Email</label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <input required="" type="email" name="email" id="email"
+                                                    autocomplete="off" id="email" class="input">
+                                                <label class="user-label">Email</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="input-group">
-                                            <input required="" type="text" name="text" id="address"
-                                                autocomplete="off" class="input">
-                                            <label class="user-label">Address</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 mt-1">
-                                <label class="fs-5">Jrc councellor details </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input required="" type="text" name="text" id="councellor_name"
-                                        autocomplete="off" class="input">
-                                    <label class="user-label">Name</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input required="" type="email" name="text" id="councellor_email"
-                                        autocomplete="off" class="input">
-                                    <label class="user-label">Email</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input required="" type="number" name="text" id="councellor_phone"
-                                        autocomplete="off" class="input">
-                                    <label class="user-label">Phone number</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 mt-1">
-                                <label class="fs-5"> Number of students </label>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <input required="" type="number" name="class8" id="class8"
-                                        onkeyup="total_students();" autocomplete="off" class="input">
-                                    <label class="user-label">8th</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <input required="" type="number" name="class9" id="class9"
-                                        onkeyup="total_students();" autocomplete="off" class="input">
-                                    <label class="user-label">9th</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <input required="" type="number" name="class10" id="class10"
-                                        onkeyup="total_students();" autocomplete="off" class="input">
-                                    <label class="user-label">10th</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <input required="" type="number" name="text" id="total_students" onkeyup="total_fees();"
-                                        autocomplete="off" class="input">
-                                    <label class="user-label">Total students</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input required="" type="number" name="school_registration_annual_fee"
-                                        id="school_registration_annual_fee" autocomplete="off" class="input" onkeyup="total_fees();">
-                                    <label class="user-label">School registration annual fee</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input required="" type="text" name="school_student_memebership_fee"
-                                        id="school_student_memebership_fee" autocomplete="off" class="input" onkeyup="total_fees();">
-                                    <label class="user-label">Student membership fee (per student)</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="input-group">
-                                    <input required="" type="number" name="text" id=""
-                                        autocomplete="off" class="input" value="">
-                                    <label class="user-label">Number of students paid</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <label class="pt-1 text-danger fw-bold">2022 - 2023</label>
-                                    <div class="col-lg-1 text-center my-auto check-mark">
-                                        <input type="checkbox" name="" id="" class="largerCheckbox">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input required="" type="number" name="text" autocomplete="off"
-                                                class="input" id="total_fees">
-                                            <label class="user-label">Total fees to be paid</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                                            <input required="" type="number" name="text" autocomplete="off"
-                                                class="input">
-                                            <label class="user-label">Amount you will pay now</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                                            <input required="" type="number" name="text" autocomplete="off"
-                                                class="input">
-                                            <label class="user-label">Balance to be paid</label>
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <input required="" type="text" name="address" id="address"
+                                                    autocomplete="off" class="input">
+                                                <label class="user-label">Address</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <label class="pt-1 text-danger fw-bold">2021 - 2022</label>
-                                    <div class="col-lg-1 text-center my-auto check-mark">
-                                        <input type="checkbox" name="" id="" class="largerCheckbox">
+                                <div class="col-lg-12 mt-1">
+                                    <label class="fs-5">Jrc councellor details </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="text" name="councellor_name"
+                                            id="councellor_name" autocomplete="off" class="input">
+                                        <label class="user-label">Name</label>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input required="" type="number" name="total_fees" id="total_fees"
-                                                autocomplete="off" class="input">
-                                            <label class="user-label">Total fees to be paid</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="email" name="councellor_email"
+                                            id="councellor_email" autocomplete="off" class="input">
+                                        <label class="user-label">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="councellor_phone"
+                                            id="councellor_phone" autocomplete="off" class="input">
+                                        <label class="user-label">Phone number</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 mt-1">
+                                    <label class="fs-5"> Number of students </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="no_of_students_class_eight"
+                                            id="no_of_students_class_eight" onkeyup="total_no_students();"
+                                            autocomplete="off" class="input">
+                                        <label class="user-label">8th</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="no_of_students_class_nine"
+                                            id="no_of_students_class_nine" onkeyup="total_no_students();"
+                                            autocomplete="off" class="input">
+                                        <label class="user-label">9th</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="no_of_students_class_ten"
+                                            id="no_of_students_class_ten" onkeyup="total_no_students();"
+                                            autocomplete="off" class="input">
+                                        <label class="user-label">10th</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="total_students"
+                                            id="total_students" autocomplete="off" class="input">
+                                        <label class="user-label">Total students</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="school_registration_annual_fee"
+                                            id="school_registration_annual_fee" autocomplete="off" class="input">
+                                        <label class="user-label">School registration annual fee</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="school_student_memebership_fee"
+                                            id="school_student_memebership_fee" autocomplete="off" class="input">
+                                        <label class="user-label">Student membership fee (per student)</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <input required="" type="number" id="no_of_students_paid"
+                                            name="no_of_students_paid" autocomplete="off" class="input"
+                                            value="">
+                                        <label class="user-label">Number of students paid</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <label class="pt-1 text-danger fw-bold">{{ $year->name }}</label>
+                                        <div class="col-lg-1 text-center my-auto check-mark">
+                                            <input type="checkbox" name="year[]" id="current_year"
+                                                class="largerCheckbox" value="{{ $year->id }}" required>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="input-group">
+                                                <input required="" type="number" name="total_fees[]"
+                                                    id="total_fees" autocomplete="off" class="input">
+                                                <label class="user-label">Total fees to be paid</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="input-group">
+                                                <input required="" type="number" name="paid_amount[]"
+                                                    id="paid_amount" autocomplete="off" class="input">
+                                                <label class="user-label">Amount you will pay now</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="input-group">
+                                                <input required="" type="number" name="balance_amount[]"
+                                                    id="balance_amount" autocomplete="off" class="input">
+                                                <label class="user-label">Balance to be paid</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                                            <input required="" type="number" name="text" autocomplete="off"
-                                                class="input">
-                                            <label class="user-label">Amount you will pay now</label>
+                                </div>
+
+                                <div id="previous"></div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="total" id="total"
+                                            autocomplete="off" class="input">
+                                        <label class="user-label">Total</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 ">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="convenience" id="convenience"
+                                            autocomplete="off" class="input">
+                                        <label class="user-label">Convenience</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 ">
+                                    <div class="input-group">
+                                        <input required="" type="number" name="total_to_be_paid"
+                                            id="total_to_be_paid" autocomplete="off" class="input">
+                                        <label class="user-label">Total to be paid</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-3 col-sm-12 mt-4">
+                                            <button class="btns" type="submit"><span>Pay Now</span></a>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                                            <input required="" type="number" name="text" autocomplete="off"
-                                                class="input">
-                                            <label class="user-label">Balance to be paid</label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-
-
-                            <div class="col-lg-4 ">
-                                <div class="input-group">
-                                    <input required="" type="number" name="text" autocomplete="off"
-                                        class="input">
-                                    <label class="user-label">Total</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 ">
-                                <div class="input-group">
-                                    <input required="" type="number" name="text" autocomplete="off"
-                                        class="input">
-                                    <label class="user-label">Convenience</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 ">
-                                <div class="input-group">
-                                    <input required="" type="number" name="text" autocomplete="off"
-                                        class="input">
-                                    <label class="user-label">Total to be paid</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-3 col-sm-12 mt-4">
-                                        <a href="javascript:void()" class="btns"><span>Pay Now</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -567,10 +546,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" referrerpolicy="no-referrer"></script>
 
     <script>
+        //fill the form when dise number filled
         $(document).ready(function() {
-
-            $('#dise').on('change', function() {
-                let dise = $('#dise').val();
+            $('#dise_code').on('change', function() {
+                let dise = $('#dise_code').val();
                 var url = "{{ url('data') }}";
                 $.ajax({
                     type: "GET",
@@ -580,12 +559,13 @@
                     },
                     dataType: "json",
                     success: function(answer) {
-                        console.log(answer);
+                        // console.log(answer);
+                        $('#id').val(answer['id']);
                         $('#school_name').val(answer['school_name']);
                         $('#district').val(answer['district']);
                         $('#taluk').val(answer['taluk']);
                         $('#pin_code').val(answer['pin_code']);
-                        $('#phone').val(answer['phone_number']);
+                        $('#phone_number').val(answer['phone_number']);
                         $('#email').val(answer['email']);
                         $('#address').val(answer['address']);
                         $('#councellor_name').val(answer['councellor_name']);
@@ -595,35 +575,164 @@
                 });
             });
         });
-    </script>
-    <script>
+
         $(document).ready(function() {
-            $('#dise').on('change', function() {
-                var url = "{{ url('master_price_data') }}";
+            $('#dise_code').on('change', function() {
+                var url = "{{ url('master-price-data') }}";
                 $.ajax({
                     type: "GET",
                     url: url,
                     dataType: "json",
                     success: function(answer) {
-                        console.log(answer);
                         $('#school_registration_annual_fee').val(answer[
                             'school_registration_annual_fee']);
                         $('#school_student_memebership_fee').val(answer[
                             'school_student_memebership_fee']);
+                        $('#convenience').val(answer[
+                            'convenience']);
                     },
                 });
             });
         });
-    </script>
-    <script>
-        window.total_students = function sum() {
-            var class8 = document.getElementById('class8').value || 0;
-            var class9 = document.getElementById('class9').value || 0;
-            var class10 = document.getElementById('class10').value || 0;
-            var total_students = parseInt(class8) + parseInt(class9) + parseInt(class10);
 
-            document.getElementById('total_students').value = total_students;
+        //calculate total number of students 
+        window.total_no_students = function total_no_students() {
+            var class8 = document.getElementById('no_of_students_class_eight').value || 0;
+            var class9 = document.getElementById('no_of_students_class_nine').value || 0;
+            var class10 = document.getElementById('no_of_students_class_ten').value || 0;
+            var total_no_students = parseInt(class8) + parseInt(class9) + parseInt(class10);
+            document.getElementById('total_students').value = total_no_students;
+
+            var school_student_memebership_fee = document.getElementById(
+                'school_student_memebership_fee').value || 0;
+            var school_registration_annual_fee = document.getElementById(
+                'school_registration_annual_fee').value || 0;
+
+            var total_fees = parseInt(total_no_students) * parseInt(school_student_memebership_fee) + parseInt(
+                school_registration_annual_fee);
+            document.getElementById('total_fees').value = total_fees;
+
         };
+
+        //calculate amount beign paid
+        $(document).ready(function() {
+            $('#no_of_students_paid').on('change', function() {
+                var no_of_students_paid = document.getElementById('no_of_students_paid').value || 0;
+                var school_student_memebership_fee = document.getElementById(
+                    'school_student_memebership_fee').value || 0;
+                var school_registration_annual_fee = document.getElementById(
+                    'school_registration_annual_fee').value || 0;
+                var paid_amount = parseInt(no_of_students_paid) * parseInt(school_student_memebership_fee) +
+                    parseInt(school_registration_annual_fee);
+                document.getElementById('paid_amount').value = paid_amount;
+
+                var total_fees = document.getElementById('total_fees').value;
+
+                var balance_amount = total_fees - paid_amount;
+                document.getElementById('balance_amount').value = balance_amount;
+
+            });
+        });
+
+
+        $(document).ready(function() {
+            $('#dise_code').on('change', function() {
+                let dise = $('#dise_code').val();
+                var url = "{{ url('previous-years-data') }}";
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {
+                        dise
+                    },
+                    dataType: "json",
+                    success: function(answer) {
+                        for (i = 0; i < answer.length; i++) {
+                            var htm = `<div class="col-lg-12">
+                                        <div class="row" id=row-` + i + `>
+                                            <label class="pt-1 text-danger fw-bold">${answer[i].year_id}</label>
+                                            <div class="col-lg-1 text-center my-auto check-mark">
+                                                <input type="checkbox" name="year[]" id="year` + i + `"
+                                                    class="largerCheckbox" value=${answer[i].year_id} >
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <input required="" type="number" name="total_fees[]"
+                                                        id="total_fees-` + i + `" autocomplete="off" class="input"
+                                                        value=${answer[i].balance}>
+                                                    <label class="user-label">Total fees to be paid</label>
+                                                </div>
+                                            </div>
+                                            <input required="" type="number" name="previous_financial_year[]"
+                                                id="previous_financial_year-` + i + `" autocomplete="off" class="input"
+                                                    value=${answer[i].year_id} hidden>
+
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <input required="" type="number" name="paid_amount[]"
+                                                        id="paid_amount-` + i + `" autocomplete="off" class="paid_amount">
+                                                    <label class="user-label">Amount you will pay now</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <input required="" type="number" name="balance_amount[]"
+                                                        id="balance_amount-` + i + `" autocomplete="off" class="input" value="">
+                                                    <label class="user-label">Balance to be paid</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                            $('#previous').append(htm);
+                        }
+                    },
+                });
+            });
+        });
+
+        $(document).on('change', '.paid_amount', function() {
+            calculateTotal()
+
+        });
+    </script>
+
+    <script>
+        function calculateTotal() {
+            var total1 = 0;
+            var total = 0;
+
+            $('.paid_amount').each(function() {
+                var val = $(this).val();
+                var id = $(this).attr('id');
+                var index = id.split("-")[1];
+
+                if (val != '') {
+                    var total_fees = '#total_fees-' + index;
+                    var paid_fees = val;
+                    var balance_fees = '#balance_amount-' + index;
+
+                    var balance = $(total_fees).val() - paid_fees;
+                    $(balance_fees).val(balance)
+                    // console.log('value', balance);
+                    total1 = total1 + parseInt(val);
+                    // console.log(total);
+                }
+
+            })
+
+            var current_total = $(paid_amount).val();
+
+            total = total1 + parseInt(current_total);
+            $('#total').val(total);
+
+
+        }
+        convenience = $(convenience).val();
+        // alert(convenience);
+        convenience_amount = parseInt((convenience / 100) * total);
+        // alert(convenience_amount);
+        total_to_be_paid = total + convenience_amount;
+        $('#total_to_be_paid').val(total_to_be_paid);
     </script>
 </body>
 

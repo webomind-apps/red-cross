@@ -44,6 +44,9 @@ class MasterPriceController extends Controller
         $masterprice->school_student_memebership_fee = $request->school_student_memebership_fee;
         $masterprice->college_registration_annual_fee = $request->college_registration_annual_fee;
         $masterprice->college_student_membership_fee = $request->college_student_membership_fee;
+        $masterprice->jrc_examination_fee = $request->jrc_examination_fee;
+        $masterprice->book_fee = $request->book_fee;
+        $masterprice->convenience = $request->convenience;
         $masterprice->save();
 
         return redirect()->route('admin.master-price.index');
@@ -86,6 +89,9 @@ class MasterPriceController extends Controller
         $masterprice->school_student_memebership_fee = $request->school_student_memebership_fee;
         $masterprice->college_registration_annual_fee = $request->college_registration_annual_fee;
         $masterprice->college_student_membership_fee = $request->college_student_membership_fee;
+        $masterprice->jrc_examination_fee = $request->jrc_examination_fee;
+        $masterprice->book_fee = $request->book_fee;
+        $masterprice->convenience = $request->convenience;
         $masterprice->save();
 
         return redirect()->route('admin.master-price.index');

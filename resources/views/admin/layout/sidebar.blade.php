@@ -98,7 +98,7 @@
             <span>School Data</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.payment-details.index')}}">
+        <a class="nav-link" href="{{ route('admin.school-registration-payment.index')}}">
             <i class="far fa-info-circle"></i>
             <span>Registration Payment</span></a>
     </li>

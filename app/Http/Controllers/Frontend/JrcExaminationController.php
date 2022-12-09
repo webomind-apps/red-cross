@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
+use App\Models\JrcExaminationFee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
-class PaymentDetailController extends Controller
+class JrcExaminationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,7 @@ class PaymentDetailController extends Controller
      */
     public function index()
     {
-        return view('admin.payment-details.index');
+        //
     }
 
     /**
@@ -24,7 +27,7 @@ class PaymentDetailController extends Controller
      */
     public function create()
     {
-        return view('admin.payment-details.create');
+        //
     }
 
     /**
@@ -35,8 +38,11 @@ class PaymentDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jrc_examination_fee = JrcExaminationFee::create($request->all());
+
+        return redirect()->route('thank-you');
     }
+
 
     /**
      * Display the specified resource.
@@ -46,7 +52,8 @@ class PaymentDetailController extends Controller
      */
     public function show($id)
     {
-        //
+       
+
     }
 
     /**

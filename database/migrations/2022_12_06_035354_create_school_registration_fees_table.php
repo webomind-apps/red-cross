@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('master_prices', function (Blueprint $table) {
+        Schema::create('school_registration_fees', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('school_registration_annual_fee');
-            $table->bigInteger('school_student_memebership_fee');
-            $table->bigInteger('college_registration_annual_fee');
-            $table->bigInteger('college_student_membership_fee');
-            $table->bigInteger('jrc_examination_fee');
-            $table->bigInteger('book_fee');
+            $table->foreignId('school_registration_id')->constrained('school_registrations')->onDelete('cascade');
+            $table->bigInteger('total_fees');
+            $table->bigInteger('paid_amount');
+            $table->bigInteger('balance_amount');
+            $table->bigInteger('total');
             $table->bigInteger('convenience');
+            $table->bigInteger('total_to_be_paid');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_prices');
+        Schema::dropIfExists('school_registration_fees');
     }
 };
