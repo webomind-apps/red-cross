@@ -26,8 +26,8 @@ class SchoolData extends Model
     {
         return $this->hasMany(SchoolRegistration::class, 'school_id');
     }    
-    public function balance()
+    public function balances()
     {
         return $this->hasMany(Balance::class, 'school_id');
-    }    
+    }  
 }

@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Total Schools Paid</div>
-                    <div class="h5">565 / 2050</div>
+                    <div class="h5">{{ $total_schools_paid }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Total Schools Not Paid</div>
-                    <div class="h5">1285 / 2050</div>
+                    <div class="h5">{{ $total_schools_not_paid }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
@@ -44,7 +44,7 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Total Schools Partially Paid</div>
-                    <div class="h5">1285 / 2050</div>
+                    <div class="h5">{{ $total_schools_paid_partially}}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
@@ -61,7 +61,7 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Total Amount Collected</div>
-                    <div class="h5">₹57600</div>
+                    <div class="h5">Rs.{{ $paid_amount }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
@@ -78,7 +78,7 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Amount To Be Collected</div>
-                    <div class="h5">₹150500</div>
+                    <div class="h5">Rs.{{ $balance_amount }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">

@@ -33,7 +33,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
-            <img src="img/redcrosslogo.png" alt="" height="50px">
+            <img src="{{asset('admin/img/redcrosslogo.png')}}" alt="" height="50px">
         </div>
         <div class="sidebar-brand-text mx-3">REDCROSS</div>
     </a>
@@ -118,6 +118,11 @@
             <span>User Creation</span></a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.admins.index') }}">
+            <i class="fas fa-user-plus"></i>
+            <span>Admin</span></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.master-price.index') }}">
             <i class="fas fa-usd-circle"></i>
             <span>Master Price</span></a>
@@ -126,6 +131,11 @@
         <a class="nav-link" href="{{ route('admin.financial-year.index') }}">
             <i class="fas fa-calendar"></i>
             <span>Financial year</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.general-secretary-signature.index') }}">
+            <i class="fas fa-calendar"></i>
+            <span>General Secretary Signature</span></a>
     </li>
 
 

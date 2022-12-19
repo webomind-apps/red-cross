@@ -4,14 +4,15 @@ namespace App\Exports;
 
 use App\Models\SchoolData;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class SchoolDataExport implements FromCollection
+class SchoolDataExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    public function view(): View
     {
-        return SchoolData::all();
+        return view('admin.exports.school_data_export', [
+            'schooldatas' => SchoolData::all()
+        ]);
     }
 }

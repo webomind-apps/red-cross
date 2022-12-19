@@ -156,7 +156,7 @@
             padding: 50px 0;
         }
 
-        .input-group {
+        /* .input-group {
             position: relative;
             margin: 15px 0;
         }
@@ -220,8 +220,42 @@
             padding: 0 .2em;
             color: #FF1414;
             font-size: 20px;
+        } */
+        .input-group {
+            margin-bottom: 15px;
         }
 
+        .input-group input {
+            width: 100%;
+            height: 40px;
+            border-radius: 5px !important;
+            border: 1px solid #bdbcbc;
+            outline: none;
+            padding-left: 15px;
+        }
+
+        .input-group select {
+            width: 100%;
+            height: 40px;
+            border-radius: 5px !important;
+            border: 1px solid #bdbcbc;
+            outline: none;
+            padding-left: 15px;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            height: 40px;
+            border-radius: 5px !important;
+            border: 1px solid #bdbcbc;
+            outline: none;
+            padding-left: 15px;
+        }
+
+        .input-group label {
+            padding-bottom: 6px;
+            font-size: 17px;
+        }
 
         @media (max-width: 768px) {
             .btns span {
@@ -258,7 +292,8 @@
     <nav class="navbar navbar-expand-lg sticky-top bg-light px-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="./img/cropped-Final-Logo.png" class="img-fluid" alt="logo" srcset="">
+                <img src="{{ asset('admin/img/cropped-Final-Logo.png') }}" class="img-fluid" alt="logo"
+                    srcset="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -267,28 +302,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto b-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#flow-reactor">Flow-Reactor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Benifits">Benifits</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#solutions">Solutions</a>
-                    </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#Specifications"> Technical Specifications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Faq">Faq</a>
-                    </li>
-                    <li class="nav-item">
-                        <!-- <img src="./new-icon-gif-2.jpg" height="30px" class="position:absolute; left:40px"> -->
-                        <img src="./new-icon-gif-2.jpg" height="30px" alt=""
+                        <img src="{{ asset('admin/img/new-icon-gif-2.jpg') }}" height="30px" alt=""
                             style="position: absolute; top:0;right:13px ">
                         <select class="btns" style="color: #000; position: relative;"
                             onChange="window.location.href=this.value">
@@ -322,12 +338,12 @@
                         <form action="{{ route('jrc-examination-payment.store') }}" method="POST">
                             @csrf
                             <div class="row">
-
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Dise code/School code</label>
                                         <input required="" type="text" name="dise_code" id="dise_code"
                                             autocomplete="off" class="input">
-                                        <label class="user-label">Dise code/School code</label>
+                                        
                                     </div>
                                 </div>
 
@@ -335,52 +351,59 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="input-group">
-                                                <input required="" type="text" name="school_name" id="school_name"
-                                                    autocomplete="off" class="input">
                                                 <label class="user-label">School Name</label>
+                                                <input required="" type="text" name="school_name" id="school_name"
+                                                    autocomplete="off" class="input" readonly>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
-                                                <input required="" type="text" name="district" id="district"
-                                                    autocomplete="off" class="input">
                                                 <label class="user-label">District</label>
+                                                <input required="" type="text" name="district" id="district"
+                                                    autocomplete="off" class="input" readonly>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
-                                                <input required="" type="text" name="taluk" id="taluk"
-                                                    autocomplete="off" class="input">
                                                 <label class="user-label">Taluk</label>
+                                                <input required="" type="text" name="taluk" id="taluk"
+                                                    autocomplete="off" class="input" readonly>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
-                                                <input required="" type="number" name="pin_code" id="pin_code"
-                                                    autocomplete="off" class="input">
                                                 <label class="user-label">Pincode</label>
+                                                <input required="" type="number" name="pin_code" id="pin_code"
+                                                    autocomplete="off" class="input" readonly>
+                                               
                                             </div>
                                         </div>
 
                                         <div class="col-lg-6">
                                             <div class="input-group">
-                                                <input required="" type="number" name="phone_number"
-                                                    id="phone_number" autocomplete="off" class="input">
                                                 <label class="user-label">Phone Number</label>
+                                                <input required="" type="number" name="phone_number"
+                                                    id="phone_number" autocomplete="off" class="input" readonly>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="input-group">
-                                                <input required="" type="email" name="email" id="email"
-                                                    autocomplete="off" class="input">
                                                 <label class="user-label">Email</label>
+                                                <input required="" type="email" name="email" id="email"
+                                                    autocomplete="off" class="input" readonly>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="input-group">
-                                                <input required="" type="text" name="address" id="address"
-                                                    autocomplete="off" class="input">
                                                 <label class="user-label">Address</label>
+                                                <input required="" type="text" name="address" id="address"
+                                                    autocomplete="off" class="input" readonly>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -391,23 +414,26 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
-                                        <input required="" type="text" name="councellor_name"
-                                            id="councellor_name" autocomplete="off" class="input">
                                         <label class="user-label">Name</label>
+                                        <input required="" type="text" name="councellor_name"
+                                            id="councellor_name" autocomplete="off" class="input" readonly>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
-                                        <input required="" type="email" name="councellor_email"
-                                            id="councellor_email" autocomplete="off" class="input">
                                         <label class="user-label">Email</label>
+                                        <input required="" type="email" name="councellor_email"
+                                            id="councellor_email" autocomplete="off" class="input" readonly>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
-                                        <input required="" type="number" name="councellor_phone"
-                                            id="councellor_phone" autocomplete="off" class="input">
                                         <label class="user-label">Phone number</label>
+                                        <input required="" type="number" name="councellor_phone"
+                                            id="councellor_phone" autocomplete="off" class="input" readonly>
+                                       
                                     </div>
                                 </div>
 
@@ -417,72 +443,90 @@
 
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Total number students</label>
                                         <input required="" type="number" name="total_no_of_students"
                                             id="total_no_of_students" autocomplete="off" class="input">
-                                        <label class="user-label">Total number students</label>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Student jrc examination fee per student(₹)</label>
                                         <input required="" type="number" name="jrc_examination_fee"
-                                            id="jrc_examination_fee" autocomplete="off" class="input">
-                                        <label class="user-label">Student jrc examination fee (per student)</label>
+                                            id="jrc_examination_fee" autocomplete="off" class="input" readonly>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total(₹)</label>
                                         <input required="" type="number" id="total_fee_amount"
-                                            name="total_fee_amount" autocomplete="off" class="input">
-                                        <label class="user-label">Total</label>
+                                            name="total_fee_amount" autocomplete="off" class="input" readonly>
+                                       
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Total number students willing to buy book</label>
                                         <input required="" type="number" name="no_of_students_buying_book"
                                             id="no_of_students_buying_book" autocomplete="off" class="input">
-                                        <label class="user-label">Total number students willing to buy book</label>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Book fee per student(₹)</label>
                                         <input required="" type="number" name="book_fee" id="book_fee"
-                                            autocomplete="off" class="input">
-                                        <label class="user-label">Book fee (per student)</label>
+                                            autocomplete="off" class="input" readonly>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total(₹)</label>
                                         <input required="" type="number" name="total_book_fee"
-                                            id="total_book_fee" autocomplete="off" class="input">
-                                        <label class="user-label">Total</label>
+                                            id="total_book_fee" autocomplete="off" class="input" readonly>
+                                       
                                     </div>
                                 </div>
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total(₹)</label>
                                         <input required="" type="number" name="total" id="total"
-                                            autocomplete="off" class="input">
-                                        <label class="user-label">Total</label>
+                                            autocomplete="off" class="input" readonly> 
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Convenience(₹)</label>
                                         <input required="" type="number" name="convenience" id="convenience"
-                                            autocomplete="off" class="input">
-                                        <label class="user-label">Convenience</label>
+                                            autocomplete="off" class="input" readonly>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total to be paid(₹)</label>
                                         <input required="" type="number" name="total_to_be_paid"
-                                            id="total_to_be_paid" autocomplete="off" class="input">
-                                        <label class="user-label">Total to be paid</label>
+                                            id="total_to_be_paid" autocomplete="off" class="input" readonly>
+                                        
                                     </div>
                                 </div>
+
+                                <input type="number" name="mode_of_payment" id="mode_of_payment" class="input"
+                                    value="online payment" hidden>
+
+                                <input type="number" name="payment_method" id="payment_method" class="input"
+                                    value="online payment" hidden>
+
+                                <input type="date" name="transaction_date" id="transaction_date" class="input"
+                                    value="{{ date('Y-m-d') }}" hidden>
 
                                 <div class="col-lg-12">
                                     <div class="row">
@@ -492,6 +536,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                         </form>
                     </div>
                 </div>

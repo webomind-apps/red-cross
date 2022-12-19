@@ -16,8 +16,11 @@ class HomeController extends Controller
     public function index()
     {
 
-
+        // $data =  SchoolData::where('dise_code', 'sc001')->first()->id;
+        // $data =   $current_year = FinancialYear::where('status', true)->first();
+        // dd($data);
         $year = FinancialYear::where('status', '=', 1)->first();
+
         return view('frontend.index', compact('year'));
     }
 
@@ -26,9 +29,14 @@ class HomeController extends Controller
         return view('frontend.jrc-exam');
     }
 
-    public function thank_you_page()
+    public function thank_you_page(Request $request)
     {
-        return view('frontend.thank-you-page');
+        // dd($request->all());
+        $amount =  $request->amount;
+        $email =  $request->email;
+        $councellor_email =  $request->councellor_email;
+        $current_year =  $request->current_year;
+        return view('frontend.thank-you-page', compact('amount', 'email', 'councellor_email', 'current_year'));
     }
 
     public function data(Request $request)
@@ -52,14 +60,43 @@ class HomeController extends Controller
     }
     public function previous_years_data(Request $request)
     {
-        $data = DB::table('school_data')
-            ->join('balances', 'balances.school_id', '=', 'school_data.id')
-            ->where('dise_code', '=', $request->dise)
-            ->get();
-        // dd($data);
+        $disecode = $request->dise;
 
-        // $data = SchoolData::with('balance')->where('dise_code', '=', $request->dise)->get();
-        // $data = Balance::with('school')->where('dise_code', '=', $request->dise)->get();
-        return response()->json($data);
+        $school =  SchoolData::where('dise_code', $disecode)->first();
+
+        // $data = DB::table('school_data')
+        //     ->join('balances', 'balances.school_id', '=', 'school_data.id')
+        //     ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
+        //     ->where('school_data.dise_code', '=', $request->dise)
+        //     // ->where('financial_years.status', '!=', 1)
+        //     ->get();
+
+        $current_year = FinancialYear::where('status', true)->first();
+
+        $data = FinancialYear::with(['balances' => function ($query) use ($disecode, $school) {
+            $query->where('school_id', $school->id)
+                ->where('balance', '>', 0);
+            $query->whereHas('school', function ($q) use ($disecode) {
+                $q->where('dise_code', $disecode);
+            });
+        }])
+            ->where('status', false)
+            ->get();
+
+        $students_data = FinancialYear::with(['registrations' => function ($query) use ($disecode, $school) {
+            $query->where('school_id', $school->id);
+        }])
+            ->where('status', false)
+            ->get();
+
+        // $students_data = FinancialYear::with('registrations')
+        //     ->get();
+
+        $balance = Balance::where('year_id', $current_year->id)->where('school_id', $school->id)->first();
+
+        $school_data = SchoolRegistration::where('year_id', $current_year->id)->where('school_id', SchoolData::where('dise_code', $disecode)->first()->id)->first();
+
+
+        return response()->json(['financial_years' => $data, 'balance' => $balance, 'school_data' => $school_data, 'students_data' => $students_data]);
     }
 }

@@ -9,11 +9,11 @@
             <div class="card-header d-flex justify-content-between py-3">
                 <h6 class="my-auto font-weight-bold text-primary">Add Your Payment Details</h6>
                 <!-- <a href="add-payment.html" class="btn btn-primary btn-icon-split">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-plus"></i>
-                                            </span>
-                                            <span class="text">Update</span>
-                                        </a> -->
+                                                                                    <span class="icon text-white-50">
+                                                                                        <i class="fas fa-plus"></i>
+                                                                                    </span>
+                                                                                    <span class="text">Update</span>
+                                                                                </a> -->
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.school-registration-payment.store') }}" method="POST">
@@ -128,54 +128,59 @@
                                 name="no_of_students_paid" placeholder="Number of students paid">
                         </div>
                     </div>
-                    <div class="form-row">
+                    {{-- <div class="form-row">
                         <label class="pt-1 text-danger fw-bold">2021 - 2022</label>
                         <div class="form-group col-md-3">
                             <div class="input-group">
-                                <input required="" type="number" name="total_fees" id="total_fees"
+                                <input required="" type="number" name="total_fees" id="total_fees[]"
                                     autocomplete="off" class="form-control" placeholder="Total fees to be paid">
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <div class="input-group">
-                                <input required="" type="number" name="paid_amount" id="paid_amount"
+                                <input required="" type="number" name="paid_amount" id="paid_amount[]"
                                     autocomplete="off" class="form-control" placeholder="Amount you will pay now">
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <div class="input-group">
-                                <input required="" type="number" name="balance_amount" id="balance_amount"
+                                <input required="" type="number" name="balance_amount[]" id="balance_amount"
                                     autocomplete="off" class="form-control" placeholder="Balance to be paid">
                             </div>
                         </div>
                         <div class="col-sm-1 text-center check-mark">
                             <input type="checkbox" name="year" id="year" class="form-control" value="1">
                         </div>
-                    </div>
+                    </div> --}}
+
+
                     <div class="form-row">
                         <label class="pt-1 text-danger fw-bold">2020 - 2021</label>
 
                         <div class="form-group col-md-3">
                             <div class="input-group">
-                                <input required="" type="number" name="" id="" autocomplete="off"
-                                    class="form-control" placeholder="Total fees to be paid">
+                                <input required="" type="number" name="total_fees[]" id="total_fees"
+                                    autocomplete="off" class="form-control" placeholder="Total fees to be paid">
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <div class="input-group">
-                                <input required="" type="number" name="text" autocomplete="off"
-                                    class="form-control" placeholder="Amount you will pay now">
+                                <input required="" type="number" name="paid_amount[]" id="paid_amount"
+                                    class="paid_amount" autocomplete="off" class="form-control"
+                                    placeholder="Amount you will pay now">
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <div class="input-group">
-                                <input required="" type="number" name="text" autocomplete="off"
-                                    class="form-control" placeholder="Balance to be paid">
+                                <input required="" type="number" name="balance_amount[]" id="balance_amount"
+                                    autocomplete="off" class="form-control" placeholder="Balance to be paid">
                             </div>
                         </div>
                         <div class="col-sm-1 text-center check-mark">
                             <input type="checkbox" name="" id="" class="form-control">
                         </div>
+
+                        <div id="previous"></div>
 
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Total</label>
@@ -228,7 +233,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" referrerpolicy="no-referrer"></script>
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $('#dise_code').on('change', function() {
             let dise = $('#dise_code').val();
@@ -289,4 +294,186 @@
         var total_no_students = parseInt(class8) + parseInt(class9) + parseInt(class10);
         document.getElementById('total_students').value = total_no_students;
     };
+</script> --}}
+
+
+
+<script>
+    //fill the form when dise number filled
+    $(document).ready(function() {
+        $('#dise_code').on('change', function() {
+            let dise = $('#dise_code').val();
+            var url = "{{ url('data') }}";
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    dise
+                },
+                dataType: "json",
+                success: function(answer) {
+                    // console.log(answer);
+                    $('#id').val(answer['id']);
+                    $('#school_name').val(answer['school_name']);
+                    $('#district').val(answer['district']);
+                    $('#taluk').val(answer['taluk']);
+                    $('#pin_code').val(answer['pin_code']);
+                    $('#phone_number').val(answer['phone_number']);
+                    $('#email').val(answer['email']);
+                    $('#address').val(answer['address']);
+                    $('#councellor_name').val(answer['councellor_name']);
+                    $('#councellor_email').val(answer['councellor_email']);
+                    $('#councellor_phone').val(answer['councellor_phone']);
+                },
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        $('#dise_code').on('change', function() {
+            var url = "{{ url('master-price-data') }}";
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function(answer) {
+                    $('#school_registration_annual_fee').val(answer[
+                        'school_registration_annual_fee']);
+                    $('#school_student_memebership_fee').val(answer[
+                        'school_student_memebership_fee']);
+                    $('#convenience').val(answer[
+                        'convenience']);
+                },
+            });
+        });
+    });
+
+    //calculate total number of students 
+    window.total_no_students = function total_no_students() {
+        var class8 = document.getElementById('no_of_students_class_eight').value || 0;
+        var class9 = document.getElementById('no_of_students_class_nine').value || 0;
+        var class10 = document.getElementById('no_of_students_class_ten').value || 0;
+        var total_no_students = parseInt(class8) + parseInt(class9) + parseInt(class10);
+        document.getElementById('total_students').value = total_no_students;
+
+        var school_student_memebership_fee = document.getElementById(
+            'school_student_memebership_fee').value || 0;
+        var school_registration_annual_fee = document.getElementById(
+            'school_registration_annual_fee').value || 0;
+
+        var total_fees = parseInt(total_no_students) * parseInt(school_student_memebership_fee) + parseInt(
+            school_registration_annual_fee);
+        document.getElementById('total_fees').value = total_fees;
+
+    };
+
+    //calculate amount beign paid
+    $(document).ready(function() {
+        $('#no_of_students_paid').on('change', function() {
+            var no_of_students_paid = document.getElementById('no_of_students_paid').value || 0;
+            var school_student_memebership_fee = document.getElementById(
+                'school_student_memebership_fee').value || 0;
+            var school_registration_annual_fee = document.getElementById(
+                'school_registration_annual_fee').value || 0;
+            var paid_amount = parseInt(no_of_students_paid) * parseInt(school_student_memebership_fee) +
+                parseInt(school_registration_annual_fee);
+            document.getElementById('paid_amount').value = paid_amount;
+
+            var total_fees = document.getElementById('total_fees').value;
+
+            var balance_amount = total_fees - paid_amount;
+            document.getElementById('balance_amount').value = balance_amount;
+
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('#dise_code').on('change', function() {
+            let dise = $('#dise_code').val();
+            var url = "{{ url('previous-years-data') }}";
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    dise
+                },
+                dataType: "json",
+                success: function(answer) {
+                    for (i = 0; i < answer.length; i++) {
+                        var htm = `<div>
+                            <div class="form-row">
+                        <label class="pt-1 text-danger fw-bold">2021 - 2022</label>
+                        <div class="form-group col-md-3">
+                            <div class="input-group">
+                                <input required="" type="number" name="total_fees" id="total_fees[]"
+                                    autocomplete="off" class="form-control" value=${answer[i].balance}>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="input-group">
+                                <input required="" type="number" name="paid_amount" id="paid_amount-` + i + `" 
+                                    autocomplete="off" class="form-control paid_amount" placeholder="Amount you will pay now">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="input-group">
+                                <input required="" type="number" name="balance_amount[]" id="balance_amount-` + i + `"
+                                    autocomplete="off" class="form-control" placeholder="Balance to be paid">
+                            </div>
+                        </div>
+                        <div class="col-sm-1 text-center check-mark">
+                            <input type="checkbox" name="year" id="year" class="form-control" value=${answer[i].year_id}>
+                        </div>
+                    </div>`;
+                        $('#previous').append(htm);
+                    }
+                },
+            });
+        });
+    });
+
+    $(document).on('change', '.paid_amount', function() {
+        calculateTotal()
+
+    });
+</script>
+
+<script>
+    function calculateTotal() {
+        var total1 = 0;
+        var total = 0;
+
+        $('.paid_amount').each(function() {
+            var val = $(this).val();
+            var id = $(this).attr('id');
+            var index = id.split("-")[1];
+
+            if (val != '') {
+                var total_fees = '#total_fees-' + index;
+                var paid_fees = val;
+                var balance_fees = '#balance_amount-' + index;
+
+                var balance = $(total_fees).val() - paid_fees;
+                $(balance_fees).val(balance)
+                // console.log('value', balance);
+                total1 = total1 + parseInt(val);
+                // console.log(total);
+            }
+        })
+
+        var current_total = $(paid_amount).val();
+
+        total = total1 + parseInt(current_total);
+        $('#total').val(total);
+
+
+        convenience = $(convenience).val();
+        // alert(convenience);
+        convenience_amount = parseInt((convenience / 100) * total);
+        // alert(convenience_amount);
+        total_to_be_paid = total + convenience_amount;
+
+        $('#total_to_be_paid').val(total_to_be_paid);
+    }
 </script>

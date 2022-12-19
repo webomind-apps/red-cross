@@ -16,4 +16,11 @@ class FinancialYear extends Model
         'status',
         'comment'
     ];
+
+    public function balances(){
+        return $this->hasMany(Balance::class,'year_id');
+    }
+    public function registrations(){
+        return $this->hasMany(SchoolRegistration::class,'year_id');
+    }
 }

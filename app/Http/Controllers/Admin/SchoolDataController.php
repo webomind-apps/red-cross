@@ -118,6 +118,9 @@ class SchoolDataController extends Controller
     {
         // dd(request()->file('file'));
         Excel::import(new SchoolDataImport, request()->file('file')->store('files'));
+
+
+        // Excel::import(new SchoolDataImport, request()->file('files'));
         return back();
     }
 }

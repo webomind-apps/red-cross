@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\FinancialYear;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FinancialYearController extends Controller
 {
@@ -44,6 +45,8 @@ class FinancialYearController extends Controller
             'status' => 'required'
         ]);
         
+        DB::table('financial_years')->where('status',1)->update(['status' => 0]);
+
         $financial_year = new FinancialYear();
         $financial_year->name = $request->name;
         $financial_year->from_date = $request->from_date;

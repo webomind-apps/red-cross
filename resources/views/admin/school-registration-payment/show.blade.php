@@ -120,7 +120,7 @@
                             value="{{ $school_registration->no_of_students_paid }}" readonly>
                         </div>
                     </div>
-                    <div class="form-row">
+                    {{-- <div class="form-row">
                         <label class="pt-1 text-danger fw-bold">2021 - 2022</label>
                         <div class="form-group col-md-3">
                             <div class="input-group">
@@ -131,22 +131,22 @@
                         <div class="form-group col-md-3">
                             <div class="input-group">
                                 <input required="" type="number" name="paid_amount" id="paid_amount"
-                                    autocomplete="off" class="form-control" placeholder="Amount you will pay now"
+                                    autocomplete="off" class="form-control" value="{{ $school_registration->paid_amount }}"
                                     readonly>
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <div class="input-group">
                                 <input required="" type="number" name="balance_amount" id="balance_amount"
-                                    autocomplete="off" class="form-control" placeholder="Balance to be paid" readonly>
+                                    autocomplete="off" class="form-control" value="{{ $school_registration->balance_amount }}" readonly>
                             </div>
                         </div>
                         <div class="col-sm-1 text-center check-mark">
                             <input type="checkbox" name="year" id="year" class="form-control" value="2022">
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-row">
-                        <label class="pt-1 text-danger fw-bold">2020 - 2021</label>
+                        {{-- <label class="pt-1 text-danger fw-bold">2020 - 2021</label>
 
                         <div class="form-group col-md-3">
                             <div class="input-group">
@@ -161,6 +161,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-3">
+
                             <div class="input-group">
                                 <input required="" type="number" name="text" autocomplete="off"
                                     class="form-control" placeholder="Balance to be paid">
@@ -168,50 +169,24 @@
                         </div>
                         <div class="col-sm-1 text-center check-mark">
                             <input type="checkbox" name="" id="" class="form-control">
-                        </div>
+                        </div> --}}
 
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Total</label>
                             <input type="text" class="form-control" id="total" name="total"
-                                placeholder="Total">
+                            value="{{ $school_registration->total }}" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Convenience</label>
                             <input type="text" class="form-control" id="convenience" name="convenience"
-                                placeholder="Convenience">
+                            value="{{ $school_registration->convenience }}" readonly>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputAddress2">Total to be paid</label>
+                            <label for="inputAddress2">Total paid</label>
                             <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
-                                placeholder="Total to be paid">
+                            value="{{ $school_registration->total_to_be_paid }}" readonly>
                         </div>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress">Payment Metod</label>
-                            <select name="mode_of_payment" id="mode_of_payment" aria-label="Default select example"
-                                class="custom-select custom-select-sm form-control form-control-sm" required>
-                                <option selected>Mode Of Payment</option>
-                                <option value="1">Demand Draft</option>
-                                <option value="2">Cheque</option>
-                                <option value="3">NEFT</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress">Cheque/DD/NEFT No.</label>
-                            <input type="text" class="form-control" id="payment_method" name="payment_method"
-                                placeholder="Cheque/DD/NEFT No.">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress">Transaction Date</label>
-                            <input type="date" class="form-control" id="transaction_date" name="transaction_date"
-                                placeholder="Transaction Date">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-3">
-                        <span class="text">Add</span>
-                    </button>
                 </form>
             </div>
         </div>

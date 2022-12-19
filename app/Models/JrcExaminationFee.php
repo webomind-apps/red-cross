@@ -29,6 +29,7 @@ class JrcExaminationFee extends Model
         'total_book_fee',
         'total',
         'convenience',
+        // 'convenience_amount',
         'total_to_be_paid',
         'mode_of_payment',
         'payment_method',

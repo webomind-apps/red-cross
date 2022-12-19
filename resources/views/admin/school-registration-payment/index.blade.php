@@ -11,7 +11,7 @@
                 <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
             </div>
             <div class="d-flex">
-                <div class="dropdown p-1">
+                {{-- <div class="dropdown p-1">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Payment Status
@@ -21,7 +21,25 @@
                         <a class="dropdown-item" href="#">Paid</a>
                         <a class="dropdown-item" href="#">Partially Paid</a>
                     </div>
+                </div> --}}
+                <div class="p-1">
+                    <select name="year" id="year"
+                        class="custom-select custom-select-sm form-control form-control-sm">
+                        <option value="" name="year">Select Year</option>
+                        @foreach ($years as $year)
+                            <option value="{{ $year->id }}" id="{{ $year->id }}"
+                                {{ request('year') == $year->id ? 'selected' : '' }}>
+                                {{ $year->name }} </option>
+                        @endforeach
+                    </select>
                 </div>
+                <div class="p-1">
+                    <a href="{{ route('admin.school-registration-export') }}"
+                        class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Export</a>
+                </div>
+                
+
                 {{-- <div class="p-1">
                     <select name="dataTable_length" aria-label="Default select example"
                         class="custom-select custom-select-sm form-control form-control-sm">
@@ -31,16 +49,7 @@
                         <option value="3">District 3</option>
                     </select>
                 </div> --}}
-                <div class="p-1">
-                    <select class="custom-select custom-select-sm form-control form-control-sm"
-                        aria-label="Default select example" id="year" name="year">
-                        <option selected>Year</option>
-                        @foreach ($years as $year)
-                            <option value="{{ $year->id }}" id="{{ $year->id }}">
-                                {{ $year->name }} </option>
-                        @endforeach
-                    </select>
-                </div>
+
             </div>
         </div>
 
@@ -73,14 +82,15 @@
                                 <th>School Name</th>
                                 {{-- <th>Payment Year</th> --}}
                                 <th>Districts</th>
-                                {{-- <th>Amount Paid</th> --}}
-                                <th>Amount Due</th>
+                                <th>Amount Paid</th>
+                                {{-- <th>Amount Due</th> --}}
                                 {{-- <th>Status</th> --}}
                                 <th>View</th>
 
                             </tr>
                         </thead>
 
+                        {{-- {{dd($school_registrations)}} --}}
                         <tbody>
                             @foreach ($school_registrations as $index => $school_registration)
                                 <tr>
@@ -94,8 +104,8 @@
                                     <td>{{ $school_registration->school_name }}</td>
                                     {{-- <td>{{ $school_registration->name }}</td> --}}
                                     <td>{{ $school_registration->district }}</td>
-                                    {{-- <td>{{ $school_registration->total_to_be_paid }}</td> --}}
-                                    <td>{{ $school_registration->balance }}</td>
+                                    <td>{{ $school_registration->total_to_be_paid }}</td>
+                                    {{-- <td>{{ $school_registration->balance }}</td> --}}
                                     {{-- @if ($school_registration->balance_amount == 0)
                                         <td><span class="badge bg-paid">Paid</span></td>
                                     @elseif($school_registration->balance_amount == $school_registration->total_fees)
@@ -122,7 +132,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- {{ $school_registrations->links('pagination::bootstrap-4') }} --}}
+                    {{ $school_registrations->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
@@ -138,5 +148,23 @@
                 $('#' + id + '').submit();
             }
         })
+
+        $('#year').on('change', function() {
+            var val = $(this).val();
+            // alert(val);
+            var route = "{{ url()->current() }}";
+            var newRoute = updateQueryStringParameter(window.location.href, 'year', val);
+            window.location.href = newRoute;
+        })
+
+        function updateQueryStringParameter(uri, key, value) {
+            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            } else {
+                return uri + separator + key + "=" + value;
+            }
+        }
     </script>
 @endpush

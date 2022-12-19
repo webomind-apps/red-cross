@@ -45,4 +45,8 @@ class SchoolRegistration extends Model
     {
         return $this->hasMany(SchoolRegistrationFee::class, 'school_registration_id');
     }
+
+    public function financial_year(){
+        return $this->belongsTo(FinancialYear::class,'year_id');
+    }
 }

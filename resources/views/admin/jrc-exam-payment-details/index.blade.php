@@ -11,7 +11,7 @@
                 <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
             </div>
             <div class="d-flex">
-                <div class="dropdown p-1">
+                {{-- <div class="dropdown p-1">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Payment Status
@@ -21,7 +21,7 @@
                         <a class="dropdown-item" href="#">Paid</a>
                         <a class="dropdown-item" href="#">Partially Paid</a>
                     </div>
-                </div>
+                </div> --}}
                 {{-- <div class="p-1">
                     <select name="dataTable_length" aria-label="Default select example"
                         class="custom-select custom-select-sm form-control form-control-sm">
@@ -31,7 +31,7 @@
                         <option value="3">District 3</option>
                     </select>
                 </div> --}}
-                <div class="p-1">
+                {{-- <div class="p-1">
                     <select class="custom-select custom-select-sm form-control form-control-sm"
                         aria-label="Default select example">
                         <option selected>Year</option>
@@ -39,7 +39,7 @@
                         <option value="2">2021</option>
                         <option value="3">2020</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

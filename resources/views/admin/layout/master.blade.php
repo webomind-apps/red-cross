@@ -95,6 +95,17 @@
 
     @stack('scripts')
 
+    <script src="https://cdn.tiny.cloud/1/zbox8sr678l2ohrdbxdf2r1qbtnbs2gfg9mgnwd30ukjd98g/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#email_body',
+            plugins: 'code',
+            valid_elements: '*[*]',
+        });
+    </script>
+
 </body>
 
 </html>

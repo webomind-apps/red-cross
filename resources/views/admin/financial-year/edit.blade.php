@@ -20,7 +20,7 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="name">Name</label>
+                            <label for="name">Display format</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Name"
                                 value="{{  $financial_year->name  }}">
                         </div>

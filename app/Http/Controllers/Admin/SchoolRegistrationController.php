@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SchoolRegistrationExport;
 use App\Http\Controllers\Controller;
 use App\Models\FinancialYear;
+use App\Models\SchoolData;
 use App\Models\SchoolRegistration;
 use App\Models\SchoolRegistrationFee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SchoolRegistrationController extends Controller
 {
@@ -18,14 +21,21 @@ class SchoolRegistrationController extends Controller
      */
     public function index()
     {
+
+        $year = request()->year;
         $years = FinancialYear::all();
-        $school_registrations = DB::table('school_data')
-            ->join('school_registrations', 'school_registrations.school_id', '=', 'school_data.id')
-            ->join('balances', 'balances.school_id', '=', 'school_data.id')
-            // ->join('financial_years', '')
-            ->paginate(10);
-            // ->toSql();
-            // dd($school_registrations);
+
+
+        if (is_null($year)) {
+            $school_registrations = DB::table('school_data')
+                ->join('school_registrations', 'school_registrations.school_id', '=', 'school_data.id')
+                ->paginate(10);
+        } else {
+            $school_registrations = DB::table('school_data')
+                ->join('school_registrations', 'school_registrations.school_id', '=', 'school_data.id')
+                ->where('year_id', '=', $year)
+                ->paginate(10);
+        }
 
         return view('admin.school-registration-payment.index', compact('school_registrations', 'years'));
     }
@@ -80,7 +90,7 @@ class SchoolRegistrationController extends Controller
         $school_registration_fee->paid_amount = $request->paid_amount;
         $school_registration_fee->balance_amount = $request->balance_amount;
         $school_registration_fee->total = $request->total;
-        $school_registration_fee->convenience = $request->convenience;
+        $school_registration_fee->convenience = $request->convenience_amount;
         $school_registration_fee->total_to_be_paid = $request->total_to_be_paid;
         $school_registration_fee->save();
 
@@ -95,11 +105,13 @@ class SchoolRegistrationController extends Controller
      */
     public function show($id)
     {
+
         $school_registration = DB::table('school_data')
             ->join('school_registrations', 'school_registrations.school_id', '=', 'school_data.id')
-            ->join('school_registration_fees', 'school_registration_fees.school_registration_id', '=', 'school_registrations.id')
-            ->where('school_registration_fees.id', '=', $id)
-            ->first();
+            // ->join('school_registration_fees', 'school_id', '=', 'school_registrations.school_id')
+            // ->join('balances', 'balances.school_id', '=', 'school_registrations.school_id')
+            ->where('school_registrations.id', '=', $id)->first();
+
         return view('admin.school-registration-payment.show', compact('school_registration'));
     }
 
@@ -134,13 +146,16 @@ class SchoolRegistrationController extends Controller
      */
     public function destroy($id)
     {
-        $school_registration = DB::table('school_data')
-            ->join('school_registrations', 'school_registrations.school_id', '=', 'school_data.id')
-            ->join('school_registration_fees', 'school_registration_fees.school_registration_id', '=', 'school_registrations.id')
-            ->where('school_registration_fees.id', '=', $id);
 
+        $school_registration = SchoolRegistration::find($id);
         $school_registration->delete();
 
         return redirect()->route('admin.school-registration-payment.index');
+    }
+
+
+    public function export()
+    {
+        return Excel::download(new SchoolRegistrationExport, 'school-data.xlsx');
     }
 }
