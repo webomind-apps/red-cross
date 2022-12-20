@@ -8,11 +8,11 @@
             <div class="card-header d-flex justify-content-between py-3">
                 <h6 class="my-auto font-weight-bold text-primary">Add Your Payment Details</h6>
                 <!-- <a href="add-payment.html" class="btn btn-primary btn-icon-split">
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-plus"></i>
-                                            </span>
-                                            <span class="text">Update</span>
-                                        </a> -->
+                                                                    <span class="icon text-white-50">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </span>
+                                                                    <span class="text">Update</span>
+                                                                </a> -->
             </div>
             <div class="card-body">
 
@@ -106,88 +106,99 @@
                         <div class="form-group col-md-4">
                             <label for="inputPassword4">School registration annual fee</label>
                             <input type="text" class="form-control" id="school_registration_annual_fee"
-                            value="{{ $school_registration->school_registration_annual_fee }}"
-                                readonly>
+                                value="{{ $school_registration->school_registration_annual_fee }}" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Student membership fee</label>
                             <input type="text" class="form-control" id="school_student_memebership_fee"
-                            value="{{ $school_registration->school_student_memebership_fee }}" readonly>
+                                value="{{ $school_registration->school_student_memebership_fee }}" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Number of students paid</label>
                             <input type="text" class="form-control" id="no_of_students_paid"
-                            value="{{ $school_registration->no_of_students_paid }}" readonly>
+                                value="{{ $school_registration->no_of_students_paid }}" readonly>
                         </div>
                     </div>
-                    {{-- <div class="form-row">
-                        <label class="pt-1 text-danger fw-bold">2021 - 2022</label>
-                        <div class="form-group col-md-3">
-                            <div class="input-group">
-                                <input required="" type="number" name="total_fees" id="total_fees"
-                                    autocomplete="off" class="form-control" value="{{ $school_registration->total_fees }}" readonly>
+                    <label for="inputAddress">Payment Details of the year</label>
+                    @foreach ($balances as $balance)
+                        <div class="form-row">
+
+                            <label for="inputAddress">{{ $balance->financial_year->name }}</label>
+
+                            <div class="form-group col-md-2">
+                                <label for="inputAddress2">Total to be paid</label>
+                                <input type="text" class="form-control" id="convenience" name="convenience"
+                                    value="{{ $balance->total_amount }}" readonly>
+                                <h6 style="font-size: 12px">Total students* student memebership fee + school registration
+                                    fee</h6>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputAddress2">Total paid amount</label>
+                                <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
+                                    value="{{ $balance->amount_to_be_paid }}" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputAddress2">balance</label>
+                                <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
+                                    value="{{ $balance->balance }}" readonly>
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <div class="input-group">
-                                <input required="" type="number" name="paid_amount" id="paid_amount"
-                                    autocomplete="off" class="form-control" value="{{ $school_registration->paid_amount }}"
-                                    readonly>
+                    @endforeach
+
+                    <label for="inputAddress">Payment Split Details</label>
+                    @foreach ($datas as $data)
+                        <div class="form-row">
+
+                            <label for="inputAddress">{{ $data->financial_year->name }}</label>
+
+                            <div class="form-group col-md-2">
+                                <label for="inputAddress2">Total to be paid</label>
+                                <input type="text" class="form-control" id="convenience" name="convenience"
+                                    value="{{ $data->total_fees }}" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputAddress2">Total paid amount</label>
+                                <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
+                                    value="{{ $data->paid_amount }}" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputAddress2">balance</label>
+                                <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
+                                    value="{{ $data->balance_amount }}" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputAddress2">paid on</label>
+                                <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
+                                    value="{{ $data->created_at }}" readonly>
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <div class="input-group">
-                                <input required="" type="number" name="balance_amount" id="balance_amount"
-                                    autocomplete="off" class="form-control" value="{{ $school_registration->balance_amount }}" readonly>
-                            </div>
-                        </div>
-                        <div class="col-sm-1 text-center check-mark">
-                            <input type="checkbox" name="year" id="year" class="form-control" value="2022">
-                        </div>
-                    </div> --}}
+                    @endforeach
+
                     <div class="form-row">
-                        {{-- <label class="pt-1 text-danger fw-bold">2020 - 2021</label>
-
-                        <div class="form-group col-md-3">
-                            <div class="input-group">
-                                <input required="" type="number" name="" id="" autocomplete="off"
-                                    class="form-control" placeholder="Total fees to be paid">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <div class="input-group">
-                                <input required="" type="number" name="text" autocomplete="off"
-                                    class="form-control" placeholder="Amount you will pay now">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-3">
-
-                            <div class="input-group">
-                                <input required="" type="number" name="text" autocomplete="off"
-                                    class="form-control" placeholder="Balance to be paid">
-                            </div>
-                        </div>
-                        <div class="col-sm-1 text-center check-mark">
-                            <input type="checkbox" name="" id="" class="form-control">
-                        </div> --}}
-
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress">Total</label>
-                            <input type="text" class="form-control" id="total" name="total"
-                            value="{{ $school_registration->total }}" readonly>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress2">Convenience</label>
+                        <div class="form-group col-md-2">
+                            <label for="inputAddress2">Payment method</label>
                             <input type="text" class="form-control" id="convenience" name="convenience"
-                            value="{{ $school_registration->convenience }}" readonly>
+                                value="{{ $school_registration->mode_of_payment }}" readonly>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress2">Total paid</label>
+                        <div class="form-group col-md-2">
+                            <label for="inputAddress2">Last transaction date</label>
                             <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
-                            value="{{ $school_registration->total_to_be_paid }}" readonly>
+                                value="{{ $school_registration->transaction_date }}" readonly>
                         </div>
+                       
                     </div>
                 </form>
+
+                {{-- <a href="{{ route('admin.school-registration-payment.index') }}">
+                    <button class="btn btn-sm ">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </a> --}}
+
+                <a
+                href="{{ route('admin.school-registration-payment.index') }}"><button
+                    type="button" class="btn btn-sm bg-paid"><i class="fa fa-arrow-left"></i></button>
+                </a>
             </div>
         </div>
 

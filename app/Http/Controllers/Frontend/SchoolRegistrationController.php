@@ -63,6 +63,8 @@ class SchoolRegistrationController extends Controller
             $school_registration->total = $request->total;
             $school_registration->convenience = $request->convenience_amount;
             $school_registration->total_to_be_paid = $request->total_to_be_paid;
+            $school_registration->mode_of_payment = $request->mode_of_payment;
+            $school_registration->transaction_date = $request->transaction_date;
             $school_registration->save();
         } else {
             $school_registration = new SchoolRegistration();
@@ -78,6 +80,8 @@ class SchoolRegistrationController extends Controller
             $school_registration->total = $request->total;
             $school_registration->convenience = $request->convenience_amount;
             $school_registration->total_to_be_paid = $request->total_to_be_paid;
+            $school_registration->mode_of_payment = $request->mode_of_payment;
+            $school_registration->transaction_date = $request->transaction_date;
             $school_registration->save();
         }
 
@@ -88,11 +92,13 @@ class SchoolRegistrationController extends Controller
             $school_registration_fee = new SchoolRegistrationFee();
             $school_registration_fee->school_registration_id  = $school_registration->id;
             $school_registration_fee->year_id  = $year;
+            $school_registration_fee->school_id = $request->id;
 
-           // dd($request->year,$request->total_fees);
+            // dd($request->year,$request->total_fees);
 
             if (!is_null($request->total_fees[$key])) {
-               // dd($year);
+                // dd($year);
+                
                 $school_registration_fee->total_fees = $request->total_fees[$key];
                 $school_registration_fee->paid_amount = $request->paid_amount[$key];
                 $school_registration_fee->balance_amount = $request->balance_amount[$key];
@@ -139,9 +145,10 @@ class SchoolRegistrationController extends Controller
 
         $order_details = $api->order->create(array(
             'receipt' => mt_rand(1000000000, 9999999999), 'amount' => $request->total_to_be_paid * 100, 'currency' => 'INR',
-            'notes' => array('school_name' => $request->school_name, 'email' => $request->email, 'phone_number' => $request->phone_number,
-                             'address' => $request->address, 'councellor_email' => $request->councellor_email, 'current_year'=> $request->current_year
-                             )
+            'notes' => array(
+                'school_name' => $request->school_name, 'email' => $request->email, 'phone_number' => $request->phone_number,
+                'address' => $request->address, 'councellor_email' => $request->councellor_email, 'current_year' => $request->current_year
+            )
         ));
 
         session(['orderdetails' => $order_details]);

@@ -84,8 +84,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('import', [SchoolDataController::class, 'import'])->name('import');
         Route::resource('school-registration-payment', AdminSchoolRegistrationController::class);
         Route::get('school-registration-export', [AdminSchoolRegistrationController::class, 'export'])->name('school-registration-export');
+        Route::get('school-registration-payment/school_id/{id}/year_id/{year}', [AdminSchoolRegistrationController::class, 'show'])->name('school-registration-payment.show');
+        
+        // Route::get('school-registration-export/{id}',[AdminSchoolRegistrationController::class, 'show'])->name("school-registration-export.show");
+        
         Route::resource('jrc-exam-payment-details', JrcExamPaymentController::class);
         Route::resource('admins', AdminUsersController::class);
         Route::resource('general-secretary-signature', GeneralSecretaryController::class);
     });
 });
+
+

@@ -24,4 +24,8 @@ class SchoolRegistrationFee extends Model
     {
         return $this->belongsTo(SchoolRegistration::class);
     }
+
+    public function financial_year(){
+        return $this->belongsTo(FinancialYear::class,'year_id');
+    }
 }

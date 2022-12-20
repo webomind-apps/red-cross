@@ -96,7 +96,8 @@ class HomeController extends Controller
 
         $school_data = SchoolRegistration::where('year_id', $current_year->id)->where('school_id', SchoolData::where('dise_code', $disecode)->first()->id)->first();
 
+        $payment_data = SchoolRegistrationFee::where('school_id', SchoolData::where('dise_code', $disecode)->first()->id)->orderBy('year_id')->get();
 
-        return response()->json(['financial_years' => $data, 'balance' => $balance, 'school_data' => $school_data, 'students_data' => $students_data]);
+        return response()->json(['financial_years' => $data, 'balance' => $balance, 'school_data' => $school_data, 'students_data' => $students_data, 'payment_data' => $payment_data]);
     }
 }

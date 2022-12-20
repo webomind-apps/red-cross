@@ -23,8 +23,7 @@
                     </div>
                 </div> --}}
                 <div class="p-1">
-                    <select name="year" id="year"
-                        class="custom-select custom-select-sm form-control form-control-sm">
+                    <select name="year" id="year" class="custom-select custom-select-sm form-control form-control-sm">
                         <option value="" name="year">Select Year</option>
                         @foreach ($years as $year)
                             <option value="{{ $year->id }}" id="{{ $year->id }}"
@@ -34,22 +33,21 @@
                     </select>
                 </div>
                 <div class="p-1">
+                    <select name="school" id="school"
+                        class="custom-select custom-select-sm form-control form-control-sm">
+                        <option value="" name="year">Select school</option>
+                        @foreach ($schools as $school)
+                            <option value="{{ $school->id }}" id="{{ $school->id }}"
+                                {{ request('school') == $school->id ? 'selected' : '' }}>
+                                {{ $school->school_name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="p-1">
                     <a href="{{ route('admin.school-registration-export') }}"
                         class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Export</a>
                 </div>
-                
-
-                {{-- <div class="p-1">
-                    <select name="dataTable_length" aria-label="Default select example"
-                        class="custom-select custom-select-sm form-control form-control-sm">
-                        <option selected>Select District</option>
-                        <option value="1">District 1</option>
-                        <option value="2">District 2</option>
-                        <option value="3">District 3</option>
-                    </select>
-                </div> --}}
-
             </div>
         </div>
 
@@ -80,17 +78,18 @@
                                 </th>
                                 <th>Dice Code</th>
                                 <th>School Name</th>
-                                {{-- <th>Payment Year</th> --}}
+                                <th>Payment Year</th>
                                 <th>Districts</th>
+                                <th>Total Amount</th>
                                 <th>Amount Paid</th>
-                                {{-- <th>Amount Due</th> --}}
+                                <th>Amount Due</th>
                                 {{-- <th>Status</th> --}}
                                 <th>View</th>
 
                             </tr>
                         </thead>
 
-                        {{-- {{dd($school_registrations)}} --}}
+                        {{-- {{dd($school_registrations->year_id)}} --}}
                         <tbody>
                             @foreach ($school_registrations as $index => $school_registration)
                                 <tr>
@@ -102,27 +101,34 @@
                                     </th>
                                     <td>{{ $school_registration->dise_code }}</td>
                                     <td>{{ $school_registration->school_name }}</td>
-                                    {{-- <td>{{ $school_registration->name }}</td> --}}
+                                    <td>{{ $school_registration->name }}</td>
                                     <td>{{ $school_registration->district }}</td>
-                                    <td>{{ $school_registration->total_to_be_paid }}</td>
-                                    {{-- <td>{{ $school_registration->balance }}</td> --}}
-                                    {{-- @if ($school_registration->balance_amount == 0)
+                                    <td>{{ $school_registration->total_amount }}</td>
+                                    <td>{{ $school_registration->amount_to_be_paid }}</td>
+                                    <td>{{ $school_registration->balance }}</td>
+
+                                    @if ($school_registration->balance == 0)
                                         <td><span class="badge bg-paid">Paid</span></td>
-                                    @elseif($school_registration->balance_amount == $school_registration->total_fees)
+                                    @elseif($school_registration->balance == $school_registration->total_amount)
                                         <td><span class="badge bg-unpaid">Not paid</span></td>
-                                    @else
+                                    @elseif($school_registration->balance > 0 && $school_registration->balance < $school_registration->total_amount)
                                         <td><span class="badge bg-partial">Partially paid</span></td>
-                                    @endif --}}
+                                    @endif
                                     <td>
+                                        {{-- <a
+                                            href="{{ route('admin.school-registration-payment.show', $school_registration->school_id, $school_registration->year_id) }}"><button
+                                                type="button" class="btn btn-sm bg-paid">Details</button></a> --}}
                                         <a
-                                            href="{{ route('admin.school-registration-payment.show', $school_registration->id) }}"><button
+                                            href="{{ route('admin.school-registration-payment.show', ['id' => $school_registration->school_id, 'year' => $school_registration->year_id]) }}"><button
                                                 type="button" class="btn btn-sm bg-paid">Details</button></a>
-                                        <a class="deleteRecord" data-id="form-submit-{{ $school_registration->id }}"
-                                            data-route="{{ route('admin.school-registration-payment.destroy', $school_registration->id) }}">
+
+                                        {{-- <a href="{{ route('admin.school-registration-payment.show', ['id' => $school_registration->school_id, 'year' => $school_registration->year_id]) }}">Show</a> --}}
+                                        {{-- <a class="deleteRecord" data-id="form-submit-{{ $school_registration->school_id }}"
+                                            data-route="{{ route('admin.school-registration-payment.destroy', $school_registration->school_id) }}">
                                             <i class="bg-unpaid p-2 far fa-trash-alt"></i>
-                                        </a>
+                                        </a> --}}
                                         <form method="POST" id="form-submit-{{ $school_registration->id }}"
-                                            action="{{ route('admin.school-registration-payment.destroy', $school_registration->id) }}"
+                                            action="{{ route('admin.school-registration-payment.destroy', $school_registration->school_id) }}"
                                             hidden>
                                             @method('DELETE')
                                             @csrf
@@ -154,6 +160,13 @@
             // alert(val);
             var route = "{{ url()->current() }}";
             var newRoute = updateQueryStringParameter(window.location.href, 'year', val);
+            window.location.href = newRoute;
+        })
+        $('#school').on('change', function() {
+            var val = $(this).val();
+            // alert(val);
+            var route = "{{ url()->current() }}";
+            var newRoute = updateQueryStringParameter(window.location.href, 'school', val);
             window.location.href = newRoute;
         })
 

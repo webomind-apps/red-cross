@@ -42,7 +42,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -92,47 +92,47 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
     </li> -->
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'school-data' ? 'active' : '' }}">
         <a class="nav-link" href="{{route('admin.school-data.index')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>School Data</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'school-registration-payment' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.school-registration-payment.index')}}">
             <i class="far fa-info-circle"></i>
             <span>Registration Payment</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'jrc-exam-payment-details' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.jrc-exam-payment-details.index')}}">
             <i class="far fa-info-circle"></i>
             <span>Jrc Examination Payment</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'email-templates' ? 'active' : '' }}">
         <a class="nav-link" href="{{route('admin.email-templates.index')}}">
             <i class="fas fa-envelope-open"></i>
             <span>Email Templates</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'users' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.users.index') }}">
             <i class="fas fa-user-plus"></i>
             <span>User Creation</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'admins' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.admins.index') }}">
             <i class="fas fa-user-plus"></i>
             <span>Admin</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'master-price' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.master-price.index') }}">
             <i class="fas fa-usd-circle"></i>
             <span>Master Price</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'financial-year' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.financial-year.index') }}">
             <i class="fas fa-calendar"></i>
             <span>Financial year</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item {{ request()->segment(2) == 'general-secretary-signature' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.general-secretary-signature.index') }}">
             <i class="fas fa-calendar"></i>
             <span>General Secretary Signature</span></a>

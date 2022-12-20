@@ -23,4 +23,7 @@ class FinancialYear extends Model
     public function registrations(){
         return $this->hasMany(SchoolRegistration::class,'year_id');
     }
+    public function registration_fees(){
+        return $this->hasMany(SchoolRegistrationFee::class,'year_id');
+    }
 }
