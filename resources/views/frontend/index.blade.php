@@ -558,8 +558,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <input  type="text" name="mode_of_payment" id="mode_of_payment"
                                      class="input" value="Online Payment" hidden>
                                 <input  type="text" name="transaction_date" id="transaction_date"
@@ -593,7 +591,10 @@
                     },
                     dataType: "json",
                     success: function(answer) {
-                        // console.log('1', answer);
+                        // console.log(answer.dise_code);
+                        if(answer.dise_code != dise){
+                            alert('enter valid dise code');
+                        }
                         $('#id').val(answer['id']);
                         $('#school_name').val(answer['school_name']);
                         $('#district').val(answer['district']);
@@ -692,8 +693,8 @@
                         var balance = answer.balance;
                         var school_data = answer.school_data;
                         var students_data = answer.students_data;
-                        var payment_data = answer.payment_data;
-                        console.log('payment data', payment_data);
+                        var payment_data = answer.financial_years[0].registration_fees;
+                        // console.log('payment data', payment_data);
 
 
                         $('#total_fees_bal').val(balance?.total_amount)
@@ -746,6 +747,15 @@
                                 var school_student_memebership_fee = students_data[i]
                                     .registrations[0]?.school_student_memebership_fee;
 
+                                // var previous_payment_amount='';
+                                    for (j = 0; j < financial_years[i].registration_fees; j++) {
+                                        console.log(financial_years[i].registration_fees[j].paid_amount);
+
+                                    // previous_payment_amount = <span> {financial_years[i].registration_fees[j].paid_amount} paid on {financial_years[i].registration_fees[j].created_at} </span>
+                                    }   
+                                    // $('#previous_payment').html("");
+                                    // $('#previous_payment').append(previous_payment_amount);
+
 
                                 htm += `<div class="col-lg-12">
                                         <div class="row" id=row-` + i + `>
@@ -773,7 +783,7 @@
                                                     <input type="number" name="total_fees_bal[]"
                                                         id="total_fees_bal-` + i + `" autocomplete="off" class="input"
                                                         value=${total_amount_paid}>
-          
+                                                        <span id="previous_payment"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
@@ -804,9 +814,9 @@
                                             <input type="number" name="previous_financial_year[]"
                                                 id="previous_financial_year-` + i + `" autocomplete="off" class="input"
                                                     value=${year_id} hidden>
-
                                         </div>
-                                    </div>`;
+                                        
+                                    </div> ` ;
 
                             }
                         }
@@ -815,6 +825,8 @@
 
                         var added_row = '';
                         for (i = 0; i < payment_data.length; i++) {
+
+                            console.log(payment_data[i]);
 
                             var year = payment_data[i].year_id;
                             var total_fees = payment_data[i].total_fees;
@@ -880,7 +892,7 @@
 
                     var balance = $(total_fees).val() - paid_fees;
                     $(balance_fees).val(balance)
-                    console.log('value', balance);
+                    // console.log('value', balance);
                     total1 = total1 + parseInt(val);
 
                     $('#total').val(total1);
@@ -888,7 +900,7 @@
             })
 
             var convenience = $('#convenience').val();
-            console.log('convenience', convenience);
+            // console.log('convenience', convenience);
             var convenience_amount = Math.ceil((convenience / 100) * total1)
 
             $('#convenience_amount').val(convenience_amount);

@@ -83,8 +83,7 @@
                                 <th>Total Amount</th>
                                 <th>Amount Paid</th>
                                 <th>Amount Due</th>
-                                {{-- <th>Status</th> --}}
-                                <th>View</th>
+                                <th>Status</th>
 
                             </tr>
                         </thead>
@@ -108,7 +107,7 @@
                                     <td>{{ $school_registration->balance }}</td>
 
                                     @if ($school_registration->balance == 0)
-                                        <td><span class="badge bg-paid">Paid</span></td>
+                                        <td><span class="badge bg-paid">Fully Paid</span></td>
                                     @elseif($school_registration->balance == $school_registration->total_amount)
                                         <td><span class="badge bg-unpaid">Not paid</span></td>
                                     @elseif($school_registration->balance > 0 && $school_registration->balance < $school_registration->total_amount)
@@ -122,7 +121,6 @@
                                             href="{{ route('admin.school-registration-payment.show', ['id' => $school_registration->school_id, 'year' => $school_registration->year_id]) }}"><button
                                                 type="button" class="btn btn-sm bg-paid">Details</button></a>
 
-                                        {{-- <a href="{{ route('admin.school-registration-payment.show', ['id' => $school_registration->school_id, 'year' => $school_registration->year_id]) }}">Show</a> --}}
                                         {{-- <a class="deleteRecord" data-id="form-submit-{{ $school_registration->school_id }}"
                                             data-route="{{ route('admin.school-registration-payment.destroy', $school_registration->school_id) }}">
                                             <i class="bg-unpaid p-2 far fa-trash-alt"></i>

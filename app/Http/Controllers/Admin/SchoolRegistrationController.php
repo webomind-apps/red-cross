@@ -22,9 +22,6 @@ class SchoolRegistrationController extends Controller
      */
     public function index()
     {
-
-
-
         $year = request()->year;
         $school = request()->school;
         $years = FinancialYear::all();
@@ -167,14 +164,24 @@ class SchoolRegistrationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $year)
     {
 
-        $school_registration = DB::table('balances')
-            ->join('school_data', 'school_data.id', '=', 'balances.school_id')
-            ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
-            ->where('school_data.id', $id)
-            ->first();
+        // $school_registration = DB::table('balances')
+        //     ->join('school_data', 'school_data.id', '=', 'balances.school_id')
+        //     ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
+        //     ->where('school_data.id', $id)
+        //     ->first();
+
+
+            $school_registration = DB::table('balances')
+                ->join('school_data', 'school_data.id', '=', 'balances.school_id')
+                ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
+                ->where('financial_years.id',$year)
+                ->where('school_data.id',$id)->get();
+
+                dd($school_registration);
+                // ->where('school_data.id', $id);
         $school_registration->delete();
 
         return redirect()->route('admin.school-registration-payment.index');

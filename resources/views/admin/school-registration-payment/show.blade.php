@@ -119,8 +119,8 @@
                                 value="{{ $school_registration->no_of_students_paid }}" readonly>
                         </div>
                     </div>
-                    <label for="inputAddress">Payment Details of the year</label>
-                    @foreach ($balances as $balance)
+                    <label for="inputAddress">Payment Details of the year </label>
+                    @foreach ($balances as $index => $balance)
                         <div class="form-row">
 
                             <label for="inputAddress">{{ $balance->financial_year->name }}</label>
@@ -146,10 +146,10 @@
                     @endforeach
 
                     <label for="inputAddress">Payment Split Details</label>
-                    @foreach ($datas as $data)
+                    @foreach ($datas as $index => $data)
                         <div class="form-row">
 
-                            <label for="inputAddress">{{ $data->financial_year->name }}</label>
+                            <label for="inputAddress">Payment {{$index + 1}} </label>
 
                             <div class="form-group col-md-2">
                                 <label for="inputAddress2">Total to be paid</label>

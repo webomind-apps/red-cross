@@ -4,6 +4,8 @@
     <!-- Content Row -->
     <div class="row mt-3">
 
+
+
         <!-- Pending Requests Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card h-100">
@@ -44,7 +46,7 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Total Schools Partially Paid</div>
-                    <div class="h5">{{ $total_schools_paid_partially}}</div>
+                    <div class="h5">{{ $total_schools_paid_partially }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
@@ -54,6 +56,21 @@
 
                 </div>
             </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+
+        </div>
+
+
+        <div class="p-1">
+            <select name="year" id="year" class="custom-select custom-select-sm form-control form-control-sm">
+                <option value="" name="year">Select year</option>
+                @foreach ($years as $year)
+                    <option value="{{ $year->id }}" id="{{ $year->id }}"
+                        {{ request('year') == $year->id ? 'selected' : '' }}>
+                        {{ $year->name }} </option>
+                @endforeach
+            </select>
         </div>
         <!-- Pending Requests Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -93,3 +110,26 @@
 
     <!-- Content Row -->
 @endsection
+
+
+@push('scripts')
+    <script>
+        $('#year').on('change', function() {
+            var val = $(this).val();
+            // alert(val);
+            var route = "{{ url()->current() }}";
+            var newRoute = updateQueryStringParameter(window.location.href, 'year', val);
+            window.location.href = newRoute;
+        })
+
+        function updateQueryStringParameter(uri, key, value) {
+            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            } else {
+                return uri + separator + key + "=" + value;
+            }
+        }
+    </script>
+@endpush
