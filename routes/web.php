@@ -55,6 +55,8 @@ Route::get('/dashboard', function () {
    
     $years = FinancialYear::all();
 
+    $total_schools = SchoolData::count();
+
     $year = request()->year;
     if (is_null($year) ) {
         $current_year = FinancialYear::where('status', true)->first();
@@ -71,7 +73,7 @@ Route::get('/dashboard', function () {
         $total_schools_not_paid = $total_schools - $total_schools_paid - $total_schools_paid_partially;
         
        
-    return view('admin.dashboard.index', compact('total_schools_paid', 'total_schools_not_paid', 'paid_amount', 'balance_amount','total_schools_paid_partially','years'));
+    return view('admin.dashboard.index', compact('total_schools_paid', 'total_schools_not_paid', 'paid_amount', 'balance_amount','total_schools_paid_partially','years','total_schools'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -92,6 +94,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('school-registration-payment', AdminSchoolRegistrationController::class);
         Route::get('school-registration-export', [AdminSchoolRegistrationController::class, 'export'])->name('school-registration-export');
         Route::get('school-registration-payment/school_id/{id}/year_id/{year}', [AdminSchoolRegistrationController::class, 'show'])->name('school-registration-payment.show');
+        // Route::get('school-registration-payment/school_id/{id}/year_id/{year}', [AdminSchoolRegistrationController::class, 'destroy'])->name('school-registration-payment.destroy');
         // Route::get('school-registration-payment/school_id/{id}/year_id/{year}', [AdminSchoolRegistrationController::class, 'destroy'])->name('school-registration-payment.destroy');
         Route::resource('jrc-exam-payment-details', JrcExamPaymentController::class);
         Route::resource('admins', AdminUsersController::class);

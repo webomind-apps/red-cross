@@ -11,6 +11,24 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div class="text pb-3">
+                        Total number of Schools</div>
+                    <div class="h5">{{ $total_schools }}</div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="#"></a>
+                        <div class="icon">
+                            <i class="far fa-school" style="background-color: #d3f1ed; color: #0ab39f;"></i>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="text pb-3">
                         Total Schools Paid</div>
                     <div class="h5">{{ $total_schools_paid }}</div>
                     <div class="d-flex justify-content-between align-items-center">
@@ -34,7 +52,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
-                            <i class="far fa-money-check-edit-alt" style="background-color: #d8edf9; color: #29a1e1;"></i>
+                            <i class="far fa-school" style="background-color: #d3f1ed; color: #0ab39f;"></i>
+
                         </div>
                     </div>
 
@@ -50,17 +69,12 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
-                            <i class="far fa-money-check-edit-alt" style="background-color: #d8edf9; color: #29a1e1;"></i>
+                            <i class="far fa-school" style="background-color: #d3f1ed; color: #0ab39f;"></i>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-
-        </div>
-
 
         <div class="p-1">
             <select name="year" id="year" class="custom-select custom-select-sm form-control form-control-sm">
@@ -78,11 +92,11 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Total Amount Collected</div>
-                    <div class="h5">Rs.{{ $paid_amount }}</div>
+                    <div class="h5">₹ {{ $paid_amount }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
-                            <i class="fas fa-coins" style="background-color: #fef2df; color: #f7b850;"></i>
+                            <i class="fas fa-sack-dollar" style="background-color: #dde0ea; color: #405189;"></i>
                         </div>
                     </div>
 
@@ -95,14 +109,13 @@
                 <div class="card-body">
                     <div class="text pb-3">
                         Amount To Be Collected</div>
-                    <div class="h5">Rs.{{ $balance_amount }}</div>
+                    <div class="h5">₹ {{ $balance_amount }}</div>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="#"></a>
                         <div class="icon">
                             <i class="fas fa-sack-dollar" style="background-color: #dde0ea; color: #405189;"></i>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

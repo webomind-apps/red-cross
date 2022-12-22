@@ -25,55 +25,55 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">School Name</label>
-                            <input type="text" class="form-control" id="school_name" name="school_name" placeholder="School Name">
+                            <input type="text" class="form-control" id="school_name" name="school_name" placeholder="School Name" readonly>
                         </div>
                        
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputAddress">District</label>
-                            <input type="text" class="form-control" id="district" name="district" placeholder="District">
+                            <input type="text" class="form-control" id="district" name="district" placeholder="District" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Taluk</label>
                             <input type="text" class="form-control" id="taluk" name="taluk"
-                                placeholder="Taluk">
+                                placeholder="Taluk" readonly>
                         </div> 
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Pin Code</label>
-                            <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="Pin Code">
+                            <input type="text" class="form-control" id="pin_code" name="pin_code" placeholder="Pin Code" readonly>
                         </div>
                         <div class="form-group col-md-12">
                             <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" readonly>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputAddress">Mail Id</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Mail Id">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Mail Id" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputAddress2">Phone No</label>
                             <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                placeholder="Phone No">
+                                placeholder="Phone No" readonly>
                         </div>       
                     </div>
                     <label for="inputAddress2">JRC councellor details</label>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Name</label>
-                            <input type="text" class="form-control" id="councellor_name" name="councellor_name" placeholder="Name">
+                            <input type="text" class="form-control" id="councellor_name" name="councellor_name" placeholder="Name" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Phone No</label>
                             <input type="text" class="form-control" id="councellor_phone" name="councellor_phone"
-                                placeholder="Phone No">
+                                placeholder="Phone No" readonly>
                         </div>       
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Email</label>
                             <input type="text" class="form-control" id="councellor_email" name="councellor_email"
-                                placeholder="Email">
+                                placeholder="Email" readonly>
                         </div>       
                     </div>
                     <label for="inputAddress2">Number of students</label>
@@ -85,12 +85,12 @@
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Student jrc examination fee(per student)</label>
                             <input type="text" class="form-control" id="jrc_examination_fee" name="jrc_examination_fee"
-                                placeholder="Student jrc examination fee(per student)">
+                                placeholder="Student jrc examination fee(per student)" readonly>
                         </div>       
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Total</label>
                             <input type="text" class="form-control" id="total_fee_amount" name="total_fee_amount"
-                                placeholder="Total">
+                                placeholder="Total" readonly>
                         </div>       
                     </div>
                     <div class="form-row">
@@ -101,28 +101,28 @@
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Book fee(per student)</label>
                             <input type="text" class="form-control" id="book_fee" name="book_fee"
-                                placeholder="Book fee(per student)">
+                                placeholder="Book fee(per student)" readonly>
                         </div>       
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Total</label>
                             <input type="text" class="form-control" id="total_book_fee" name="total_book_fee"
-                                placeholder="Total">
+                                placeholder="Total" readonly>
                         </div>       
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Total</label>
-                            <input type="text" class="form-control" id="total" name="total" placeholder="Total">
+                            <input type="text" class="form-control" id="total" name="total" placeholder="Total" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Convenience</label>
                             <input type="text" class="form-control" id="convenience" name="convenience"
-                                placeholder="Convenience">
+                                placeholder="Convenience" readonly>
                         </div>       
                         <div class="form-group col-md-4">
                             <label for="inputAddress2">Total to be paid</label>
                             <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
-                                placeholder="Total to be paid">
+                                placeholder="Total to be paid" readonly>
                         </div>       
                     </div>
                     <div class="form-row">
@@ -177,6 +177,9 @@
                     dataType: "json",
                     success: function(answer) {
                         // console.log(answer);
+                        if(answer.dise_code != dise){
+                            alert('enter valid dise code');
+                        }
                         $('#school_name').val(answer['school_name']);
                         $('#district').val(answer['district']);
                         $('#taluk').val(answer['taluk']);

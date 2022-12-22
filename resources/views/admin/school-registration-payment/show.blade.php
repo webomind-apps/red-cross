@@ -169,7 +169,7 @@
                             <div class="form-group col-md-2">
                                 <label for="inputAddress2">paid on</label>
                                 <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
-                                    value="{{ $data->created_at }}" readonly>
+                                    value="{{ $data->created_at->format('Y-m-d') }}" readonly>
                             </div>
                         </div>
                     @endforeach

@@ -27,12 +27,15 @@ class SchoolRegistrationController extends Controller
         $years = FinancialYear::all();
         $schools = SchoolData::all();
 
-        // dd($school);
+        $current_year = FinancialYear::where('status', true)->first();
+
+        // dd($current_year->id);
 
         if (is_null($year) && is_null($school)) {
             $school_registrations = DB::table('balances')
                 ->join('school_data', 'school_data.id', '=', 'balances.school_id')
                 ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
+                ->where('balances.year_id', $current_year->id)
                 ->paginate(10);
         } else if ($year) {
             $school_registrations = DB::table('balances')
@@ -48,7 +51,7 @@ class SchoolRegistrationController extends Controller
                 ->paginate(10);
         }
 
-        return view('admin.school-registration-payment.index', compact('school_registrations', 'years', 'schools'));
+        return view('admin.school-registration-payment.index', compact('school_registrations', 'years', 'schools','current_year'));
     }
 
     /**
@@ -58,7 +61,8 @@ class SchoolRegistrationController extends Controller
      */
     public function create()
     {
-        return view('admin.school-registration-payment.create',);
+        $year = FinancialYear::where('status', '=', 1)->first();
+        return view('admin.school-registration-payment.create', compact('year'));
     }
 
     /**
@@ -69,42 +73,88 @@ class SchoolRegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        $school_registration = new SchoolRegistration();
-        $school_registration->school_id = $request->id;
-        $school_registration->dise_code = $request->dise_code;
-        $school_registration->school_name = $request->school_name;
-        $school_registration->district = $request->district;
-        $school_registration->taluk = $request->taluk;
-        $school_registration->pin_code = $request->pin_code;
-        $school_registration->phone_number = $request->phone_number;
-        $school_registration->email = $request->email;
-        $school_registration->address = $request->address;
-        $school_registration->councellor_name = $request->councellor_name;
-        $school_registration->councellor_email = $request->councellor_email;
-        $school_registration->councellor_phone = $request->councellor_phone;
-        $school_registration->no_of_students_class_eight = $request->no_of_students_class_eight;
-        $school_registration->no_of_students_class_nine = $request->no_of_students_class_nine;
-        $school_registration->no_of_students_class_ten = $request->no_of_students_class_ten;
-        $school_registration->total_students = $request->total_students;
-        $school_registration->school_registration_annual_fee = $request->school_registration_annual_fee;
-        $school_registration->school_student_memebership_fee = $request->school_student_memebership_fee;
-        $school_registration->no_of_students_paid = $request->no_of_students_paid;
-        $school_registration->mode_of_payment = $request->mode_of_payment;
-        $school_registration->payment_method = $request->payment_method;
-        $school_registration->transaction_date = $request->transaction_date;
-        $school_registration->save();
+        // dd($request->all());
 
-        $school_registration_fee = new SchoolRegistrationFee();
-        $school_registration_fee->school_registration_id  = $school_registration->id;
-        $school_registration_fee->year_id  = $request->year;
-        $school_registration_fee->school_id = $request->id;
-        $school_registration_fee->total_fees = $request->total_fees;
-        $school_registration_fee->paid_amount = $request->paid_amount;
-        $school_registration_fee->balance_amount = $request->balance_amount;
-        $school_registration_fee->total = $request->total;
-        $school_registration_fee->convenience = $request->convenience_amount;
-        $school_registration_fee->total_to_be_paid = $request->total_to_be_paid;
-        $school_registration_fee->save();
+        $school_registration = SchoolRegistration::where('year_id', '=', $request->current_year)->where('school_id', '=', $request->id)->first();
+
+        //    dd($school_registration);
+        if ($school_registration) {
+            $school_registration->school_id = $request->id;
+            $school_registration->year_id  = $request->current_year;
+            // $school_registration->no_of_students_class_eight = $request->no_of_students_class_eight;
+            $school_registration->no_of_students_class_eight = $school_registration->no_of_students_class_eight;
+            $school_registration->no_of_students_class_nine = $school_registration->no_of_students_class_nine;
+            $school_registration->no_of_students_class_ten = $school_registration->no_of_students_class_ten;
+            $school_registration->total_students = $school_registration->total_students;
+            $school_registration->school_registration_annual_fee = $school_registration->school_registration_annual_fee;
+            $school_registration->school_student_memebership_fee = $school_registration->school_student_memebership_fee;
+            $school_registration->no_of_students_paid = $school_registration->no_of_students_paid;
+            $school_registration->total = $request->total;
+            $school_registration->convenience = $request->convenience_amount;
+            $school_registration->total_to_be_paid = $request->total_to_be_paid;
+            $school_registration->mode_of_payment = $request->mode_of_payment;
+            $school_registration->transaction_date = $request->transaction_date;
+            $school_registration->save();
+        } else {
+            $school_registration = new SchoolRegistration();
+            $school_registration->school_id = $request->id;
+            $school_registration->year_id  = $request->current_year;
+            $school_registration->no_of_students_class_eight = $request->no_of_students_class_eight;
+            $school_registration->no_of_students_class_nine = $request->no_of_students_class_nine;
+            $school_registration->no_of_students_class_ten = $request->no_of_students_class_ten;
+            $school_registration->total_students = $request->total_students;
+            $school_registration->school_registration_annual_fee = $request->school_registration_annual_fee;
+            $school_registration->school_student_memebership_fee = $request->school_student_memebership_fee;
+            $school_registration->no_of_students_paid = $request->no_of_students_paid;
+            $school_registration->total = $request->total;
+            $school_registration->convenience = $request->convenience_amount;
+            $school_registration->total_to_be_paid = $request->total_to_be_paid;
+            $school_registration->mode_of_payment = $request->mode_of_payment;
+            $school_registration->transaction_date = $request->transaction_date;
+            $school_registration->save();
+        }
+
+        // $registration_fee = SchoolRegistration::where('year_id', '=', $request->year)->where('school_id', '=', $request->id)->first();
+
+        foreach ($request->year as $key => $year) {
+
+            $school_registration_fee = new SchoolRegistrationFee();
+            $school_registration_fee->school_registration_id  = $school_registration->id;
+            $school_registration_fee->year_id  = $year;
+            $school_registration_fee->school_id = $request->id;
+
+            // dd($request->year,$request->total_fees);
+
+            if (!is_null($request->total_fees[$key])) {
+                // dd($year);
+                
+                $school_registration_fee->total_fees = $request->total_fees[$key];
+                $school_registration_fee->paid_amount = $request->paid_amount[$key];
+                $school_registration_fee->balance_amount = $request->balance_amount[$key];
+
+                $school_registration_fee->previous_financial_year = $year;
+                $school_registration_fee->save();
+
+                $previous_year = Balance::where('year_id', $year)->where('school_id', $request->id)->first();
+
+                // dd($previous_year);
+                if ($previous_year) {
+                    $previous_year->balance = $request->balance_amount[$key];
+                    $previous_year->paid_amount = $request->paid_amount[$key];
+                    $previous_year->amount_to_be_paid += $request->paid_amount[$key];
+                    $previous_year->save();
+                } else {
+                    $balance = new Balance();
+                    $balance->year_id = $request->year[$key];
+                    $balance->school_id = $request->id;
+                    $balance->total_amount = $request->total_fees[$key];
+                    $balance->amount_to_be_paid = $request->paid_amount[$key];
+                    $balance->balance = $request->balance_amount[$key];
+                    $balance->paid_amount = $request->paid_amount[$key];
+                    $balance->save();
+                }
+            }
+        }
 
         return redirect()->route('admin.school-registration-payment.index');
     }
@@ -180,7 +230,7 @@ class SchoolRegistrationController extends Controller
                 ->where('financial_years.id',$year)
                 ->where('school_data.id',$id)->get();
 
-                dd($school_registration);
+                // dd($school_registration);
                 // ->where('school_data.id', $id);
         $school_registration->delete();
 

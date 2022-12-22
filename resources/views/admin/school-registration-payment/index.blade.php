@@ -8,7 +8,7 @@
         <div class="head-name d-flex justify-content-between ">
             <div>
                 <h6>Payment detail of all the schools</h6>
-                <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
+                <p>{{ $current_year->name }}</p>
             </div>
             <div class="d-flex">
                 {{-- <div class="dropdown p-1">
@@ -122,10 +122,10 @@
                                                 type="button" class="btn btn-sm bg-paid">Details</button></a>
 
                                         {{-- <a class="deleteRecord" data-id="form-submit-{{ $school_registration->school_id }}"
-                                            data-route="{{ route('admin.school-registration-payment.destroy', $school_registration->school_id) }}">
+                                            data-route="{{ route('admin.school-registration-payment.destroy', ['id' => $school_registration->school_id, 'year' => $school_registration->year_id]) }}">
                                             <i class="bg-unpaid p-2 far fa-trash-alt"></i>
                                         </a> --}}
-                                        <form method="POST" id="form-submit-{{ $school_registration->id }}"
+                                        <form method="POST" id="form-submit-{{ $school_registration->school_id }}"
                                             action="{{ route('admin.school-registration-payment.destroy', $school_registration->school_id) }}"
                                             hidden>
                                             @method('DELETE')

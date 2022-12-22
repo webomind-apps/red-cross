@@ -18,250 +18,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.1/css/all.min.css"
         referrerpolicy="no-referrer" />
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap');
-
-        * {
-            padding: 0;
-            margin: 0;
-            text-decoration: none;
-
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        .navbar-brand img {
-            height: 55px;
-        }
-
-        .nav-item {
-            padding: 0px 7px;
-        }
-
-        .nav-item a {
-            color: #4b4b4d !important;
-            font-weight: 400;
-            text-decoration: none;
-            list-style: none;
-        }
-
-        .navbar {
-            padding-top: 0px;
-            padding-bottom: 0px;
-        }
-
-        .navbar-light .navbar-nav .nav-link.active {
-            font-weight: 400;
-        }
-
-        .nav-item a:hover {
-            color: #FF1414 !important;
-            transition: color 0.3s ease;
-        }
-
-        .nav-item a.btn-outline-success:hover {
-            color: #1d1d1d !important;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-light .navbar-brand {
-            max-width: 185px;
-        }
-
-        .btns {
-            margin: 0 10px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 5px;
-            background: transparent;
-            outline: 1px solid #FF1414;
-            font-family: "Montserrat", sans-serif;
-            overflow: hidden;
-            /* box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.079); */
-            text-decoration: none;
-        }
-
-        .btns:hover {
-            box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
-            color: #fff;
-        }
-
-        .btns:after {
-            content: " ";
-            width: 0%;
-            height: 100%;
-            background: #FF1414;
-            position: absolute;
-            transition: all 0.4s ease-in-out;
-            right: 0;
-        }
-
-        .btns:hover::after {
-            right: auto;
-            left: 0;
-            width: 100%;
-        }
-
-        .btns span {
-            text-align: center;
-            text-decoration: none;
-            width: 100%;
-            padding: 14px 16px;
-            color: #FF1414;
-            font-weight: 400;
-            letter-spacing: 1px;
-            line-height: 100%;
-            z-index: 20;
-            transition: all 0.3s ease-in-out;
-            text-decoration: none;
-        }
-
-        .btns:hover span {
-            color: #ffffff;
-            animation: scaleUp 0.3s ease-in-out;
-
-        }
-
-        @keyframes scaleUp {
-            0% {
-                transform: scale(1);
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap');
+    
+            * {
+                padding: 0;
+                margin: 0;
+                text-decoration: none;
+    
             }
-
-            50% {
-                transform: scale(0.95);
+    
+            html {
+                scroll-behavior: smooth;
             }
-
-            100% {
-                transform: scale(1);
+    
+    
+            .navbar-brand img {
+                height: 55px;
             }
-        }
-
-
-        /* registration form  */
-
-
-        /* Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .ptb {
-            padding: 50px 0;
-        }
-
-        /* .input-group {
-            position: relative;
-            margin: 15px 0;
-        }
-
-        input {
-            width: 100%;
-            border: solid 1.5px #9e9e9e;
-            background: none;
-            padding: 10px;
-            font-size: 14px;
-            transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        select {
-            width: 100%;
-            border: none;
-            outline: none;
-            border: solid 1.5px #9e9e9e;
-            background: none;
-            padding: 10px;
-            padding-right: 20px !important;
-            font-size: 14px;
-            transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        textarea {
-            width: 100%;
-            border: none;
-            outline: none;
-            border: solid 1.5px #9e9e9e;
-            background: none;
-            padding: 10px;
-            padding-right: 20px !important;
-            font-size: 14px;
-            transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        input[type=checkbox] {
-            text-align: left;
-        }
-
-        .user-label {
-            position: absolute;
-            left: 15px;
-            color: #3a3939;
-            pointer-events: none;
-            transform: translateY(.7rem);
-            transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .input:focus,
-        input:valid {
-            outline: none;
-            border: 1.5px solid #FF1414;
-        }
-
-        .input:focus~label,
-        input:valid~label {
-            transform: translateY(-55%) scale(0.8);
-            background-color: #fff;
-            padding: 0 .2em;
-            color: #FF1414;
-            font-size: 20px;
-        } */
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group input {
-            width: 100%;
-            height: 40px;
-            border-radius: 5px !important;
-            border: 1px solid #bdbcbc;
-            outline: none;
-            padding-left: 15px;
-        }
-
-        .input-group select {
-            width: 100%;
-            height: 40px;
-            border-radius: 5px !important;
-            border: 1px solid #bdbcbc;
-            outline: none;
-            padding-left: 15px;
-        }
-
-        .input-group textarea {
-            width: 100%;
-            height: 40px;
-            border-radius: 5px !important;
-            border: 1px solid #bdbcbc;
-            outline: none;
-            padding-left: 15px;
-        }
-
-        .input-group label {
-            padding-bottom: 6px;
-            font-size: 17px;
-        }
-
-        @media (max-width: 768px) {
-            .btns span {
-                width: 60%;
+    
+            .nav-item {
+                padding: 0px 7px;
             }
-
+    
+            .nav-item a {
+                color: #4b4b4d !important;
+                font-weight: 400;
+                text-decoration: none;
+                list-style: none;
+            }
+    
+            .navbar {
+                padding-top: 0px;
+                padding-bottom: 0px;
+            }
+    
+            .navbar-light .navbar-nav .nav-link.active {
+                font-weight: 400;
+            }
+    
+            .nav-item a:hover {
+                color: #FF1414 !important;
+                transition: color 0.3s ease;
+            }
+    
+            .nav-item a.btn-outline-success:hover {
+                color: #1d1d1d !important;
+                transition: color 0.3s ease;
+            }
+    
+            .navbar-light .navbar-brand {
+                max-width: 185px;
+            }
+    
+            .btns {
+                margin: 0 10px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+                background: transparent;
+                outline: 1px solid #FF1414;
+                font-family: "Montserrat", sans-serif;
+                overflow: hidden;
+                /* box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.079); */
+                text-decoration: none;
+            }
+    
+            .btns:hover {
+                box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+                color: #fff;
+            }
+    
             .btns:after {
                 content: " ";
                 width: 0%;
@@ -271,20 +100,134 @@
                 transition: all 0.4s ease-in-out;
                 right: 0;
             }
-
+    
             .btns:hover::after {
                 right: auto;
                 left: 0;
-                width: 60%;
+                width: 100%;
             }
-
-        }
-
-        input.largerCheckbox {
-            width: 25px;
-            height: 25px;
-        }
-    </style>
+    
+            .btns span {
+                text-align: center;
+                text-decoration: none;
+                width: 100%;
+                padding: 14px 16px;
+                color: #FF1414;
+                font-weight: 400;
+                letter-spacing: 1px;
+                line-height: 100%;
+                z-index: 20;
+                transition: all 0.3s ease-in-out;
+                text-decoration: none;
+            }
+    
+            .btns:hover span {
+                color: #ffffff;
+                animation: scaleUp 0.3s ease-in-out;
+    
+            }
+    
+            @keyframes scaleUp {
+                0% {
+                    transform: scale(1);
+                }
+    
+                50% {
+                    transform: scale(0.95);
+                }
+    
+                100% {
+                    transform: scale(1);
+                }
+            }
+    
+    
+            /* registration form  */
+    
+    
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+    
+            .ptb {
+                padding: 50px 0;
+            }
+    
+            .input-group {
+                margin-bottom: 15px;
+            }
+    
+            .input-group input {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px !important;
+                border: 1px solid #bdbcbc;
+                outline: none;
+                padding-left: 15px;
+            }
+    
+            .input-group select {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px !important;
+                border: 1px solid #bdbcbc;
+                outline: none;
+                padding-left: 15px;
+            }
+    
+            .input-group textarea {
+                width: 100%;
+                height: 40px;
+                border-radius: 5px !important;
+                border: 1px solid #bdbcbc;
+                outline: none;
+                padding-left: 15px;
+            }
+    
+            .input-group label {
+                padding-bottom: 6px;
+                font-size: 15px;
+                color: #949292;
+            }
+    
+            @media (max-width: 768px) {
+                .btns span {
+                    width: 60%;
+                }
+    
+                .btns:after {
+                    content: " ";
+                    width: 0%;
+                    height: 100%;
+                    background: #FF1414;
+                    position: absolute;
+                    transition: all 0.4s ease-in-out;
+                    right: 0;
+                }
+    
+                .btns:hover::after {
+                    right: auto;
+                    left: 0;
+                    width: 60%;
+                }
+    
+            }
+    
+            input.largerCheckbox {
+                width: 25px;
+                height: 25px;
+            }
+    
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
 
 </head>
 
@@ -563,6 +506,9 @@
                     dataType: "json",
                     success: function(answer) {
                         // console.log(answer);
+                        if(answer.dise_code != dise){
+                            alert('enter valid dise code');
+                        }
                         $('#school_name').val(answer['school_name']);
                         $('#district').val(answer['district']);
                         $('#taluk').val(answer['taluk']);
