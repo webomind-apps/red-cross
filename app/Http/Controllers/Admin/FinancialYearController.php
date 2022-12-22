@@ -16,8 +16,9 @@ class FinancialYearController extends Controller
      */
     public function index()
     {
+        $current_year = FinancialYear::where('status', 1)->first();
         $financial_years = FinancialYear::paginate(10);
-        return view('admin.financial-year.index', compact('financial_years'));
+        return view('admin.financial-year.index', compact('financial_years','current_year'));
     }
 
     /**

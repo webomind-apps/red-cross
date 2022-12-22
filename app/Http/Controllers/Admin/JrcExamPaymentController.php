@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\FinancialYear;
 use App\Models\JrcExaminationFee;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class JrcExamPaymentController extends Controller
      */
     public function index()
     {
+        $current_year = FinancialYear::where('status', 1)->first();
         $jrc_examination_payments = JrcExaminationFee::paginate(10);
-        return view('admin.jrc-exam-payment-details.index', compact('jrc_examination_payments'));
+        return view('admin.jrc-exam-payment-details.index', compact('jrc_examination_payments','current_year'));
     }
 
     /**

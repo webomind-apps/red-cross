@@ -8,7 +8,7 @@
           <div class="head-name d-flex justify-content-between ">
               <div>
                   <h6>School data list</h6>
-                  <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
+                  <p>{{ $current_year->name  }}</p>
               </div>
               <div class="d-flex">
 

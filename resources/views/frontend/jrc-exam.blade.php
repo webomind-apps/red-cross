@@ -271,7 +271,7 @@
 
                 <div class="col-lg-11 mb-3 mx-auto">
                     <h1 class="header-underline text-uppercase">JRC Examination/Program <span
-                            class="fs-6 text-capitalize">( Academic 2022 - 2023 )</span> </h1>
+                            class="fs-6 text-capitalize">( Academic {{ $year? $year->name : '' }} )</span> </h1>
 
                 </div>
             </div>
@@ -353,7 +353,7 @@
                                 </div>
 
                                 <div class="col-lg-12 mt-1">
-                                    <label class="fs-5">Jrc councellor details </label>
+                                    <label class="fs-5">JRC counselor details </label>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">

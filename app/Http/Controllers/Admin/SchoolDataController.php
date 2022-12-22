@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\SchoolDataExport;
 use App\Http\Controllers\Controller;
 use App\Imports\SchoolDataImport;
+use App\Models\FinancialYear;
 use App\Models\SchoolData;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -19,8 +20,9 @@ class SchoolDataController extends Controller
      */
     public function index()
     {
+        $current_year = FinancialYear::where('status', true)->first();
         $school_datas = SchoolData::paginate(10);
-        return view('admin.school-data.index', compact('school_datas'));
+        return view('admin.school-data.index', compact('school_datas', 'current_year'));
     }
 
     /**

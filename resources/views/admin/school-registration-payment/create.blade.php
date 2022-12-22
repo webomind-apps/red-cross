@@ -70,7 +70,7 @@
                                 readonly>
                         </div>
                     </div>
-                    <label for="inputAddress2">JRC councellor details</label>
+                    <label for="inputAddress2">JRC counselor details</label>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Name</label>

@@ -8,7 +8,7 @@
         <div class="head-name d-flex justify-content-between ">
             <div>
                 <h6>Jrc Exam Payment detail of all the schools</h6>
-                <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
+                <p>{{ $current_year->name }}</p>
             </div>
             <div class="d-flex">
                 {{-- <div class="dropdown p-1">

@@ -8,7 +8,7 @@
         <div class="head-name d-flex justify-content-between ">
             <div>
                 <h6>Financial years</h6>
-                <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
+                <p>{{ $current_year ? $current_year->name : '' }}</p>
             </div>
             <div class="d-flex">
 

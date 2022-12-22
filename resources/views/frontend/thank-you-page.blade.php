@@ -92,19 +92,18 @@
                         <i class="fa fa-check"></i>
                         <p class="main-content__body">
                             Thank you,
-                            You have successfully paid amount of <b>Rs.{{ $amount }}</b> for the year
+                            You have successfully paid <b>school registration fees</b> + <b>student membership fees</b> + <b>convenience fees</b> as an amount of <b>Rs.{{ $amount }}</b> for the year
                             <b>{{ date('Y') }}</b>. <br><br>
                             The invoice has been mail to <span>{{ $email }} <span> and </span> {{ $councellor_email }}</span>.
                             <br>
-                            In case of any clarifications you can reach to <span>jrc@gmail.com</span> and also call us
+                            In case of any clarifications you can reach to <span>jrckar@gmail.com</span> and also call us
                             on <span>080-22268435</span>.
                         </p>
                     </div>
                     <div class="col-lg-3 mt-5 mx-auto">
-                        <a href="{{ route('index') }}" class="btns"><span>Back to home</span></a>
+                        <a href="{{ route('index') }}" class="btns"><span>Back to registration form</span></a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>

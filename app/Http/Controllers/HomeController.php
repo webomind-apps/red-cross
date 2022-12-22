@@ -23,7 +23,8 @@ class HomeController extends Controller
 
     public function jrc_exam_form()
     {
-        return view('frontend.jrc-exam');
+        $year = FinancialYear::where('status', '=', 1)->first();
+        return view('frontend.jrc-exam', compact('year'));
     }
 
     public function thank_you_page(Request $request)
