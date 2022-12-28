@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\Balance;
+use App\Models\GeneralSecretarySignature;
 use App\Models\SchoolRegistration;
 use App\Models\SchoolRegistrationFee;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -12,7 +13,10 @@ use Exception;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use NumberFormatter;
 use Razorpay\Api\Api;
+use Razorpay\Api\Errors\SignatureVerificationError;
 
 class SchoolRegistrationController extends Controller
 {
@@ -106,6 +110,7 @@ class SchoolRegistrationController extends Controller
                 $school_registration_fee->previous_financial_year = $year;
                 $school_registration_fee->save();
 
+
                 $previous_year = Balance::where('year_id', $year)->where('school_id', $request->id)->first();
 
                 // dd($previous_year);
@@ -127,19 +132,10 @@ class SchoolRegistrationController extends Controller
             }
         }
 
-        $html = '';
-        $view = view('admin.invoice.school_invoice', ['name' => $request->school_name, 'address' => $request->address, 'total_to_be_paid' => $request->total_to_be_paid, 'school_registration_annual_fee' => $request->school_registration_annual_fee, 'school_student_memebership_fee' => $request->school_student_memebership_fee]);
-        $html .= $view->render();
-        $file = Pdf::loadHTML($html);
-
-        $subject = 'Red cross payment';
-        $body = 'Payment successful';
-
-        $emails = [$request->email, $request->councellor_email];
-        Mail::to($emails)->send(new InvoiceMail($subject, $body, $file));
-
 
         $input = $request->all();
+
+        $signature = GeneralSecretarySignature::first();
 
         $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
 
@@ -147,7 +143,10 @@ class SchoolRegistrationController extends Controller
             'receipt' => mt_rand(1000000000, 9999999999), 'amount' => $request->total_to_be_paid * 100, 'currency' => 'INR',
             'notes' => array(
                 'school_name' => $request->school_name, 'email' => $request->email, 'phone_number' => $request->phone_number,
-                'address' => $request->address, 'councellor_email' => $request->councellor_email, 'current_year' => $request->current_year
+                'address' => $request->address, 'councellor_email' => $request->councellor_email, 'current_year' => $request->current_year, 
+                'school_registration_annual_fee' =>$request->school_registration_annual_fee, 'no_of_students_paid' => $request->no_of_students_paid,
+                'school_student_memebership_fee' => $request->school_student_memebership_fee , 'convenience_amount' => $request->convenience_amount,
+                'signature' => $signature->signature
             )
         ));
 
@@ -207,14 +206,52 @@ class SchoolRegistrationController extends Controller
         return view('admin.payment.payment-page', compact('order'));
     }
 
+
     public function payment_success(Request $request)
     {
+        $success = true;
 
-        $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
-        $attributes  = array('razorpay_signature'  => $request->razorpay_signature,  'razorpay_payment_id'  => $request->razorpay_payment_id,  'razorpay_order_id' => $request->order_id);
-        $order  = $api->utility->verifyPaymentSignature($attributes);
+        $error = "Payment Failed";
 
-        return response()->json([$request->all(), $order]);
+        if (empty($request->razorpay_payment_id) === false) {
+            $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
+
+            try {
+                // Please note that the razorpay order ID must
+                // come from a trusted source (session here, but
+                // could be database or something else)
+                $attributes = array(
+                    'razorpay_order_id' => $request->order_id,
+                    'razorpay_payment_id' => $request->razorpay_payment_id,
+                    'razorpay_signature' => $request->razorpay_signature
+                );
+
+                $order = $api->utility->verifyPaymentSignature($attributes);
+            } catch (SignatureVerificationError $e) {
+                $success = false;
+                $error = 'Razorpay Error : ' . $e->getMessage();
+            }
+        }
+
+        if ($success === true) {
+            // $html = "<p>Your payment was successful</p>
+            //  <p>Payment ID: {$request->razorpay_payment_id}</p>";
+            // echo 'hi';
+
+            return response()->json([$request->all(), $order]);
+        } else {
+            $html = "<p>Your payment failed</p>
+             <p>{$error}</p>";
+        }
+
+
+        echo $html;
+
+        // $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
+        // $attributes  = array('razorpay_signature'  => $request->razorpay_signature,  'razorpay_payment_id'  => $request->razorpay_payment_id,  'razorpay_order_id' => $request->order_id);
+        // $order  = $api->utility->verifyPaymentSignature($attributes);
+
+        // return response()->json([$request->all(), $order]);
     }
 
     public function invoice()
@@ -222,4 +259,6 @@ class SchoolRegistrationController extends Controller
 
         return view('admin.invoice.invoice');
     }
+
 }
+

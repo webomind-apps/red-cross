@@ -1,11 +1,19 @@
 @extends('admin.layout.master')
 
 @section('page-contents')
+
+<div class="p-1">
+    <select name="year" id="year" class="custom-select custom-select-sm form-control form-control-sm">
+        <option value="" name="year">Select year</option>
+        @foreach ($years as $year)
+            <option value="{{ $year->id }}" id="{{ $year->id }}"
+                {{ request('year') == $year->id ? 'selected' : '' }}>
+                {{ $year->name }} </option>
+        @endforeach
+    </select>
+</div>
     <!-- Content Row -->
     <div class="row mt-3">
-
-
-
         <!-- Pending Requests Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card h-100">
@@ -76,16 +84,7 @@
             </div>
         </div>
 
-        <div class="p-1">
-            <select name="year" id="year" class="custom-select custom-select-sm form-control form-control-sm">
-                <option value="" name="year">Select year</option>
-                @foreach ($years as $year)
-                    <option value="{{ $year->id }}" id="{{ $year->id }}"
-                        {{ request('year') == $year->id ? 'selected' : '' }}>
-                        {{ $year->name }} </option>
-                @endforeach
-            </select>
-        </div>
+       
         <!-- Pending Requests Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card h-100">

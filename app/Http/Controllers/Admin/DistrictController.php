@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\EmailTemplate;
-use Egulias\EmailValidator\Warning\EmailTooLong;
+use App\Models\District;
 use Illuminate\Http\Request;
 
-class EmailTemplateController extends Controller
+class DistrictController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class EmailTemplateController extends Controller
      */
     public function index()
     {
-        $email_templates = EmailTemplate::paginate(10);
-        return view('admin.email-templates.index', compact('email_templates'));
+        $districts = District::paginate(10);
+        return view('admin.district.index', compact('districts'));
     }
 
     /**
@@ -27,7 +26,7 @@ class EmailTemplateController extends Controller
      */
     public function create()
     {
-        return view('admin.email-templates.create');
+        return view('admin.district.create');
     }
 
     /**
@@ -38,14 +37,12 @@ class EmailTemplateController extends Controller
      */
     public function store(Request $request)
     {
-        $email_template = new EmailTemplate();
-        $email_template->title = $request->name;
-        $email_template->subject = $request->subject;
-        $email_template->body = $request->email_body;
-        $email_template->emails_to =    $request->emails_to;
-        $email_template->save();
+        $district = new District();
+        $district->name = $request->name;
+        $district->comments = $request->comments;
+        $district->save();
 
-        return redirect()->route('admin.email-templates.index');
+        return redirect()->route('admin.districts.index');
     }
 
     /**
@@ -67,9 +64,10 @@ class EmailTemplateController extends Controller
      */
     public function edit($id)
     {
-        $email_template = EmailTemplate::find($id);
-        return view('admin.email-templates.edit', compact('email_template'));
+        $district = District::find($id);
+        return view('admin.district.edit', compact('district'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -80,16 +78,14 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $email_template = EmailTemplate::find($id);
-        $email_template->title = $request->name;
-        $email_template->subject = $request->subject;
-        $email_template->body = $request->email_body;
-        $email_template->emails_to = $request->emails_to;
-        $email_template->save();
+        $district = District::find($id);
+        $district->name = $request->name;
+        $district->comments = $request->comments;
+        $district->save();
 
-        return redirect()->route('admin.email-templates.index');
+        return redirect()->route('admin.districts.index');
+
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -99,10 +95,9 @@ class EmailTemplateController extends Controller
      */
     public function destroy($id)
     {
-        $email_template = EmailTemplate::find($id);
+        $district = District::find($id);
+        $district->delete();
 
-        $email_template->delete();
-
-        return redirect()->route('admin.email-templates.index');
+        return redirect()->route('admin.districts.index');
     }
 }

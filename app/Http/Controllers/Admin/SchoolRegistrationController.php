@@ -24,14 +24,17 @@ class SchoolRegistrationController extends Controller
     {
         $year = request()->year;
         $school = request()->school;
+        $district = request()->district;
+        // dd($district);
         $years = FinancialYear::all();
         $schools = SchoolData::all();
-
+        $districts = SchoolData::distinct()->get(['district']);
+        
         $current_year = FinancialYear::where('status', true)->first();
 
         // dd($current_year->id);
 
-        if (is_null($year) && is_null($school)) {
+        if (is_null($year) && is_null($school) && is_null($district)) {
             $school_registrations = DB::table('balances')
                 ->join('school_data', 'school_data.id', '=', 'balances.school_id')
                 ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
@@ -49,9 +52,15 @@ class SchoolRegistrationController extends Controller
                 ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
                 ->where('school_id', $school)
                 ->paginate(10);
+        } else if($district){
+            $school_registrations = DB::table('balances')
+                ->join('school_data', 'school_data.id', '=', 'balances.school_id')
+                ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
+                ->where('district', $district)
+                ->paginate(10);
         }
 
-        return view('admin.school-registration-payment.index', compact('school_registrations', 'years', 'schools','current_year'));
+        return view('admin.school-registration-payment.index', compact('school_registrations', 'years', 'schools','current_year','districts'));
     }
 
     /**
@@ -156,6 +165,8 @@ class SchoolRegistrationController extends Controller
             }
         }
 
+
+        
         return redirect()->route('admin.school-registration-payment.index');
     }
 
@@ -217,13 +228,6 @@ class SchoolRegistrationController extends Controller
     public function destroy($id, $year)
     {
 
-        // $school_registration = DB::table('balances')
-        //     ->join('school_data', 'school_data.id', '=', 'balances.school_id')
-        //     ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
-        //     ->where('school_data.id', $id)
-        //     ->first();
-
-
             $school_registration = DB::table('balances')
                 ->join('school_data', 'school_data.id', '=', 'balances.school_id')
                 ->join('financial_years', 'financial_years.id', '=', 'balances.year_id')
@@ -231,7 +235,6 @@ class SchoolRegistrationController extends Controller
                 ->where('school_data.id',$id)->get();
 
                 // dd($school_registration);
-                // ->where('school_data.id', $id);
         $school_registration->delete();
 
         return redirect()->route('admin.school-registration-payment.index');

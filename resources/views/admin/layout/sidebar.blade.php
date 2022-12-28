@@ -127,6 +127,11 @@
             <i class="fas fa-usd-circle"></i>
             <span>Master Price</span></a>
     </li>
+    {{-- <li class="nav-item {{ request()->segment(2) == 'districts' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.districts.index') }}">
+            <i class="fas fa-usd-circle"></i>
+            <span>Districts</span></a>
+    </li> --}}
     <li class="nav-item {{ request()->segment(2) == 'financial-year' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.financial-year.index') }}">
             <i class="fas fa-calendar"></i>
@@ -137,6 +142,7 @@
             <i class="fas fa-calendar"></i>
             <span>General Secretary Signature</span></a>
     </li>
+
 
 
     <!-- Divider -->
@@ -156,3 +162,4 @@
 
 </ul>
 <!-- End of Sidebar -->
+

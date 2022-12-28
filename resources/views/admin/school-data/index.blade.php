@@ -8,13 +8,13 @@
           <div class="head-name d-flex justify-content-between ">
               <div>
                   <h6>School data list</h6>
-                  <p>{{ $current_year->name  }}</p>
+                  <p>{{ $current_year->name }}</p>
               </div>
               <div class="d-flex">
 
                   <div class="p-1">
                       <a href="{{ route('admin.export') }}" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
-                              class="fas fa-download fa-sm text-white-50"></i> Export</a>
+                              class="fas fa-download fa-sm text-white-50"></i> Download</a>
                   </div>
                   <div class="p-1">
                       {{-- <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
@@ -25,7 +25,7 @@
                       </form> --}}
                       <button data-toggle="modal" data-target="#ImportModal"
                           class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
-                              class="fas fa-upload fa-sm text-white-50"></i>Import</button>
+                              class="fas fa-upload fa-sm text-white-50"></i>Upload</button>
                   </div>
               </div>
           </div>
@@ -106,13 +106,22 @@
                   </div>
 
                   <div class="modal-footer" style="align-content: center !important">
-                      <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
-                          @csrf
-                          <input type="file" name="file" class="form-control"
-                              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                          <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
-                                  class="fas fa-upload fa-sm text-white-50"></i></button>
-                      </form>
+                      <div>
+                        <label>Excel format to upload</label>
+                          <a href="{{ asset('admin/img/school-data.xlsx')}}">
+                              <button class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">Download</button>
+                          </a>
+                      </div>
+                      <div>
+                          <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                              @csrf
+                              <input type="file" name="file" class="form-control" accept=".xlsx, .xls, .csv">
+                              <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
+                                      class="fas fa-upload fa-sm text-white-50"></i></button>
+                          </form>
+                      </div>
+                      <div> 
+                      </div>
                   </div>
               </div>
           </div>

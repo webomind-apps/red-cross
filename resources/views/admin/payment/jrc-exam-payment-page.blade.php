@@ -17,7 +17,7 @@
         "order_id": "{{ $order->id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         "handler": function(response) {
             $.ajax({
-                url: '{{ route('payment-success') }}',
+                url: '{{ route('jrc-exam-payment-success') }}',
                 type: 'get',
                 dataType: 'json',
                 data: {
@@ -25,7 +25,6 @@
                     razorpay_order_id: response.razorpay_order_id,
                     razorpay_signature: response.razorpay_signature,
                     order_id: "{{ $order->id }}",
-
                 },
                 success: function(success) {
                     console.log(success);
@@ -62,6 +61,7 @@
             e.preventDefault();
         }
     }, true);
+
 </script>
 
 
@@ -70,11 +70,7 @@
     <input type="text" value="{{ $order->notes->email }}" name="email">
     <input type="text" value="{{ $order->notes->school_name }}" name="school_name">
     <input type="text" value="{{ $order->notes->councellor_email }}" name="councellor_email">
-    <input type="text" value="{{ $order->notes->school_registration_annual_fee }}" name="school_registration_annual_fee">
-    <input type="text" value="{{ $order->notes->no_of_students_paid }}" name="no_of_students_paid">
-    <input type="text" value="{{ $order->notes->school_student_memebership_fee }}" name="school_student_memebership_fee">
     <input type="text" value="{{ $order->notes->convenience_amount }}" name="convenience_amount">
-    <input type="text" value="{{ $order->notes->signature }}" name="signature">
     <input type='submit' id='thankYouForm'>
     {{-- <button>Send</button> --}}
 </form>

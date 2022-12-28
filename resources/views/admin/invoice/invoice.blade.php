@@ -3,19 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Red Cross</title>
 </head>
-
-<body>
-
-  <html xmlns="http://www.w3.org/1999/xhtml">
-
-  <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <media_query_styles></media_query_styles>
-  </head>
 
   <body style="margin:0;padding:0;background-color:#FFF">
     <center>
@@ -51,7 +42,7 @@
                                                 <tr>
                                                   <th valign="top" class="kmTextContent" style="text-align: right;">
                                                     {{-- <img src="./cropped-Final-Logo.png" height="90px" alt="">  --}}
-                                                    <img src="{{ public_path('admin/img/cropped-Final-Logo.png')}}" height="90px" alt=""> 
+                                                    <img src="{{ public_path('admin/img/red-cross.png')}}" height="90px" alt=""> 
                                                   </th>
                                                   <th valign="top" class="kmTextContent">
                                                     <h2 style="line-height: 0; font-size: 31px; margin-top: 20px;">Indian Red Cross Society</h2>
@@ -60,7 +51,7 @@
                                                     <h5 style="line-height: 0; font-size: 25px; margin-top: 25px; color: #FF1414;font-family:Helvetica, Arial;">JUNIOR RED CROSS</h5>
                                                   </th>
                                                   <th valign="top" class="kmTextContent" style="text-align: left;">
-                                                    <img src="{{ public_path('admin/img/cropped-Final-Logo.png')}}" height="90px" alt=""> 
+                                                    <img src="{{ public_path('admin/img/red-cross.png')}}" height="90px" alt=""> 
                                                     {{-- <img src="{{ public_path('storage/signature')}}" height="90px" alt="">  --}}
                                                   </th>
                                                 </tr>
@@ -196,8 +187,3 @@
   </body>
 
   </html>
-
-
-</body>
-
-</html>

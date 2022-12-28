@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Razorpay\Api\Api;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Razorpay\Api\Errors\SignatureVerificationError;
 
 class JrcExaminationController extends Controller
 {
@@ -45,6 +46,7 @@ class JrcExaminationController extends Controller
 
         // dd($request->all());
         $jrc_examination_fee = JrcExaminationFee::create($request->all());
+        // dd($jrc_examination_fee);
 
         $name = $request->school_name;
         $address = $request->address;
@@ -65,7 +67,7 @@ class JrcExaminationController extends Controller
         $emails = [$request->email, $request->councellor_email];
         Mail::to($emails)->send(new InvoiceMail($subject, $body, $file));
 
-       
+
         $input = $request->all();
 
         $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
@@ -80,7 +82,58 @@ class JrcExaminationController extends Controller
 
         session(['orderdetails' => $order_details]);
 
-        return redirect()->route('payment-page');
+        return redirect()->route('jrc-payment-page');
+    }
+
+
+    public function payment()
+    {
+        $order = session('orderdetails');
+        return view('admin.payment.jrc-exam-payment-page', compact('order'));
+    }
+
+    public function payment_success(Request $request)
+    {
+
+        $success = true;
+
+        $error = "Payment Failed";
+
+        if (empty($request->razorpay_payment_id) === false) {
+            $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
+
+            try {
+                // Please note that the razorpay order ID must
+                // come from a trusted source (session here, but
+                // could be database or something else)
+                $attributes = array(
+                    'razorpay_order_id' => $request->order_id,
+                    'razorpay_payment_id' => $request->razorpay_payment_id,
+                    'razorpay_signature' => $request->razorpay_signature
+                );
+
+                $api->utility->verifyPaymentSignature($attributes);
+            } catch (SignatureVerificationError $e) {
+                $success = false;
+                $error = 'Razorpay Error : ' . $e->getMessage();
+            }
+        }
+
+        if ($success === true) {
+            $html = "<p>Your payment was successful</p>
+             <p>Payment ID: {$request->razorpay_payment_id}</p>";
+        } else {
+            $html = "<p>Your payment failed</p>
+             <p>{$error}</p>";
+        }
+
+        echo $html;
+
+        // $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
+        // $attributes  = array('razorpay_signature'  => $request->razorpay_signature,  'razorpay_payment_id'  => $request->razorpay_payment_id,  'razorpay_order_id' => $request->order_id);
+        // $order  = $api->utility->verifyPaymentSignature($attributes);
+
+        // return response()->json([$request->all(), $order]);
     }
 
 

@@ -9,7 +9,7 @@ use App\Models\FinancialYear;
 use App\Models\SchoolData;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-
+use PhpOffice\PhpSpreadsheet\Calculation\Financial;
 
 class SchoolDataController extends Controller
 {
@@ -24,6 +24,7 @@ class SchoolDataController extends Controller
         $school_datas = SchoolData::paginate(10);
         return view('admin.school-data.index', compact('school_datas', 'current_year'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -118,11 +119,9 @@ class SchoolDataController extends Controller
 
     public function import()
     {
-        // dd(request()->file('file'));
-        Excel::import(new SchoolDataImport, request()->file('file')->store('files'));
-
-
-        // Excel::import(new SchoolDataImport, request()->file('files'));
-        return back();
+       
+       $import = Excel::import(new SchoolDataImport, request()->file('file')->store('files'));
+       
+       return back();
     }
 }

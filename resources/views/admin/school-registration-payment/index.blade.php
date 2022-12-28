@@ -24,11 +24,22 @@
                 </div> --}}
                 <div class="p-1">
                     <select name="year" id="year" class="custom-select custom-select-sm form-control form-control-sm">
-                        <option value="" name="year">Select Year</option>
+                        <option value="" name="year">Select year</option>
                         @foreach ($years as $year)
                             <option value="{{ $year->id }}" id="{{ $year->id }}"
                                 {{ request('year') == $year->id ? 'selected' : '' }}>
                                 {{ $year->name }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="p-1">
+                    <select name="district" id="district"
+                        class="custom-select custom-select-sm form-control form-control-sm">
+                        <option value="" name="district">Select district</option>
+                        @foreach ($districts as $district)
+                            <option value="{{ $district->district }}" id="{{ $district }}"
+                                {{ request('district') == $district->district ? 'selected' : '' }}>
+                                {{ $district->district }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -165,6 +176,13 @@
             // alert(val);
             var route = "{{ url()->current() }}";
             var newRoute = updateQueryStringParameter(window.location.href, 'school', val);
+            window.location.href = newRoute;
+        })
+        $('#district').on('change', function() {
+            var val = $(this).val();
+            // alert(val);
+            var route = "{{ url()->current() }}";
+            var newRoute = updateQueryStringParameter(window.location.href, 'district', val);
             window.location.href = newRoute;
         })
 

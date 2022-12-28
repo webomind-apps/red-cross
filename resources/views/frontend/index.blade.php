@@ -519,6 +519,12 @@
 
                                 </div>
 
+                                
+                                <div id="previous_fully_paid">
+                                    {{-- <label class="fs-5">Fully paid</label> --}}
+                                </div>
+                                
+
 
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
@@ -548,6 +554,9 @@
 
                                     </div>
                                 </div>
+
+                               
+
                                 <div class="col-lg-12">
                                     <div class="row">
                                         <div class="col-lg-2 col-md-3 col-sm-12 mt-4">
@@ -563,6 +572,8 @@
                                      class="input" value={{date('Y-m-d')}} hidden>
                             </div>
                         </form>
+
+                        
                     </div>
                 </div>
             </div>
@@ -697,7 +708,8 @@
                         var school_data = answer.school_data;
                         var students_data = answer.students_data;
                         var payment_data = answer.payment_data;
-                        // console.log('school_data', school_data);
+                        var data_fully_paid = answer.data_fully_paid;
+                        console.log('data_fully_paid', data_fully_paid);
 
 
                         $('#total_fees_bal').val(balance?.total_amount)
@@ -734,6 +746,7 @@
                         for (i = 0; i < financial_years.length; i++) {
                             if (financial_years[i].balances.length > 0 && financial_years[i]
                                 .status == 0) {
+
                                 
                                 var name = financial_years[i].name
                                 var year_id = financial_years[i].id;
@@ -788,6 +801,7 @@
                                                     for(j = 0; j < financial_years[i].registration_fees.length; j++){
                                                         var previous_paid_amount = financial_years[i].registration_fees[j].paid_amount;
                                                         var paid_on = financial_years[i].registration_fees[j].created_at;
+                                                        
                                                         htm += `<h6 style="font-size:12px">Payment ${j+1} - ₹ ${previous_paid_amount} paid on ${paid_on}</h6>`;
                                                     }
                                                    
@@ -828,6 +842,78 @@
                         $('#previous').html("");
                         $('#previous').append(htm);
 
+                        var previous_fully_paid_htm = '';
+                        var paid = "Fully paid";
+
+                        for (m = 0; m < data_fully_paid.length; m++) {
+                            if (data_fully_paid[m].balances.length > 0 && data_fully_paid[m]
+                                .status == 0) {
+
+                                
+                                var name = data_fully_paid[m].name
+                                var year_id = data_fully_paid[m].id;
+                                var paid_amount = data_fully_paid[m].balances[0]?.paid_amount;
+                                var balance = data_fully_paid[m].balances[0]?.balance;
+                                var total_amount = data_fully_paid[m].balances[0]?.total_amount;
+                                var total_amount_paid = data_fully_paid[m].balances[0]
+                                    ?.amount_to_be_paid;
+
+                                    var no_of_students_class_eight = students_data[m].registrations[
+                                    0]?.no_of_students_class_eight;
+                                var no_of_students_class_nine = students_data[m].registrations[
+                                    0]?.no_of_students_class_nine;
+                                var no_of_students_class_ten = students_data[m].registrations[0]
+                                    ?.no_of_students_class_ten;
+                                var total_students = students_data[m].registrations[0]
+                                    ?.total_students;
+                                var school_registration_annual_fee = students_data[m]
+                                    .registrations[0]?.school_registration_annual_fee;
+                                var school_student_memebership_fee = students_data[m]
+                                    .registrations[0]?.school_student_memebership_fee;
+
+
+                                    previous_fully_paid_htm += `<div class="col-lg-12">
+                                        <div class="row" id=row-` + m + `>
+                                            <label class="pt-1 text-danger fw-bold">${name}</label>
+                                            
+                                                <label class="pt-1 text-danger fw-bold">${paid}</label>
+                                            
+                                            <div class="col-lg-2">
+                                                <div class="input-group">
+                                                    <label class="user-label">Total fees (₹)</label>
+                                                    <input type="number" name="total_fees_bal[]"
+                                                        id="total_fees_bal-` + i + `" autocomplete="off" class="input"
+                                                        value=${total_amount}>
+                                                        <h6>${total_students} students* ₹ ${school_student_memebership_fee} (student memebership fee) + ₹ ${school_registration_annual_fee} (school registration fee)</h6>
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="col-lg-2">
+                                                <div class="input-group">
+                                                    <label class="user-label">Total fees paid (₹)</label>
+                                                    <input type="number" name="total_fees_bal[]"
+                                                        id="total_fees_bal-` + m + `" autocomplete="off" class="input"
+                                                        value=${total_amount_paid}>   
+                                                    `;
+                                                   
+                                                    for(n = 0; n < data_fully_paid[m].registration_fees.length; n++){
+                                                        var previous_paid_amount = data_fully_paid[m].registration_fees[n].paid_amount;
+                                                        var paid_on = data_fully_paid[m].registration_fees[n].created_at;
+                                                        previous_fully_paid_htm += `<h6 style="font-size:12px">Payment ${n+1} - ₹ ${previous_paid_amount} paid on ${paid_on}</h6>`;
+                                                    }
+                                                   
+                                                    previous_fully_paid_htm += `</div>
+                                                </div>
+                                                  
+                                            </div>
+                                        </div>
+                                       
+                                    </div> ` ;
+                            }
+                        }
+                        $('#previous_fully_paid').html("");
+                        $('#previous_fully_paid').append(previous_fully_paid_htm);
+
                     },
                 });
             });
@@ -845,6 +931,7 @@
         $(document).on('change', '#no_of_students_paid', function() {
             calculateTotal()
         });
+
     </script>
 
     <script>

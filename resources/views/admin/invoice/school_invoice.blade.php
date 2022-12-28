@@ -3,26 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Red Cross</title>
 </head>
 
-<body>
-
-  <html xmlns="http://www.w3.org/1999/xhtml">
-
-  <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <media_query_styles></media_query_styles>
-  </head>
-
+{{-- {{dd($signature)}} --}}
   <body style="margin:0;padding:0;background-color:#FFF">
     <center>
-      <table align="center" border="0" cellpadding="0" cellspacing="0" id="bodyTable" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;background-color:#FFF;height:100%;margin:0;width:100%">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" id="bodyTable" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;background-color:#FFF;height:99px;margin:0;width:100%">
         <tbody >
           <tr>
-            <td align="center" id="bodyCell" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-top:50px;padding-left:20px;padding-bottom:20px;padding-right:20px;border-top:0;height:100%;margin:0;width:100%">
+            <td align="center" id="bodyCell" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-top:50px;padding-left:20px;padding-bottom:20px;padding-right:20px;border-top:0;height:99px;margin:0;width:100%">
               <table border="0" cellpadding="0" cellspacing="0" class="templateContainer" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;border:0 solid #FFF;background-color:#FFF">
                 <tbody>
                   <tr>
@@ -51,7 +43,7 @@
                                                 <tr>
                                                   <th valign="top" class="kmTextContent" style="text-align: right;">
                                                     {{-- <img src="./cropped-Final-Logo.png" height="90px" alt="">  --}}
-                                                    <img src="{{ public_path('admin/img/cropped-Final-Logo.png')}}" height="90px" alt=""> 
+                                                    <img src="{{ public_path('admin/img/red-cross.png')}}" height="90px" alt=""> 
                                                   </th>
                                                   <th valign="top" class="kmTextContent">
                                                     <h2 style="line-height: 0; font-size: 31px; margin-top: 20px;">Indian Red Cross Society</h2>
@@ -60,12 +52,12 @@
                                                     <h5 style="line-height: 0; font-size: 25px; margin-top: 25px; color: #FF1414;font-family:Helvetica, Arial;">JUNIOR RED CROSS</h5>
                                                   </th>
                                                   <th valign="top" class="kmTextContent" style="text-align: left;">
-                                                    <img src="{{ public_path('admin/img/cropped-Final-Logo.png')}}" height="90px" alt=""> 
+                                                    <img src="{{ public_path('admin/img/red-cross.png')}}" height="90px" alt=""> 
                                                     {{-- <img src="{{ public_path('storage/signature')}}" height="90px" alt="">  --}}
                                                   </th>
                                                 </tr>
                                               </thead>
-                                              
+             
                                             </table>
                                           </td>
                                         </tr>
@@ -82,7 +74,6 @@
                                                     <p style="text-align: center;font-weight: 600; margin-top: -20px; font-size: 15px; font-family:Helvetica, Arial;">
                                                         #26, Red Cross Bhavan, 1st Floor Race Course Road, Bengaluru - 560001. Ph : 080-2226-4205
                                                     </p>
-                                                   
                                                   </td>
                                                 </tr>
                                               </tbody>
@@ -125,7 +116,7 @@
                                                     <th valign="top" width="100%" class="kmTextContent">
                                                         <p style="text-align: left; padding-left: 20px; font-size: 17px;font-family:Helvetica, Arial;">Received with thanks from 
                                                             <span style="border-bottom: 2px dotted #1d1d1d; font-weight: 400; font-size: 16px; margin-left: 10px; ">
-                                                                {{$name}}
+                                                                {{$name}}, {{ $address}}
                                                             </span> 
                                                             
                                                         </p>
@@ -166,7 +157,7 @@
                                                     <p style="font-size: 23px;">Total Payment : <span style="font-size: 25px; border-bottom: 2px solid #000; ">Rs. {{$total_to_be_paid}}</span></p>
                                                   </th>
                                                   <th valign="top" class="kmTextContent" style="text-align: center">
-                                                    <img src="{{ public_path('admin/img/signature.png') }}" height="50px" alt="" srcset="" style="text-align: center;">
+                                                    <img src="{{ public_path("storage/{$signature}") }}" height="50px" alt="" srcset="" style="text-align: center;">
                                                     <p style="line-height: 0; margin-top: 0px;">General Secretary</p>
                                                   </th>
                                                 </tr>
@@ -199,6 +190,3 @@
   </html>
 
 
-</body>
-
-</html>
