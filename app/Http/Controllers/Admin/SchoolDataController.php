@@ -143,4 +143,19 @@ class SchoolDataController extends Controller
         return back()->with('success', 'Emails sent to the selected schools successfully!');
 
     }
+
+    public function send_mail_in_bulk(Request $request){
+        $schools = json_decode($request->school_ids);
+        $template = EmailTemplate::find($request->email_template);
+        $subject = $template ? $template->subject : 'Notification circular.';
+        $body = $template ? $template->body : 'Please check the website for the lastest notification';
+
+        foreach($schools as $key => $school){
+            $school_data = SchoolData::find($school);
+            $email = $school_data->email;
+            Mail::to($email)->send(new SendNotificationMail($subject, $body));
+        }
+
+        return back()->with('success', 'Emails sent to the selected schools successfully');
+    }
 }

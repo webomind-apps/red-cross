@@ -112,9 +112,9 @@
                                                 
                                                 <thead>
                                                     <th valign="top" width="100%" class="kmTextContent">
-                                                        <p style="text-align: left; padding-left: 20px; font-size: 17px;font-family:Helvetica, Arial;">Received with thanks from The head master
+                                                        <p style="text-align: left; padding-left: 20px; font-size: 17px;font-family:Helvetica, Arial;">Received with thanks from 
                                                             <span style="border-bottom: 2px dotted #1d1d1d; font-weight: 400; font-size: 16px; margin-left: 10px; ">
-                                                                {{$name}}, {{ $address}} 
+                                                              The head master of {{$name}}, {{ $address}} 
                                                             </span> 
                                                             
                                                         </p>
@@ -151,7 +151,7 @@
                                               <thead>
                                                 <tr>
                                                   <th valign="top" class="kmTextContent" style="text-align: left; padding-left:20px">
-                                                    <p style="font-size: 23px;">Total Payment : <span style="font-size: 25px; border-bottom: 2px solid #000; ">Rs. {{$total_to_be_paid}}</span></p>
+                                                    <p style="font-size: 23px;">Total Payment : <span style="font-size: 25px; border-bottom: 2px solid #000; ">Rs. {{$total}}</span></p>
                                                   </th>
                                                   <th valign="top" class="kmTextContent" style="text-align: center">
                                                     <img src="{{ public_path("storage/{$signature}") }}" height="50px" alt="" srcset="" style="text-align: center;">

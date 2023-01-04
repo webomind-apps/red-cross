@@ -37,6 +37,7 @@ class HomeController extends Controller
         // dd($request->all());
         $amount =  $request->amount;
         $email =  $request->email;
+        $address =  $request->address;
         $councellor_email =  $request->councellor_email;
         $school_registration_annual_fee =  $request->school_registration_annual_fee;
         $no_of_students_paid =  $request->no_of_students_paid;

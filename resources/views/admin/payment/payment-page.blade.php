@@ -68,6 +68,7 @@
 <form id='thankYouForm' action={{ route('thank-you') }} method='GET' style="display: none">
     <input type="text" value="{{ $order->amount/100 }}" name="amount">
     <input type="text" value="{{ $order->notes->email }}" name="email">
+    <input type="text" value="{{ $order->notes->address }}" name="address">
     <input type="text" value="{{ $order->notes->school_name }}" name="school_name">
     <input type="text" value="{{ $order->notes->councellor_email }}" name="councellor_email">
     <input type="text" value="{{ $order->notes->school_registration_annual_fee }}" name="school_registration_annual_fee">
