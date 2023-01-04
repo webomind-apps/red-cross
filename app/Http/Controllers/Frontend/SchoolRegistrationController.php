@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\Balance;
+use App\Models\FinancialYear;
 use App\Models\GeneralSecretarySignature;
 use App\Models\SchoolRegistration;
 use App\Models\SchoolRegistrationFee;
@@ -110,7 +111,6 @@ class SchoolRegistrationController extends Controller
                 $school_registration_fee->previous_financial_year = $year;
                 $school_registration_fee->save();
 
-
                 $previous_year = Balance::where('year_id', $year)->where('school_id', $request->id)->first();
 
                 // dd($previous_year);
@@ -128,14 +128,15 @@ class SchoolRegistrationController extends Controller
                     $balance->balance = $request->balance_amount[$key];
                     $balance->paid_amount = $request->paid_amount[$key];
                     $balance->save();
-                }
+                } 
             }
         }
-
 
         $input = $request->all();
 
         $signature = GeneralSecretarySignature::first();
+
+        $current_year_name = FinancialYear::where('status', true)->first();
 
         $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
 
@@ -146,7 +147,7 @@ class SchoolRegistrationController extends Controller
                 'address' => $request->address, 'councellor_email' => $request->councellor_email, 'current_year' => $request->current_year, 
                 'school_registration_annual_fee' =>$request->school_registration_annual_fee, 'no_of_students_paid' => $request->no_of_students_paid,
                 'school_student_memebership_fee' => $request->school_student_memebership_fee , 'convenience_amount' => $request->convenience_amount,
-                'signature' => $signature->signature
+                'signature' => $signature->signature, 'transaction_date' => $request->transaction_date, 'total'=> $request->total
             )
         ));
 
@@ -209,55 +210,19 @@ class SchoolRegistrationController extends Controller
 
     public function payment_success(Request $request)
     {
-        $success = true;
 
-        $error = "Payment Failed";
+        $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
+        $attributes  = array('razorpay_signature'  => $request->razorpay_signature,  'razorpay_payment_id'  => $request->razorpay_payment_id,  'razorpay_order_id' => $request->order_id);
+        $order  = $api->utility->verifyPaymentSignature($attributes);
 
-        if (empty($request->razorpay_payment_id) === false) {
-            $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
+        return response()->json([$request->all(), $order]);
 
-            try {
-                // Please note that the razorpay order ID must
-                // come from a trusted source (session here, but
-                // could be database or something else)
-                $attributes = array(
-                    'razorpay_order_id' => $request->order_id,
-                    'razorpay_payment_id' => $request->razorpay_payment_id,
-                    'razorpay_signature' => $request->razorpay_signature
-                );
-
-                $order = $api->utility->verifyPaymentSignature($attributes);
-            } catch (SignatureVerificationError $e) {
-                $success = false;
-                $error = 'Razorpay Error : ' . $e->getMessage();
-            }
-        }
-
-        if ($success === true) {
-            // $html = "<p>Your payment was successful</p>
-            //  <p>Payment ID: {$request->razorpay_payment_id}</p>";
-            // echo 'hi';
-
-            return response()->json([$request->all(), $order]);
-        } else {
-            $html = "<p>Your payment failed</p>
-             <p>{$error}</p>";
-        }
-
-
-        echo $html;
-
-        // $api = new Api('rzp_test_AEKYB9rRlafhix', 'arkh8l6K6tnLx1ap5Go9w8EU');
-        // $attributes  = array('razorpay_signature'  => $request->razorpay_signature,  'razorpay_payment_id'  => $request->razorpay_payment_id,  'razorpay_order_id' => $request->order_id);
-        // $order  = $api->utility->verifyPaymentSignature($attributes);
-
-        // return response()->json([$request->all(), $order]);
     }
 
     public function invoice()
     {
 
-        return view('admin.invoice.invoice');
+        return view('admin.invoice.school_invoice');
     }
 
 }

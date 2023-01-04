@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminUsersController;
+use App\Http\Controllers\Admin\CircularController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\FinancialYearController;
 use App\Http\Controllers\Admin\GeneralSecretaryController;
@@ -102,12 +103,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('school-data', SchoolDataController::class);
         Route::get('export', [SchoolDataController::class, 'export'])->name('export');
         Route::post('import', [SchoolDataController::class, 'import'])->name('import');
+        Route::post('send-bulk-mail', [SchoolDataController::class, 'send_bulk_mail'])->name('send-bulk-mail');
         Route::resource('school-registration-payment', AdminSchoolRegistrationController::class);
         Route::get('school-registration-export', [AdminSchoolRegistrationController::class, 'export'])->name('school-registration-export');
         Route::get('school-registration-payment/school_id/{id}/year_id/{year}', [AdminSchoolRegistrationController::class, 'show'])->name('school-registration-payment.show');
         Route::resource('jrc-exam-payment-details', JrcExamPaymentController::class);
         Route::resource('admins', AdminUsersController::class);
         Route::resource('general-secretary-signature', GeneralSecretaryController::class);
+        Route::resource('circulars', CircularController::class);
     });
 });
 

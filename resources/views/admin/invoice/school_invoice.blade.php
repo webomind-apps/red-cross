@@ -20,7 +20,7 @@
                   <tr>
                     <td class="templateContainerInner" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0">
                       <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
-                       
+                      
                    
                         <tr style="border: 3px solid #000;">
                           <td align="center" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
@@ -61,7 +61,6 @@
                                             </table>
                                           </td>
                                         </tr>
-                                       
                                       </tbody>
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" >
                                       <tbody class="kmTextBlockOuter">
@@ -96,11 +95,10 @@
                                                       <span style="text-align: center;padding: 0px 5px;color: #FF1414;font-weight: 900; border-radius: 4px; font-size: 22px; margin-left: 40%; border: 1px solid #FF1414;">RECEIPT</span>
                                                     </th>
                                                     <th valign="top" class="kmTextContent" style="text-align: center;">
-                                                        Date : <span style="font-size: 20px; padding-left: 10px; border-bottom: 2px dotted #1d1d1d;">{{date('Y')}}</span>
+                                                        Date : <span style="font-size: 20px; padding-left: 10px; border-bottom: 2px dotted #1d1d1d;"> </span>
                                                     </th>
                                                   </tr>
                                                 </thead>
-                                                
                                               </table>
                                             </td>
                                           </tr>
@@ -114,15 +112,15 @@
                                                 
                                                 <thead>
                                                     <th valign="top" width="100%" class="kmTextContent">
-                                                        <p style="text-align: left; padding-left: 20px; font-size: 17px;font-family:Helvetica, Arial;">Received with thanks from 
+                                                        <p style="text-align: left; padding-left: 20px; font-size: 17px;font-family:Helvetica, Arial;">Received with thanks from The head master
                                                             <span style="border-bottom: 2px dotted #1d1d1d; font-weight: 400; font-size: 16px; margin-left: 10px; ">
-                                                                {{$name}}, {{ $address}}
+                                                                {{$name}}, {{ $address}} 
                                                             </span> 
                                                             
                                                         </p>
                                                         <p style="text-align: left; padding-left: 20px; font-size: 17px;font-family:Helvetica, Arial;">a sum of Rupees 
                                                             <span style="border-bottom: 2px dotted #1d1d1d; font-weight: 400; font-size: 16px; margin-left: 10px; ">
-                                                               Rs. {{$total_to_be_paid}}
+                                                               Rs. {{$total}}
                                                             </span> 
                                                         </p>
                                                         <p style="text-align: left; padding-left: 20px; font-size: 17px;font-family:Helvetica, Arial;">Online Payment towards school registration fees 
@@ -139,8 +137,7 @@
                                                     </th>
                                                 
                                                 </thead>
-                                               
-                                    
+                                      
                                             </table>
                                           </td>
                                         </tr>

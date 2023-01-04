@@ -4,14 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\SchoolRegistrationExport;
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
 use App\Models\Balance;
+use App\Models\EmailTemplate;
 use App\Models\FinancialYear;
+use App\Models\GeneralSecretarySignature;
 use App\Models\SchoolData;
 use App\Models\SchoolRegistration;
 use App\Models\SchoolRegistrationFee;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+use NumberFormatter;
 
 class SchoolRegistrationController extends Controller
 {
@@ -29,6 +35,8 @@ class SchoolRegistrationController extends Controller
         $years = FinancialYear::all();
         $schools = SchoolData::all();
         $districts = SchoolData::distinct()->get(['district']);
+
+       
         
         $current_year = FinancialYear::where('status', true)->first();
 
@@ -90,7 +98,6 @@ class SchoolRegistrationController extends Controller
         if ($school_registration) {
             $school_registration->school_id = $request->id;
             $school_registration->year_id  = $request->current_year;
-            // $school_registration->no_of_students_class_eight = $request->no_of_students_class_eight;
             $school_registration->no_of_students_class_eight = $school_registration->no_of_students_class_eight;
             $school_registration->no_of_students_class_nine = $school_registration->no_of_students_class_nine;
             $school_registration->no_of_students_class_ten = $school_registration->no_of_students_class_ten;
@@ -122,6 +129,8 @@ class SchoolRegistrationController extends Controller
             $school_registration->transaction_date = $request->transaction_date;
             $school_registration->save();
         }
+
+        
 
         // $registration_fee = SchoolRegistration::where('year_id', '=', $request->year)->where('school_id', '=', $request->id)->first();
 
@@ -165,8 +174,27 @@ class SchoolRegistrationController extends Controller
             }
         }
 
+        $signature = GeneralSecretarySignature::first();
 
-        
+        $amountInWords_total_to_be_paid = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($request->total_to_be_paid));
+        $amountInWords_school_registration_annual_fee = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($request->school_registration_annual_fee));
+        $amountInWords_school_student_memebership_fee = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($request->school_student_memebership_fee));
+
+        $html = '';
+        $view = view('admin.invoice.school_invoice', ['name' => $request->school_name, 'address' => $request->address, 'total_to_be_paid' => $amountInWords_total_to_be_paid, 'school_registration_annual_fee' => $amountInWords_school_registration_annual_fee, 'school_student_memebership_fee' => $amountInWords_school_student_memebership_fee, 'signature' => $signature]);
+        $html .= $view->render();
+        $file = Pdf::loadHTML($html);
+
+        $path = public_path('/pdf');
+        $fileName =  $request->amount. '.' . 'pdf' ;
+        $file->save($path . '/' . $fileName);
+
+        $subject = 'Red cross payment';
+        $body = 'Payment successful';
+
+        $emails = [$request->email, $request->councellor_email];
+        Mail::to($emails)->send(new InvoiceMail($subject, $body, $file));
+
         return redirect()->route('admin.school-registration-payment.index');
     }
 

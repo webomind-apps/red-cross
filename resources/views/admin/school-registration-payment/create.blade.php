@@ -161,20 +161,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <div class="input-group">
                                 <input required="" type="number" name="total_fees[]" id="total_fees"
                                     autocomplete="off" class="form-control" placeholder="Total fees to be paid">
                             </div>
                         </div>
 
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <div class="input-group">
                                 <input required="" type="number" name="paid_amount[]" id="paid_amount"
                                     autocomplete="off" class="form-control paid_amount" placeholder="Amount paying now">
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <div class="input-group">
                                 <input required="" type="number" name="balance_amount[]" id="balance_amount"
                                     autocomplete="off" class="form-control" placeholder="Balance to be paid">
@@ -183,23 +183,23 @@
 
                         <input type="number" name="current_year" id="current_year" hidden
                             value="{{ $year ? $year->id : '' }}" autocomplete="off" class="input">
-                    {{-- </div> --}}
+                    </div>
                     <div id="previous"></div>
 
-                    {{-- <div> --}}
-                        <div class="form-group col-md-3">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
                             <label for="inputAddress">Total</label>
                             <input type="text" class="form-control" id="total" name="total"
                                 placeholder="Total">
                         </div>
                         <input type="text" class="form-control" id="convenience" name="convenience"
                             placeholder="Convenience" hidden>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="inputAddress2">Convenience</label>
                             <input type="text" class="form-control" id="convenience_amount" name="convenience_amount"
                                 placeholder="Convenience">
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="inputAddress2">Total to be paid</label>
                             <input type="text" class="form-control" id="total_to_be_paid" name="total_to_be_paid"
                                 placeholder="Total to be paid">
@@ -222,6 +222,7 @@
                             <input type="text" class="form-control" id="payment_method" name="payment_method"
                                 placeholder="Cheque/DD/NEFT No.">
                         </div>
+
                         <div class="form-group col-md-4">
                             <label for="inputAddress">Transaction Date</label>
                             <input type="date" class="form-control" id="transaction_date" name="transaction_date"
@@ -448,24 +449,18 @@
                                     `<h6>Payment ${j+1} - ${previous_paid_amount} paid on ${paid_on}</h6>`;
                             }
 
-                            htm += `</div>
-                                            
-                                            <div class="form-group col-md-2">
-                                               
+                            htm += `</div>                                          
+                                            <div class="form-group col-md-2">                                               
                                                     <label class="user-label">Balance(₹)</label>
                                                     <input type="number" name="total_fees[]"
                                                         id="total_fees-` + i + `" autocomplete="off" class="form-control"
-                                                        value=${balance}>
-                                                   
-                                                
+                                                        value=${balance}>                                                
                                             </div>
                                             <div class="form-group col-md-2">
                                                 
                                                     <label class="user-label">Amount paying now(₹)</label>
                                                     <input  type="number" name="paid_amount[]"
-                                                        id="paid_amount-` + i + `" autocomplete="off"  class="form-control paid_amount">
-                                                    
-                                                
+                                                        id="paid_amount-` + i + `" autocomplete="off"  class="form-control paid_amount">                                               
                                             </div>
                                             <div class="form-group col-md-2">
                                                

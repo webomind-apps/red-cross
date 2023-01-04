@@ -79,14 +79,13 @@
                     </div>
                     
                     <div>
-                        <a href="{{ asset("pdf/$fileName") }}">
+                        <a href="{{ asset("pdf/$fileName") }}" target="_blank">
                             <span>Download Receipt</span>
                         </a>
                     </div>
                     <div class="col-lg-3 mt-5 mx-auto">
                         <a href="{{ route('index') }}" class="btns"><span>Back to registration form</span></a>
                     </div>
-
                 </div>
             </div>
         </div>

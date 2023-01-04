@@ -9,10 +9,9 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class InvoiceMail extends Mailable
+class SendNotificationMail extends Mailable
 {
-
-    public $subject, $body, $file, $file1;
+    public $subject, $body;
     use Queueable, SerializesModels;
 
     /**
@@ -20,12 +19,10 @@ class InvoiceMail extends Mailable
      *
      * @return void
      */
-    public function __construct($subject, $body, $file, $file1)
+    public function __construct($subject, $body)
     {
         $this->subject = $subject;
         $this->body = $body;
-        $this->file = $file;
-        $this->file1 = $file1;
     }
 
     /**
@@ -37,9 +34,6 @@ class InvoiceMail extends Mailable
     {
         return $this
             ->subject($this->subject)
-            ->html($this->body)
-            ->attachData($this->file->output(), 'Receipt.pdf')
-            ->attachData($this->file1->output(), 'Thank-You.pdf')
-            ->withMime('application/pdf');
+            ->html($this->body);
     }
 }

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\SchoolDataExport;
 use App\Http\Controllers\Controller;
 use App\Imports\SchoolDataImport;
+use App\Mail\SendNotificationMail;
+use App\Models\EmailTemplate;
 use App\Models\FinancialYear;
 use App\Models\SchoolData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial;
 
@@ -20,9 +23,11 @@ class SchoolDataController extends Controller
      */
     public function index()
     {
+        $email_templates = EmailTemplate::all();
+
         $current_year = FinancialYear::where('status', true)->first();
         $school_datas = SchoolData::paginate(10);
-        return view('admin.school-data.index', compact('school_datas', 'current_year'));
+        return view('admin.school-data.index', compact('school_datas', 'current_year', 'email_templates'));
     }
 
 
@@ -105,9 +110,7 @@ class SchoolDataController extends Controller
     public function destroy($id)
     {
         $school_data = SchoolData::find($id);
-
         $school_data->delete();
-
         return redirect()->route('admin.school-data.index');
     }
 
@@ -119,9 +122,25 @@ class SchoolDataController extends Controller
 
     public function import()
     {
-       
-       $import = Excel::import(new SchoolDataImport, request()->file('file')->store('files'));
-       
-       return back();
+        $import = Excel::import(new SchoolDataImport, request()->file('file')->store('files'));
+        return back()->with('success', 'Excel imported successfully!');
+    }
+
+    public function send_bulk_mail(Request $request)
+    {
+        $schools = json_decode($request->school_ids);
+        $template = EmailTemplate::find($request->email_template);
+        $subject = $template ? $template->subject : 'Notification circular.';
+        $body = $template ? $template->body : 'Please check the website for the latest notification';
+
+        foreach($schools as $key => $school)
+        { 
+            $school_data = SchoolData::find($school);
+            $email = $school_data->email;
+            Mail::to($email)->send(new SendNotificationMail($subject, $body));
+        }
+
+        return back()->with('success', 'Emails sent to the selected schools successfully!');
+
     }
 }

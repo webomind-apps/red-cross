@@ -75,6 +75,8 @@
     <input type="text" value="{{ $order->notes->school_student_memebership_fee }}" name="school_student_memebership_fee">
     <input type="text" value="{{ $order->notes->convenience_amount }}" name="convenience_amount">
     <input type="text" value="{{ $order->notes->signature }}" name="signature">
+    <input type="text" value="{{ $order->notes->transaction_date }}" name="transaction_date">
+    <input type="text" value="{{ $order->notes->total }}" name="total">
     <input type='submit' id='thankYouForm'>
     {{-- <button>Send</button> --}}
 </form>

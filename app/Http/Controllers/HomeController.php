@@ -44,13 +44,16 @@ class HomeController extends Controller
         $convenience_amount =  $request->convenience_amount;
         $current_year =  $request->current_year;
         $signature = $request->signature;
+        $transaction_date = $request->transaction_date;
+        $total = $request->total;
 
         $amountInWords_total_to_be_paid = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($amount));
+        $amountInWords_total = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($total));
         $amountInWords_school_registration_annual_fee = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($request->school_registration_annual_fee));
         $amountInWords_school_student_memebership_fee = ucwords((new NumberFormatter('en_IN', NumberFormatter::SPELLOUT))->format($request->school_student_memebership_fee));
 
         $html = '';
-        $view = view('admin.invoice.school_invoice', ['name' => $request->school_name, 'address' => $request->address, 'total_to_be_paid' => $amountInWords_total_to_be_paid, 'school_registration_annual_fee' => $amountInWords_school_registration_annual_fee, 'school_student_memebership_fee' => $amountInWords_school_student_memebership_fee, 'signature' => $signature]);
+        $view = view('admin.invoice.school_invoice', ['name' => $request->school_name, 'address' => $request->address, 'total_to_be_paid' => $amountInWords_total_to_be_paid, 'school_registration_annual_fee' => $amountInWords_school_registration_annual_fee, 'school_student_memebership_fee' => $amountInWords_school_student_memebership_fee, 'signature' => $signature, 'transaction_date' => $transaction_date, 'total'=> $amountInWords_total]);
         $html .= $view->render();
         $file = Pdf::loadHTML($html);
 
@@ -58,14 +61,23 @@ class HomeController extends Controller
         $fileName =  $request->amount. '.' . 'pdf' ;
         $file->save($path . '/' . $fileName);
 
+        $html1 = '';
+        $view1 = view('admin.thank-you-page.school-registration-thank-you', ['name' => $request->school_name, 'address' => $request->address, 'total_to_be_paid' => $amountInWords_total_to_be_paid, 'school_registration_annual_fee' => $amountInWords_school_registration_annual_fee, 'school_student_memebership_fee' => $amountInWords_school_student_memebership_fee, 'signature' => $signature, 'transaction_date' => $transaction_date, 'total'=> $amountInWords_total]);
+        $html1 .= $view1->render();
+        $file1 = Pdf::loadHTML($html1);
+
+        $path1 = public_path('/thank-you-pdf');
+        $fileName1 =  $request->amount. '.' . 'pdf' ;
+        $file1->save($path1 . '/' . $fileName1);
+
         $subject = 'Red cross payment';
         $body = 'Payment successful';
 
         $emails = [$request->email, $request->councellor_email];
-        Mail::to($emails)->send(new InvoiceMail($subject, $body, $file));
+        Mail::to($emails)->send(new InvoiceMail($subject, $body, $file, $file1));
 
 
-        return view('frontend.thank-you-page', compact('amount', 'email', 'councellor_email', 'current_year','school_registration_annual_fee','no_of_students_paid','school_student_memebership_fee','convenience_amount','fileName'));
+        return view('frontend.thank-you-page', compact('amount', 'email', 'councellor_email', 'current_year','school_registration_annual_fee','no_of_students_paid','school_student_memebership_fee','convenience_amount','fileName','total'));
     }
 
     public function data(Request $request)
@@ -79,6 +91,8 @@ class HomeController extends Controller
         $data = MasterPrice::first();
         return response()->json($data);
     }
+
+   
     public function year(Request $request)
     {
 

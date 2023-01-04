@@ -31,7 +31,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="https://redcrosskarnataka.org/">
         <div class="sidebar-brand-icon">
             <img src="{{asset('admin/img/redcrosslogo.png')}}" alt="" height="50px">
         </div>
@@ -139,8 +139,13 @@
     </li>
     <li class="nav-item {{ request()->segment(2) == 'general-secretary-signature' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.general-secretary-signature.index') }}">
-            <i class="fas fa-calendar"></i>
+            <i class="fas fa-signature"></i>
             <span>General Secretary Signature</span></a>
+    </li>
+    <li class="nav-item {{ request()->segment(2) == 'circulars' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.circulars.index') }}">
+            <i class="fas fa-file"></i>
+            <span>Circular Document</span></a>
     </li>
 
 
