@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\FinancialYear;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FinancialYearController extends Controller
 {
@@ -15,8 +16,9 @@ class FinancialYearController extends Controller
      */
     public function index()
     {
+        $current_year = FinancialYear::where('status', 1)->first();
         $financial_years = FinancialYear::paginate(10);
-        return view('admin.financial-year.index', compact('financial_years'));
+        return view('admin.financial-year.index', compact('financial_years','current_year'));
     }
 
     /**
@@ -44,6 +46,8 @@ class FinancialYearController extends Controller
             'status' => 'required'
         ]);
         
+        FinancialYear::where('status', 1)->update(['status'=> 0]);
+
         $financial_year = new FinancialYear();
         $financial_year->name = $request->name;
         $financial_year->from_date = $request->from_date;
@@ -87,6 +91,10 @@ class FinancialYearController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // DB::table('financial_years')->where('status',1)->update(['status' => 0]);
+        FinancialYear::where('status', 1)->update(['status'=> 0]);
+
         $financial_year = FinancialYear::find($id);
         $financial_year->name = $request->name;
         $financial_year->from_date = $request->from_date;

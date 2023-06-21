@@ -7,12 +7,12 @@
         <!-- Page Heading -->
         <div class="head-name d-flex justify-content-between ">
             <div>
-                <h6>School data list</h6>
-                <p>{{ date('Y') - 1 }} - {{ date('Y') }}</p>
+                <h6>Financial years</h6>
+                <p>{{ $current_year ? $current_year->name : '' }}</p>
             </div>
             <div class="d-flex">
 
-                <div class="p-1">
+                {{-- <div class="p-1">
                     <a href="{{ route('admin.export') }}" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Export</a>
                 </div>
@@ -20,14 +20,14 @@
                     <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="import_modal"><i
                             class="fas fa-upload fa-sm text-white-50"></i> Upload</a>
 
-                    {{-- <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="form-control">
                         <br>
                         <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                           class="fas fa-upload fa-sm text-white-50">Import User Data</button>
-                    </form> --}}
-                </div>
+                    </form>
+                </div> --}}
             </div>
         </div>
 
@@ -52,7 +52,7 @@
                         <thead>
                             <tr>
                                 <th>Sl No.</th>
-                                <th>Name</th>
+                                <th>Display format</th>
                                 <th>From(year)</th>
                                 <th>To(Year)</th>
                                 <th>Status</th>

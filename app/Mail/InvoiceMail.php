@@ -11,6 +11,8 @@ use Illuminate\Queue\SerializesModels;
 
 class InvoiceMail extends Mailable
 {
+
+    public $subject, $body, $file, $file1;
     use Queueable, SerializesModels;
 
     /**
@@ -18,9 +20,12 @@ class InvoiceMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($subject, $body, $file, $file1)
     {
-        //
+        $this->subject = $subject;
+        $this->body = $body;
+        $this->file = $file;
+        $this->file1 = $file1;
     }
 
     /**
@@ -28,32 +33,13 @@ class InvoiceMail extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
+    public function build()
     {
-        return new Envelope(
-            subject: 'Invoice Mail',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
-    public function content()
-    {
-        return new Content(
-            view: 'mails.invoice',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
+        return $this
+            ->subject($this->subject)
+            ->html($this->body)
+            ->attachData($this->file->output(), 'Receipt.pdf')
+            ->attachData($this->file1->output(), 'Thank-You.pdf')
+            ->withMime('application/pdf');
     }
 }

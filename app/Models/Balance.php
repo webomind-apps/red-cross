@@ -13,4 +13,8 @@ class Balance extends Model
     {
         return $this->belongsTo(SchoolData::class);
     }
+
+    public function financial_year(){
+        return $this->belongsTo(FinancialYear::class,'year_id');
+    }
 }

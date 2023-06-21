@@ -19,23 +19,23 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                            <label for="name">Display format<span style="color: red">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required
                                 >
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="from date">From Date</label>
+                            <label for="from date">From Date<span style="color: red">*</span></label>
                             <input type="date" class="form-control" id="from_date" name="from_date"
-                                placeholder="From date" >
+                                placeholder="From date" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="to date">To Date</label>
-                            <input type="date" class="form-control" id="to_date" name="to_date" placeholder="To Date"
+                            <label for="to date">To Date<span style="color: red">*</span></label>
+                            <input type="date" class="form-control" id="to_date" name="to_date" placeholder="To Date" required
                                 >
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="status">Status</label>
-                            <select class="form-control" id="status" name="status">
+                            <label for="status">Status<span style="color: red">*</span></label>
+                            <select class="form-control" id="status" name="status" required>
                                 <option value="">
                                      --Select--
                                 </option>

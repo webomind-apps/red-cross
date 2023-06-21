@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::table('school_registrations', function (Blueprint $table) {
            
-            $table->dropColumn('total_fees');
-            $table->dropColumn('paid_amount');
-            $table->dropColumn('balance_amount');
-            $table->dropColumn('total');
-            $table->dropColumn('convenience');
-            $table->dropColumn('total_to_be_paid');
+            //$table->dropColumn('total_fees');
+            //$table->dropColumn('paid_amount');
+            //$table->dropColumn('balance_amount');
+           //$table->dropColumn('total');
+            //$table->dropColumn('convenience');
+            //$table->dropColumn('total_to_be_paid');
         });
     }
 

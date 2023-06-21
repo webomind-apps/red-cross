@@ -23,12 +23,18 @@
             padding: 30px 0;
             color: green;
         }
-        .main-content__body{
+
+        .main-content__body {
             font-size: 18px;
         }
-        span{
+
+        span {
             color: #FF1414;
             font-weight: 500;
+        }
+
+        .navbar-brand img {
+            height: 55px;
         }
     </style>
 </head>
@@ -38,7 +44,8 @@
     <nav class="navbar navbar-expand-lg sticky-top bg-light px-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="./img/cropped-Final-Logo.png" class="img-fluid" alt="logo" srcset="">
+                {{-- <img src="./img/cropped-Final-Logo.png" class="img-fluid" alt="logo" srcset=""> --}}
+                <img src="{{ asset('admin/img/cropped-Final-Logo.png')}}" class="img-fluid" alt="logo" srcset="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -46,36 +53,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto b-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#flow-reactor">Flow-Reactor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Benifits">Benifits</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#solutions">Solutions</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Specifications"> Technical Specifications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Faq">Faq</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btns" href="#Contact"><span>Registration</span></a>
-                    </li>
-                </ul>
+        
             </div>
         </div>
     </nav>
 
 
-
+    {{-- {{ dd($email) }} --}}
 
     <section class="py-5">
         <div class="container">
@@ -89,18 +73,32 @@
                         <i class="fa fa-check"></i>
                         <p class="main-content__body">
                             Thank you,
-                            You have successfully paid amount of <b>XXX</b> for the year <b>XXXX</b>. <br><br>
-                            The invoice has been mail to <span>xxx@gmail.com</span>. <br>
-                            In case of any clarifications you can reach to <span>jrc@gmail.com</span> and also call us on <span>080-22268435</span>.   
+                            You have successfully paid <b>school registration fees Rs.{{ $school_registration_annual_fee }}</b> + <b>student membership fees Rs.{{ $school_student_memebership_fee }} for {{ $no_of_students_paid }} students</b> + <b>convenience fees of Rs.{{ $convenience_amount }}</b> as total amount of <b>Rs.{{ $amount }}</b> for the year
+                            <b>{{ date('Y') }}</b>. <br><br>
+                            The receipt has been mailed to <span>{{ $email }} <span> and </span> {{ $councellor_email }}</span>.
+                            <br>
+                            In case of any clarifications you can reach to <span>jrckar@gmail.com</span> and also call us
+                            on <span>080-22268435</span>.   
                         </p>
                     </div>
+                    
+                    <div>
+                        <a href="{{ asset("pdf/$fileName") }}" target="_blank">
+                            <span>Download Receipt</span>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{ asset("thank-you-pdf/$fileName1") }}" target="_blank">
+                            <span>Download thank you receipt</span>
+                        </a>
+                    </div>
                     <div class="col-lg-3 mt-5 mx-auto">
-                        <a href="{{ url()->previous() }}" class="btns"><span>Back to home</span></a>
+                        <a href="{{ route('index') }}" class="btns"><span>Back to registration form</span></a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 </body>
+
 </html>

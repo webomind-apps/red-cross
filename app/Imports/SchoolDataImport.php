@@ -3,30 +3,54 @@
 namespace App\Imports;
 
 use App\Models\SchoolData;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class SchoolDataImport implements ToModel
+class SchoolDataImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
     /**
      * @param array $row
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function model(array $row)
+
+
+
+    public function collection(Collection $rows)
     {
-        // dd($row);
-        return new SchoolData([
-            'dise_code' => $row['0'],
-            'school_name' => $row['1'],
-            'district' => $row['2'],
-            'taluk' => $row['3'],
-            'pin_code' => $row['4'],
-            'address' => $row['5'],
-            'email' => $row['6'],
-            'phone_number' => $row['7'],
-            'councellor_name' => $row['8'],
-            'councellor_phone' => $row['9'],
-            'councellor_email' => $row['10']
-        ]);
+        foreach ($rows as $row) {
+
+            // Validator::make($rows->toArray(), [
+            //     '*.0' => 'required',
+            // ])->validate();
+
+            if ($row->filter()->isNotEmpty()) {
+                SchoolData::updateOrCreate([
+                    'dise_code' => $row['dise_code'],
+                    'school_name' => $row['school_name'],
+                    'district' => $row['district'],
+                    'taluk' => $row['taluk'],
+                    'pin_code' => $row['pin_code'],
+                    'address' => $row['address'],
+                    'email' => $row['email'],
+                    'phone_number' => $row['phone_number'],
+                    // 'councellor_name' => $row['councellor_name'],
+                    // 'councellor_phone' => $row['councellor_phone'],
+                    // 'councellor_email' => $row['councellor_email']
+                ]);
+            }
+        }
+    }
+
+    public function chunkSize(): int
+    {
+        return 1000;
     }
 }
+
+
+

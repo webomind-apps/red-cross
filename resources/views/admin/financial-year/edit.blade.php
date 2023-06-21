@@ -20,22 +20,22 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="name">Name</label>
+                            <label for="name">Display format<span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Name"
                                 value="{{  $financial_year->name  }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="from date">From Date</label>
+                            <label for="from date">From Date<span style="color: red">*</span></label>
                             <input type="date" class="form-control" id="from_date" name="from_date"
                                 placeholder="From date" value="{{  $financial_year->from_date }}">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="to date">To Date</label>
+                            <label for="to date">To Date<span style="color: red">*</span></label>
                             <input type="date" class="form-control" id="to_date" name="to_date" placeholder="To Date"
                                 value="{{  $financial_year->to_date  }}">
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="status">Status</label>
+                            <label for="status">Status<span style="color: red">*</span></label>
                             <select class="form-control" id="status" name="status">
                                 <option value="{{ $financial_year ? ($financial_year->status ? '1' : '0') : '' }}">
                                     {{ $financial_year ? ($financial_year->status ? 'Active' : 'Inactive') : '--Select--' }}

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailTemplate;
+use Egulias\EmailValidator\Warning\EmailTooLong;
 use Illuminate\Http\Request;
 
 class EmailTemplateController extends Controller
@@ -14,8 +16,8 @@ class EmailTemplateController extends Controller
      */
     public function index()
     {
-       return view('admin.email-templates.index');
-
+        $email_templates = EmailTemplate::paginate(10);
+        return view('admin.email-templates.index', compact('email_templates'));
     }
 
     /**
@@ -25,7 +27,7 @@ class EmailTemplateController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.email-templates.create');
     }
 
     /**
@@ -36,7 +38,14 @@ class EmailTemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $email_template = new EmailTemplate();
+        $email_template->title = $request->name;
+        $email_template->subject = $request->subject;
+        $email_template->body = $request->email_body;
+        // $email_template->emails_to =    $request->emails_to;
+        $email_template->save();
+
+        return redirect()->route('admin.email-templates.index');
     }
 
     /**
@@ -58,7 +67,8 @@ class EmailTemplateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $email_template = EmailTemplate::find($id);
+        return view('admin.email-templates.edit', compact('email_template'));
     }
 
     /**
@@ -70,8 +80,16 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $email_template = EmailTemplate::find($id);
+        $email_template->title = $request->name;
+        $email_template->subject = $request->subject;
+        $email_template->body = $request->email_body;
+        // $email_template->emails_to = $request->emails_to;
+        $email_template->save();
+
+        return redirect()->route('admin.email-templates.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -81,6 +99,10 @@ class EmailTemplateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $email_template = EmailTemplate::find($id);
+
+        $email_template->delete();
+
+        return redirect()->route('admin.email-templates.index');
     }
 }

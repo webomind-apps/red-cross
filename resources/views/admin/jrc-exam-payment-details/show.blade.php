@@ -13,66 +13,69 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Dise No</label>
-                        <input type="text" class="form-control" id="dise_code"
-                            value="{{ $jrc_examination_payment->dise_code }}" readonly>
+                        <input type="text" class="form-control" id="dise_code" value="{{ $data->dise_code }}" readonly>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">School Name</label>
-                        <input type="text" class="form-control" id="school_name"
-                            value="{{ $jrc_examination_payment->school_name }}" readonly>
-                    </div>
+
+                    @if ($data->school_name)
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">School Name</label>
+                            <input type="text" class="form-control" id="school_name" value="{{ $data->school_name }}"
+                                readonly>
+                        </div>
+                    @elseif($data->college_name)
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">School Name</label>
+                            <input type="text" class="form-control" id="school_name" value="{{ $data->college_name }}"
+                                readonly>
+                        </div>
+                    @endif
 
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputAddress">District</label>
-                        <input type="text" class="form-control" id="district"
-                            value="{{ $jrc_examination_payment->district }}" readonly>
+                        <input type="text" class="form-control" id="district" value="{{ $data->district }}" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputAddress2">Taluk</label>
-                        <input type="text" class="form-control" id="taluk"
-                            value="{{ $jrc_examination_payment->taluk }}" readonly>
+                        <input type="text" class="form-control" id="taluk" value="{{ $data->taluk }}" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputAddress">Pin Code</label>
-                        <input type="text" class="form-control" id="pin_code"
-                            value="{{ $jrc_examination_payment->pin_code }}" readonly>
+                        <input type="text" class="form-control" id="pin_code" value="{{ $data->pin_code }}" readonly>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="address"
-                            value="{{ $jrc_examination_payment->address }}" readonly>
+                        <input type="text" class="form-control" id="address" value="{{ $data->address }}" readonly>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAddress">Mail Id</label>
-                        <input type="text" class="form-control" id="email"
-                            value="{{ $jrc_examination_payment->email }}" readonly>
+                        <input type="text" class="form-control" id="email" value="{{ $data->email }}" readonly>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress2">Phone No</label>
-                        <input type="text" class="form-control" id="phone_number"
-                            value="{{ $jrc_examination_payment->phone_number }}" readonly>
+                        <input type="text" class="form-control" id="phone_number" value="{{ $data->phone_number }}"
+                            readonly>
                     </div>
                 </div>
                 <label for="inputAddress2">JRC councellor details</label>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputAddress">Name</label>
-                        <input type="text" class="form-control" id="councellor_name"
-                            value="{{ $jrc_examination_payment->councellor_name }}" readonly>
+                        <input type="text" class="form-control" id="councellor_name" value="{{ $data->councellor_name }}"
+                            readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputAddress2">Phone No</label>
                         <input type="text" class="form-control" id="councellor_phone"
-                            value="{{ $jrc_examination_payment->councellor_phone }}" readonly>
+                            value="{{ $data->councellor_phone }}" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputAddress2">Email</label>
                         <input type="text" class="form-control" id="councellor_email"
-                            value="{{ $jrc_examination_payment->councellor_email }}" readonly>
+                            value="{{ $data->councellor_email }}" readonly>
                     </div>
                 </div>
                 <label for="inputAddress2">Number of students</label>
@@ -136,6 +139,9 @@
                             <input type="text" class="form-control" id="payment_method" value="Cheque" readonly>
                         @elseif($jrc_examination_payment->mode_of_payment == 3)
                             <input type="text" class="form-control" id="payment_method" value="NEFT" readonly>
+                        @else
+                            <input type="text" class="form-control" id="payment_method" value="Online Payment"
+                                readonly>
                         @endif
                     </div>
                     <div class="form-group col-md-4">

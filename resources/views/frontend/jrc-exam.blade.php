@@ -157,71 +157,41 @@
         }
 
         .input-group {
-            position: relative;
-            margin: 15px 0;
+            margin-bottom: 15px;
         }
 
-        input {
+        .input-group input {
             width: 100%;
-            border: solid 1.5px #9e9e9e;
-            background: none;
-            padding: 10px;
-            font-size: 14px;
-            transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            height: 40px;
+            border-radius: 5px !important;
+            border: 1px solid #bdbcbc;
+            outline: none;
+            padding-left: 15px;
         }
 
-        select {
+        .input-group select {
             width: 100%;
-            border: none;
+            height: 40px;
+            border-radius: 5px !important;
+            border: 1px solid #bdbcbc;
             outline: none;
-            border: solid 1.5px #9e9e9e;
-            background: none;
-            padding: 10px;
-            padding-right: 20px !important;
-            font-size: 14px;
-            transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            padding-left: 15px;
         }
 
-        textarea {
+        .input-group textarea {
             width: 100%;
-            border: none;
+            height: 40px;
+            border-radius: 5px !important;
+            border: 1px solid #bdbcbc;
             outline: none;
-            border: solid 1.5px #9e9e9e;
-            background: none;
-            padding: 10px;
-            padding-right: 20px !important;
-            font-size: 14px;
-            transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            padding-left: 15px;
         }
 
-        input[type=checkbox] {
-            text-align: left;
+        .input-group label {
+            padding-bottom: 6px;
+            font-size: 15px;
+            color: #949292;
         }
-
-        .user-label {
-            position: absolute;
-            left: 15px;
-            color: #3a3939;
-            pointer-events: none;
-            transform: translateY(.7rem);
-            transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .input:focus,
-        input:valid {
-            outline: none;
-            border: 1.5px solid #FF1414;
-        }
-
-        .input:focus~label,
-        input:valid~label {
-            transform: translateY(-55%) scale(0.8);
-            background-color: #fff;
-            padding: 0 .2em;
-            color: #FF1414;
-            font-size: 20px;
-        }
-
 
         @media (max-width: 768px) {
             .btns span {
@@ -250,6 +220,35 @@
             width: 25px;
             height: 25px;
         }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+
+        .circular-btn {
+            padding: 5px 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            background: transparent;
+            border: 1px solid #FF1414;
+            font-family: "Montserrat", sans-serif;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.3s ease 0s;
+        }
+
+        .circular-btn:hover {
+            background-color: red;
+            color: #fff !important;
+            transition: all 0.3s ease 0s;
+        }
     </style>
 
 </head>
@@ -257,8 +256,9 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top bg-light px-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="./img/cropped-Final-Logo.png" class="img-fluid" alt="logo" srcset="">
+            <a class="navbar-brand" href="https://redcrosskarnataka.org/">
+                <img src="{{ asset('admin/img/cropped-Final-Logo.png') }}" class="img-fluid" alt="logo"
+                    srcset="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -268,37 +268,34 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto b-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home">Home</a>
+                        <a href="{{ route('application_guide') }}"><button class="circular-btn"
+                                style="color: #000; position: relative; padding: 0px 20px">
+                                Application Guide
+                            </button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#flow-reactor">Flow-Reactor</a>
+                        <a href="{{ route('circulars') }}"><button class="circular-btn"
+                                style="color: #000; position: relative; padding: 0px 20px">
+                                Circulars
+                            </button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Benifits">Benifits</a>
+                        <a href="{{ route('index') }}"><button class="circular-btn"
+                                style="color: #000; position: relative; padding: 0px 20px">
+                                School Registration
+                            </button></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#solutions">Solutions</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Specifications"> Technical Specifications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Faq">Faq</a>
+                        <a href="{{ route('college-registration-form') }}"><button class="circular-btn"
+                                style="color: #000; position: relative; padding: 0px 20px">
+                                PU College Registration
+                            </button></a>
                     </li>
                     <li class="nav-item">
-                        <!-- <img src="./new-icon-gif-2.jpg" height="30px" class="position:absolute; left:40px"> -->
-                        <img src="./new-icon-gif-2.jpg" height="30px" alt=""
-                            style="position: absolute; top:0;right:13px ">
-                        <select class="btns" style="color: #000; position: relative;"
-                            onChange="window.location.href=this.value">
-                            <option value="">Select Registration</option>
-                            <option value="{{ route('index') }}">School
-                                Registration</option>
-                            <option value="#">PU Registration</option>
-                            <option value="{{ route('jrc-exam-form') }}">JRC
-                                Examination/Program</option>
-                        </select>
+                        <a href="{{ route('jrc-exam-form') }}"><button class="circular-btn"
+                                style="color: #000; position: relative; padding: 0px 20px">
+                                JRC Examination/Program
+                            </button></a>
                     </li>
                 </ul>
             </div>
@@ -312,7 +309,7 @@
 
                 <div class="col-lg-11 mb-3 mx-auto">
                     <h1 class="header-underline text-uppercase">JRC Examination/Program <span
-                            class="fs-6 text-capitalize">( Academic 2022 - 2023 )</span> </h1>
+                            class="fs-6 text-capitalize">( Academic {{ $year ? $year->name : '' }} )</span> </h1>
 
                 </div>
             </div>
@@ -322,92 +319,113 @@
                         <form action="{{ route('jrc-examination-payment.store') }}" method="POST">
                             @csrf
                             <div class="row">
-
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Dise code/School code</label>
                                         <input required="" type="text" name="dise_code" id="dise_code"
                                             autocomplete="off" class="input">
-                                        <label class="user-label">Dise code/School code</label>
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12">
                                     <div class="row">
+                                        <input type="text" name="school_id" id="school_id" autocomplete="off"
+                                            class="input" hidden>
+                                        <input type="text" name="college_id" id="college_id" autocomplete="off"
+                                            class="input" hidden>
+                                        <input type="text" name="year_id" id="year_id" autocomplete="off"
+                                            class="input" hidden value="{{ $year->id }}">
+
                                         <div class="col-lg-3">
                                             <div class="input-group">
-                                                <input required="" type="text" name="school_name" id="school_name"
-                                                    autocomplete="off" class="input">
                                                 <label class="user-label">School Name</label>
+                                                <input required="" type="text" name="school_name" id="name"
+                                                    autocomplete="off" class="input">
+
                                             </div>
                                         </div>
+
+                                        <input name="current_year" hidden id="current_year"
+                                            value={{ $year ? $year->id : '' }}>
+
                                         <div class="col-lg-3">
                                             <div class="input-group">
+                                                <label class="user-label">District</label>
                                                 <input required="" type="text" name="district" id="district"
                                                     autocomplete="off" class="input">
-                                                <label class="user-label">District</label>
+
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
+                                                <label class="user-label">Taluk</label>
                                                 <input required="" type="text" name="taluk" id="taluk"
                                                     autocomplete="off" class="input">
-                                                <label class="user-label">Taluk</label>
+
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
+                                                <label class="user-label">Pincode</label>
                                                 <input required="" type="number" name="pin_code" id="pin_code"
                                                     autocomplete="off" class="input">
-                                                <label class="user-label">Pincode</label>
+
                                             </div>
                                         </div>
 
                                         <div class="col-lg-6">
                                             <div class="input-group">
+                                                <label class="user-label">Phone Number</label>
                                                 <input required="" type="number" name="phone_number"
                                                     id="phone_number" autocomplete="off" class="input">
-                                                <label class="user-label">Phone Number</label>
+
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="input-group">
+                                                <label class="user-label">Email</label>
                                                 <input required="" type="email" name="email" id="email"
                                                     autocomplete="off" class="input">
-                                                <label class="user-label">Email</label>
+
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="input-group">
+                                                <label class="user-label">Address</label>
                                                 <input required="" type="text" name="address" id="address"
                                                     autocomplete="off" class="input">
-                                                <label class="user-label">Address</label>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 mt-1">
-                                    <label class="fs-5">Jrc councellor details </label>
+                                    <label class="fs-5">JRC counselor details </label>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Name</label>
                                         <input required="" type="text" name="councellor_name"
                                             id="councellor_name" autocomplete="off" class="input">
-                                        <label class="user-label">Name</label>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Email</label>
                                         <input required="" type="email" name="councellor_email"
                                             id="councellor_email" autocomplete="off" class="input">
-                                        <label class="user-label">Email</label>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Phone number</label>
                                         <input required="" type="number" name="councellor_phone"
                                             id="councellor_phone" autocomplete="off" class="input">
-                                        <label class="user-label">Phone number</label>
+
                                     </div>
                                 </div>
 
@@ -417,72 +435,94 @@
 
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Total number students</label>
                                         <input required="" type="number" name="total_no_of_students"
                                             id="total_no_of_students" autocomplete="off" class="input">
-                                        <label class="user-label">Total number students</label>
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Student jrc examination fee per student(₹)</label>
                                         <input required="" type="number" name="jrc_examination_fee"
                                             id="jrc_examination_fee" autocomplete="off" class="input">
-                                        <label class="user-label">Student jrc examination fee (per student)</label>
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total(₹)</label>
                                         <input required="" type="number" id="total_fee_amount"
                                             name="total_fee_amount" autocomplete="off" class="input">
-                                        <label class="user-label">Total</label>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Total number students willing to buy book</label>
                                         <input required="" type="number" name="no_of_students_buying_book"
                                             id="no_of_students_buying_book" autocomplete="off" class="input">
-                                        <label class="user-label">Total number students willing to buy book</label>
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="input-group">
+                                        <label class="user-label">Book fee per student(₹)</label>
                                         <input required="" type="number" name="book_fee" id="book_fee"
                                             autocomplete="off" class="input">
-                                        <label class="user-label">Book fee (per student)</label>
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total(₹)</label>
                                         <input required="" type="number" name="total_book_fee"
                                             id="total_book_fee" autocomplete="off" class="input">
-                                        <label class="user-label">Total</label>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total(₹)</label>
                                         <input required="" type="number" name="total" id="total"
                                             autocomplete="off" class="input">
-                                        <label class="user-label">Total</label>
+
                                     </div>
                                 </div>
+
+                                <input required="" type="number" step="any" name="convenience"
+                                    id="convenience" autocomplete="off" class="input" hidden>
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
-                                        <input required="" type="number" name="convenience" id="convenience"
-                                            autocomplete="off" class="input">
-                                        <label class="user-label">Convenience</label>
+                                        <label class="user-label">Convenience(₹)</label>
+                                        <input required="" type="number" name="convenience_amount"
+                                            id="convenience_amount" step="any" autocomplete="off"
+                                            class="input">
+
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 ">
                                     <div class="input-group">
+                                        <label class="user-label">Total to be paid(₹)</label>
                                         <input required="" type="number" name="total_to_be_paid"
-                                            id="total_to_be_paid" autocomplete="off" class="input">
-                                        <label class="user-label">Total to be paid</label>
+                                            id="total_to_be_paid" autocomplete="off" class="input" step="any">
+
                                     </div>
                                 </div>
+
+                                <input type="number" name="mode_of_payment" id="mode_of_payment" class="input"
+                                    value="online payment" hidden>
+                                {{-- 
+                                <input type="number" name="payment_method" id="payment_method" class="input"
+                                    value="online payment" hidden> --}}
+
+                                <input type="text" name="transaction_date" id="transaction_date" class="input"
+                                    value={{ date('d-m-Y') }} hidden>
 
                                 <div class="col-lg-12">
                                     <div class="row">
@@ -492,6 +532,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                         </form>
                     </div>
                 </div>
@@ -507,7 +549,7 @@
 
             $('#dise_code').on('change', function() {
                 let dise = $('#dise_code').val();
-                var url = "{{ url('data') }}";
+                var url = "{{ url('jrc-data') }}";
                 $.ajax({
                     type: "GET",
                     url: url,
@@ -516,17 +558,33 @@
                     },
                     dataType: "json",
                     success: function(answer) {
-                        // console.log(answer);
-                        $('#school_name').val(answer['school_name']);
-                        $('#district').val(answer['district']);
-                        $('#taluk').val(answer['taluk']);
-                        $('#pin_code').val(answer['pin_code']);
-                        $('#phone_number').val(answer['phone_number']);
-                        $('#email').val(answer['email']);
-                        $('#address').val(answer['address']);
-                        $('#councellor_name').val(answer['councellor_name']);
-                        $('#councellor_email').val(answer['councellor_email']);
-                        $('#councellor_phone').val(answer['councellor_phone']);
+                        console.log(answer.schoolData);
+                        if (answer.schoolData) {
+                            $('#school_id').val(answer.schoolData['id']);
+                            $('#name').val(answer.schoolData['school_name']);
+                            $('#district').val(answer.schoolData['district']);
+                            $('#taluk').val(answer.schoolData['taluk']);
+                            $('#pin_code').val(answer.schoolData['pin_code']);
+                            $('#phone_number').val(answer.schoolData['phone_number']);
+                            $('#email').val(answer.schoolData['email']);
+                            $('#address').val(answer.schoolData['address']);
+                            $('#councellor_name').val(answer.schoolData['councellor_name']);
+                            $('#councellor_email').val(answer.schoolData['councellor_email']);
+                            $('#councellor_phone').val(answer.schoolData['councellor_phone']);
+                        } else if (answer.collegeData) {
+                            $('#college_id').val(answer.collegeData['id']);
+                            $('#name').val(answer.collegeData['college_name']);
+                            $('#district').val(answer.collegeData['district']);
+                            $('#taluk').val(answer.collegeData['taluk']);
+                            $('#pin_code').val(answer.collegeData['pin_code']);
+                            $('#phone_number').val(answer.collegeData['phone_number']);
+                            $('#email').val(answer.collegeData['email']);
+                            $('#address').val(answer.collegeData['address']);
+                            $('#councellor_name').val(answer.collegeData['councellor_name']);
+                            $('#councellor_email').val(answer.collegeData['councellor_email']);
+                            $('#councellor_phone').val(answer.collegeData['councellor_phone']);
+                        }
+
                     },
                 });
             });
@@ -547,6 +605,8 @@
                         var convenience = answer['convenience'];
                         document.getElementById('convenience').value = convenience;
 
+
+
                         $('#no_of_students_buying_book').on('change', function() {
                             var no_of_students_buying_book = document.getElementById(
                                     'no_of_students_buying_book')
@@ -563,11 +623,18 @@
                                 total_fee_amount);
                             document.getElementById('total').value = total;
 
+                            var convenience = $('#convenience').val();
+                            // console.log('convenience', convenience);
+                            var convenience_amount = ((convenience / 100) * total)
+                                .toFixed(3);
 
-                            total_to_be_paid = (parseInt(convenience) / 100) * parseInt(
-                                total) + parseInt(total);
+                            $('#convenience_amount').val(convenience_amount);
+
+
+                            total_to_be_paid = (parseFloat(convenience) / 100) * parseFloat(
+                                total) + parseFloat(total);
                             document.getElementById('total_to_be_paid').value =
-                                Math.round(total_to_be_paid);
+                                total_to_be_paid;
                         });
                     },
                 });
